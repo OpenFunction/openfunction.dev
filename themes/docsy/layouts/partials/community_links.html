@@ -1,0 +1,29 @@
+{{ $links := .Site.Params.links }}
+
+<section class="row td-box td-box--4 td-box--gradient td-box--height-auto linkbox">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<h2>Connect and Contribute</h2>
+<p>If you want to get more involved by contributing to {{ .Site.Title }}, join us here:
+{{ with index $links "developer"}}
+{{ template "community-links-list"  . }}
+{{ end }}
+<p>You can find out how to contribute in our <a href="http://localhost:1313/docs/development/">Development Guide</a>.
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<h2>Community Call</h2>		
+<p>Join our <a href="https://us02web.zoom.us/j/87437196365?pwd=UndDL2puMXlqcSt5U3JaYUdRNk85Zz09#success">zoom</a> meeting!</p>
+<p>Meeting Time: Wednesday at 16:30~17:30 Beijing Time (biweekly, starting from June 23rd, 2021)</p>
+<p><a href="https://kubesphere.io/contribution/">Meeting Calendar</a></p>
+<p><a href="https://docs.google.com/document/d/1bh5-kVPegjNlIjjq_e37mS3ZhyXWhmmUaysFgeI9_-o/edit#heading=h.nf9f1k9xb177">Meeting notes</a></p>
+</div>
+</section>
+
+{{ define "community-links-list" }}
+<ul>
+ {{ range . }}
+ <li title="{{ .name }}">
+   <a target="_blank" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}:</a> {{ .desc }}
+ </li>
+  {{ end }}
+</ul>
+{{ end }}
