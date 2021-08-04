@@ -1,21 +1,21 @@
 {
-  "name": "tech-doc-hugo",
+  "name": "openfunction",
   "version": "0.0.1",
-  "description": "Hugo theme for technical documentation.",
+  "description": "OpenFunction website",
   "main": "none.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google/docsy-example.git"
+    "url": "git+https://github.com/OpenFunction/website.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/google/docsy-example/issues"
+    "url": "https://github.com/OpenFunction/website/issues"
   },
-  "homepage": "https://github.com/google/docsy-example#readme",
+  "homepage": "https://github.com/OpenFunction/website#readme",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^9.8.6",
