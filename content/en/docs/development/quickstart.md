@@ -1,10 +1,10 @@
 ---
 title: "QuickStart"
 linkTitle: "QuickStart"
-weight: 10
+weight: 5
+description: >
+    This document walks you through how to get started with building OpenFunction in your local environment.
 ---
-
-This document walks you through how to get started with building OpenFunction in your local environment.
 
 ## Prerequisites
 
@@ -46,4 +46,3 @@ kubectl edit deployments.apps -n openfunction openfunction-controller-manager
 ```
 
 Kubernetes will then automatically apply your controllers.
-

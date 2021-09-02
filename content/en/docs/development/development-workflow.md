@@ -2,6 +2,8 @@
 title: "Development Workflow"
 linkTitle: "Development Workflow"
 weight: 10
+description: >
+    This document will introduce you to the detailed process of project development.
 ---
 
 ## Step 1. Fork
