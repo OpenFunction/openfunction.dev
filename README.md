@@ -23,7 +23,7 @@ You will need to install [Hugo](https://gohugo.io/) to build the website in orde
 
 #### Install Hugo extended
 
-Go to the [Hugo releases place](https://github.com/gohugoio/hugo/releases) and download the `hugo_extended` version that better suits your OS.
+Go to the [Hugo releases place](https://github.com/gohugoio/hugo/releases) and download the `hugo_extended` version that better suits your OS (version 0.75+).
 
 **EXTENDED version is MANDATORY to properly build the static content!**
 
