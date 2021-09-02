@@ -2,6 +2,8 @@
 title: "Pull Request Process"
 linkTitle: "Pull Request Process"
 weight: 20
+description: >
+    This document will help you learn how to submit a pull requests.
 ---
 
 This document explains the process and best practices for submitting a PR to the [OpenFunction project](https://github.com/OpenFunction/OpenFunction). It should serve as a reference for all contributors, and be useful especially to new and infrequent submitters.

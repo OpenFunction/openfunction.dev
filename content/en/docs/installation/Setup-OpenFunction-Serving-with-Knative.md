@@ -5,7 +5,7 @@ weight: 20
 ---
 
 You can refer to the steps in [Knative docs](https://knative.dev/docs/install/any-kubernetes-cluster/) to install Knative or follow the steps below:
-> :grey_exclamation: Refer to [this section](#installation-when-having-poor-network-connectivity-to-githubgoogleapis) when you have **poor network connections to GitHub/Googleapis**.
+> Refer to [this section](#installation-when-having-poor-network-connectivity-to-githubgoogleapis) when you have **poor network connections to GitHub/Googleapis**.
 
 ## Installation
 
@@ -48,7 +48,7 @@ kubectl apply -f https://github.com/knative/serving/releases/download/v0.23.0/se
 3. Fetch the External IP or CNAME
 
     >We recommend you to configure the ```EXTERNAL-IP``` according to your cluster environment.
- 
+
     ```bash
     kubectl --namespace kourier-system get service kourier
     
@@ -57,7 +57,7 @@ kubectl apply -f https://github.com/knative/serving/releases/download/v0.23.0/se
     ```
 
 4. Confirm the service readiness
-    
+   
     >The following ```<external-ip>``` indicates an external url that can be accessed normally.
 
     ```bash
