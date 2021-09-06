@@ -14,7 +14,7 @@ description: >
 | **kind** *string*                                            | Trigger                                                      |
 | **metadata** *[v1.ObjectMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ObjectMeta)* | *(Optional)* Refer to [v1.ObjectMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ObjectMeta) |
 | **spec** *[TriggerSpec](#triggerspec)*                       | Refer to [TriggerSpec](#triggerspec)                         |
-| **status** *TriggerStatus*                                   | Refer to TriggerStatus                                       |
+| **status** *TriggerStatus*                                   | Status of Trigger                                            |
 
 ### TriggerSpec
 

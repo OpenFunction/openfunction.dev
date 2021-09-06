@@ -19,4 +19,4 @@ description: >
 | **topic** *string*          | The topic name of the Kafka event source, e.g. `topic`1, `myTopic` |
 | **saslUsername** *string*   | *(Optional)* The SASL username to use for authentication. Only required if authRequired is `true`. For example: `admin` |
 | **saslPassword** *string*   | *(Optional)* The SASL user password for authentication. Only required if authRequired is `true`. For example: `123456` |
-| **maxMessageBytes** *int64* | * (Optional) * The maximum number of bytes a single message is allowed to contain. Default is `1024`. For example: `2048` |
+| **maxMessageBytes** *int64* | *(Optional)* The maximum number of bytes a single message is allowed to contain. Default is `1024`. For example: `2048` |

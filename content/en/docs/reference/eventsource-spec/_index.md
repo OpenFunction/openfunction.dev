@@ -14,7 +14,7 @@ description: >
 | **kind** *string*                                            | EventSource                                                  |
 | **metadata** *[v1.ObjectMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ObjectMeta)* | *(Optional)* Refer to [v1.ObjectMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ObjectMeta) |
 | **spec** *[EventSourceSpec](#eventsourcespec)*               | Refer to [EventSourceSpec](#eventsourcespec)                 |
-| **status** *EventSourceStatus*                               | Refer to EventSourceStatus                                   |
+| **status** *EventSourceStatus*                               | Status of EventSource                                        |
 
 ### EventSourceSpec
 

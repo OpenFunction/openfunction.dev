@@ -1,0 +1,101 @@
++++
+title = "OpenFunction"
+linkTitle = "OpenFunction"
++++
+
+{{< blocks/cover title="" image_anchor="top" height="full" color="white" >}}
+<section>
+	<img src="logo-1.png" alt="Welcome to OpenFunction" width="75%">
+</section>
+<div class="mx-auto">
+	<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
+		文档 <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+	</a>
+	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/OpenFunction/OpenFunction">
+		GitHub <i class="fab fa-github ml-2 "></i>
+	</a>
+	<p class="lead mt-5">OpenFunction 是一个云原生、开源的 FaaS（函数即服务）框架，旨在让开发人员专注于他们的开发意图，而不必关心底层运行环境和基础设施。用户只需提交一段代码，就可以生成事件驱动的、动态伸缩的 Serverless 工作负载。</p>
+	{{< blocks/link-down color="info" >}}
+</div>
+{{< /blocks/cover >}}
+
+
+{{% blocks/section color="white" %}}
+
+<div class="container">
+<img src="openfunction-overview.jpg" alt="OpenFunction Architecture" width="100%" style="margin: 1rem 0 5rem 0" />
+
+<div style="margin:0 auto; max-width:800px">
+
+<h2 style="text-align:center">OpenFunction 特性</h2>
+
+<p style="text-align:left">
+
+- 云原生，开源
+
+- 自动构建代码为 OCI 标准镜像
+
+- 自动部署具有动态伸缩能力的应用程序
+
+- 提供事件框架，使函数具备事件驱动能力
+
+- 提供函数版本控制和入口流量管理功能
+</p>
+</div>
+</div>
+{{% /blocks/section %}}
+
+
+{{% blocks/lead color="primary" %}}
+<div class="col" >
+<h1>CustomResourceDefinitions</h1>
+<p>OpenFunction 的核心功能是使用户能够开发、运行和管理以代码函数为执行单元的业务应用程序。为此，OpenFunction 实现了以下的自定义资源定义（CRD）</p>
+</div>
+{{% /blocks/lead %}}
+
+{{% blocks/section color="secondary" %}}
+{{% blocks/feature icon="fa-lightbulb" title="Function" %}}
+<b>Function</b> 是直接由使用者定义、控制的资源，它是使用者对其业务应用的一段描述，即用何种原料（源代码）加工成何种制品（应用镜像），最终又将以何种方式运作（工作负载、运行时）。
+
+在 OpenFunction 中，Function 资源会根据配置有序控制 Builder 和 Serving 资源的协调过程，进而实现使用者函数的生命周期管理。
+
+你可以访问 [Function 概念]({{< ref "docs/concepts/function" >}}) 了解更多信息。
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fa-lightbulb" title="Builder" %}}
+<b>Builder</b> 定义了 OpenFunction 中由源代码生成应用镜像的构建工作。
+
+当前，OpenFunction Builder 使用 Shipwright 和 Cloud Native Buildpacks 来构建应用镜像。它通过 Shipwright 控制应用镜像的构建过程，包括通过 Cloud Native Buildpacks 获取代码、生成镜像制品和发布镜像。
+
+你可以访问 [Builder 概念]({{< ref "docs/concepts/builder" >}}) 了解更多信息。
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fa-lightbulb" title="Serving" %}}
+<b>Serving</b> 的目标是以高度弹性的方式（动态伸缩：0 <-> N）为使用者运行应用负载。
+
+当前，OpenFunction Serving 支持两种负载运行时：Knative 和 OpenFuncAsync。设置其中一种负载运行时之后，Serving 才能正常工作。
+
+你可以访问 [Serving 概念]({{< ref "docs/concepts/serving" >}}) 了解更多信息。
+{{% /blocks/feature %}}
+
+{{% /blocks/section %}}
+
+
+{{% blocks/lead color="orange" %}}
+
+如果你已经安装了 OpenFunction，
+
+可以参考 [OpenFunction samples](https://github.com/OpenFunction/samples) 来运行一些简单的案例。
+
+{{% /blocks/lead %}}
+
+
+{{% blocks/lead color="primary" icon="fab fa-github" title="" url="https://github.com/OpenFunction/OpenFunction" %}}
+<h1>期待你的贡献！</h1>
+
+通过一个 [Pull Request](https://github.com/OpenFunction/OpenFunction/pulls) 开启你在 [GitHub](https://github.com/OpenFunction/OpenFunction) 上的贡献之旅。我们将保持对贡献者的热忱！
+
+在 [GitHub <i class="fab fa-github"></i>](https://github.com/OpenFunction/OpenFunction) 上关注我们。
+
+{{% /blocks/lead %}}
+
