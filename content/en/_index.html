@@ -9,10 +9,10 @@ linkTitle = "OpenFunction"
 </section>
 <div class="mx-auto">
 	<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
-		Quick Started <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+		Documentation <i class="fas fa-arrow-alt-circle-right ml-2"></i>
 	</a>
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/OpenFunction/OpenFunction">
-		Learn More <i class="fab fa-github ml-2 "></i>
+		GitHub <i class="fab fa-github ml-2 "></i>
 	</a>
 	<p class="lead mt-5">OpenFunction is a cloud-native open source FaaS (Function as a Service) platform aiming to enable users to focus on their business logic without worrying about the underlying runtime environment and infrastructure. Users only need to submit business-related source code in the form of functions.</p>
 	{{< blocks/link-down color="info" >}}
@@ -31,15 +31,15 @@ linkTitle = "OpenFunction"
 
 <p style="text-align:left">
 
-- Convert business-related function source code to runnable application source code.
+- Cloud-native, open source
 
-- Generate a deployable container image from the converted application source code.
+- Automatically build code into OCI-compliant images
 
-- Deploy the generated container image to the underlying runtime environment such as K8s, and automatically scale up and down according to business traffic, and scale to 0 when there is no traffic.
+- Automatically deploys application with dynamic scaling capabilities
 
-- Provide event management functions for trigger functions.
+- Provides events framework to make functions event-driven
 
-- Provide additional functions to manage function versions, ingress management etc.
+- Provides function version control and ingress traffic management capabilities
 </p>
 </div>
 </div>
@@ -55,21 +55,27 @@ linkTitle = "OpenFunction"
 
 {{% blocks/section color="secondary" %}}
 {{% blocks/feature icon="fa-lightbulb" title="Function" %}}
-The goal of Function is to control the lifecycle management from user code to the final application that can respond to events through a single profile.
+<b>Function</b> is a resource that is directly defined and controlled by the user. It is a description of the user's application, i.e. what raw materials (source code) are used to make the product (application image) and how it will ultimately work (workload, runtime).
 
-Function will manage and coordinate Builder and Serving resources to handle the details of the process.
+In OpenFunction, the Function resource controls the coordination of Builder and Serving in an orderly manner according to the configuration, thus implementing the lifecycle management of user functions.
+
+See [Function concept]({{<ref "docs/concepts/function">}}) for more information.
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fa-lightbulb" title="Builder" %}}The goal of Builder is to compile the user's function source code into an application image that can be run in a cloud-native environment.
+{{% blocks/feature icon="fa-lightbulb" title="Builder" %}}
+<b>Builder</b> defines the build work in OpenFunction for generating application images from source code.
 
-It will fetch the code from the code repository, build the application image locally and publish it to the container image repository.
+Currently, OpenFunction Builder uses Shipwright and Cloud Native Buildpacks to build application images. It controls the build process of application images through Shipwright, including acquiring code, generating image artefacts and publishing images through Cloud Native Buildpacks.
 
-Currently, OpenFunction Builder uses Tekton and Cloud Native Buildpacks to build container images.
+See [Builder concept]({{<ref "docs/concepts/builder">}}) for more information.
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fa-lightbulb" title="Serving" %}}The goal of Serving is to serving user functions and implementing event-driven functions response.
+{{% blocks/feature icon="fa-lightbulb" title="Serving" %}}
+The goal of <b>Serving</b> is to run applications in a highly elastic way (dynamic scaling: 0 <-> N).
 
-Currently, OpenFunction supports two serving runtimes, Knative and OpenFuncAsync. At least one of these runtimes needs to be installed.
+Currently, OpenFunction Serving supports two kinds of workload runtimes: Knative and OpenFuncAsync. Serving will only work when one of the them is set.
+
+See [Serving concept]({{<ref "docs/concepts/serving">}}) for more information.
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

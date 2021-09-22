@@ -33,5 +33,5 @@ description: >
 | **poolTimeout** *string*           | *(Optional)* The timeout for the connection pool. The default is readTimeout + 1 second. E.g. `50s` |
 | **maxConnAge** *string*            | *(Optional)* Connection aging time. The default is not to close the aging connection. E.g. `30m` |
 | **minIdleConns** *int64*           | *(Optional)* The minimum number of idle connections to maintain to avoid performance degradation from creating new connections. Defaults to `0`. E.g. `2` |
-| **idleCheckFrequency** *string*    | * (Optional) * Frequency of idle connection recycler checks. Default is `1m`. `-1` means the idle connection recycler is disabled. E.g. `-1` |
+| **idleCheckFrequency** *string*    | *(Optional)* Frequency of idle connection recycler checks. Default is `1m`. `-1` means the idle connection recycler is disabled. E.g. `-1` |
 | **idleTimeout** *string*           | *(Optional)* Timeout to close idle client connections. Should be less than the server's timeout. Default is `5m`. `-1` means disable idle timeout check. E.g. `10m` |

@@ -2,6 +2,8 @@
 title: "Getting started"
 linkTitle: "Getting started"
 weight: 5
+description: >	
+    Quick start with OpenFunction, including installation, demonstration of simple cases
 ---
 
 ## Overview
@@ -25,25 +27,20 @@ OpenFunction has two main capabilities:
 
 The current version of OpenFunction requires that you have a Kubernetes cluster with version ``>=1.18.6``.
 
-In addition, you need to deploy several dependencies for the OpenFunction ```Builder``` and ```Serving```.
-
-You can refer to the [Installation Guide](docs/installation/README.md) to setup OpenFunction ```Builder``` and ```Serving```,
-or use the following command:
+You can install the dependencies of OpenFunction Builder and Serving by executing the following command:
 
 ```shell
 sh hack/deploy.sh --all
 ```
-
-This command will install dependencies of all supported ```Builder``` and ```Serving``` to your cluster.
 
 You can also customize the installation with the following parameters:
 
 | Parameter                          | Comment                                                      |
 | ---------------------------------- | ------------------------------------------------------------ |
 | --all                              | Install all supported ```Builder``` and ```Serving```        |
-| --with-shipwright                  | Install Shipwright builder                                   |
-| --with-knative                     | Install Knative serving runtime                              |
-| --with-openFuncAsync               | Install OpenFuncAsync serving runtime                        |
+| --with-shipwright                  | Install Shipwright builder (Builder dependency)              |
+| --with-knative                     | Install Knative serving runtime (Serving dependency)         |
+| --with-openFuncAsync               | Install OpenFuncAsync serving runtime (Serving dependency, include KEDA and Dapr) |
 | --poor-network                     | Use this if you have poor network connectivity to GitHub/Googleapis |
 | --tekton-dashboard-nodeport <port> | Expose the Tekton dashboard service with NodePort            |
 
@@ -54,7 +51,7 @@ You can install the OpenFunction platform by the following command:
 - Install the latest stable version
 
 ```shell
-kubectl apply -f https://github.com/OpenFunction/OpenFunction/releases/download/v0.3.0/bundle.yaml
+kubectl apply -f https://github.com/OpenFunction/OpenFunction/releases/download/v0.3.1/bundle.yaml
 ```
 
 - Install the development version

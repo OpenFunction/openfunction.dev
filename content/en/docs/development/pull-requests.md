@@ -14,9 +14,6 @@ This document explains the process and best practices for submitting a PR to the
   - [Write Release Notes if Needed](#write-release-notes-if-needed)
   - [The Testing and Merge Workflow](#the-testing-and-merge-workflow)
   - [Marking Unfinished Pull Requests](#marking-unfinished-pull-requests)
-  - [Comment Commands Reference](#comment-commands-reference)
-  - [Automation](#automation)
-  - [How the e2e Tests Work](#how-the-e2e-tests-work)
 
 ## Before You Submit a PR
 
@@ -127,20 +124,3 @@ If you want to solicit reviews before the implementation of your pull request is
 2. You may add or remove a `WIP` or `[WIP]` prefix to your pull request title
 
 The GitHub robots will add and remove the `do-not-merge/hold` label as you use the comment commands and the `do-not-merge/work-in-progress` label as you edit your title. While either label is present, your pull request will not be considered for merging.
-
-### Comment Commands Reference//TODO
-
-[The commands doc]() contains a reference for all comment commands. //TODO
-
-### Automation//TODO
-
-The OpenFunction developer community uses a variety of automation to manage pull requests.  This automation is described in detail [in the automation doc](automation.md). //TODO
-
-### How the e2e Tests Work//TODO
-
-The  tests will post the status results to the PR. If an e2e test fails,
-`@o8x-ci-robot` will comment on the PR with the test history and the
-comment-command to re-run that test. e.g.
-
-> The following tests failed, say /retest to rerun them all.
-
