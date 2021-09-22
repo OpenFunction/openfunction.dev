@@ -166,9 +166,7 @@ enable = false
 	name = "GitHub"
 	url = "https://github.com/OpenFunction/OpenFunction"
 	icon = "fab fa-github"
-        desc = "Development takes place here!"
 [[params.links.developer]]
 	name = "Slack"
 	url = "https://kubesphere.slack.com/?redir=%2Farchives%2FC021XAR3CG3"
 	icon = "fab fa-slack"
-        desc = "Chat with other project developers!"
