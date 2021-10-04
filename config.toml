@@ -118,10 +118,15 @@ github_repo = "https://github.com/OpenFunction/website"
 github_branch= "main"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "d72aa9b2712488cc3"
+# gcs_engine_id = "d72aa9b2712488cc3"
 
 # Enable Algolia DocSearch
-algolia_docsearch = false
+algolia_docsearch = true
+
+[params.algolia]
+  appId = "OVLKCBSXIH"
+  indexName = "netlify_ecf7df22-21fe-4e32-8cae-fc62fb20dff5_main_all"
+  searchOnlyKey = "0971065d2e301eae3538120301829e32"
 
 # Enable Lunr.js offline search
 offlineSearch = false
