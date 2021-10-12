@@ -123,11 +123,6 @@ github_branch= "main"
 # Enable Algolia DocSearch
 algolia_docsearch = true
 
-[params.algolia]
-  appId = "OVLKCBSXIH"
-  indexName = "netlify_ecf7df22-21fe-4e32-8cae-fc62fb20dff5_main_all"
-  searchOnlyKey = "0971065d2e301eae3538120301829e32"
-
 # Enable Lunr.js offline search
 offlineSearch = false
 
@@ -141,7 +136,7 @@ sidebar_menu_compact = false
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
 #  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
-sidebar_search_disable = false
+sidebar_search_disable = true
 #  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
 # Set to true to disable the About link in the site footer
