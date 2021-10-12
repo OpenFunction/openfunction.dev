@@ -42,14 +42,14 @@ other = "提交文档问题"
 [post_create_project_issue]
 other = "提交项目问题"
 [post_posts_in]
-other = "Posts in"
+other = " "
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "这是本节可打印的多页视图"
 [print_click_to_print]
-other = "Click here to print"
+other = "点击这里开始打印"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "返回常规视图"
 [print_entire_section]
-other = "Print entire section"
+other = "打印整个页面"
