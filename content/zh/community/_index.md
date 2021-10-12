@@ -7,7 +7,7 @@ menu:
 
 section1:
   name: '联系与贡献'
-  content: '如果你想要更深入地了解我们：'
+  content: '如果您想继续深入了解：'
   children:
     - content: '在这里了解如何做出贡献 → '
       link: 'http://localhost:1313/docs/development/' 
