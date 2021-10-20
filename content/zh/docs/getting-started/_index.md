@@ -42,7 +42,6 @@ sh hack/deploy.sh --all
 | --with-knative                     | 安装 Knative（Serving 的依赖软件）                          |
 | --with-openFuncAsync               | 安装 OpenFuncAsync（Serving 的依赖软件，包含 KEDA 与 Dapr） |
 | --poor-network                     | 用于当你正使用无法有效访问 GitHub/Googleapis 的网络时       |
-| --tekton-dashboard-nodeport <port> | 通过 NodePort 暴露 Tekton Dashboard                         |
 
 ## 安装
 
@@ -51,13 +50,13 @@ sh hack/deploy.sh --all
 - 安装最新稳定版本
 
 ```shell
-kubectl apply -f https://github.com/OpenFunction/OpenFunction/releases/download/v0.3.1/bundle.yaml
+kubectl create -f https://github.com/OpenFunction/OpenFunction/releases/download/v0.4.0/bundle.yaml
 ```
 
 - 安装最新开发版本
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/main/config/bundle.yaml
+kubectl create -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/main/config/bundle.yaml
 ```
 
 > 注意：当使用非默认的命名空间时，确保命名空间中的 ClusterRoleBinding 是匹配的。
@@ -71,7 +70,7 @@ kubectl apply -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/mai
 - 卸载最新的稳定版本
 
 ```shell
-kubectl delete -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/release-0.3/config/bundle.yaml
+kubectl delete -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/release-0.4/config/bundle.yaml
 ```
 
 - 卸载最新的开发版本
