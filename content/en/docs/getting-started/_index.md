@@ -42,7 +42,6 @@ You can also customize the installation with the following parameters:
 | --with-knative                     | Install Knative serving runtime (Serving dependency)         |
 | --with-openFuncAsync               | Install OpenFuncAsync serving runtime (Serving dependency, include KEDA and Dapr) |
 | --poor-network                     | Use this if you have poor network connectivity to GitHub/Googleapis |
-| --tekton-dashboard-nodeport <port> | Expose the Tekton dashboard service with NodePort            |
 
 ## Install
 
@@ -51,13 +50,13 @@ You can install the OpenFunction platform by the following command:
 - Install the latest stable version
 
 ```shell
-kubectl apply -f https://github.com/OpenFunction/OpenFunction/releases/download/v0.3.1/bundle.yaml
+kubectl create -f https://github.com/OpenFunction/OpenFunction/releases/download/v0.4.0/bundle.yaml
 ```
 
 - Install the development version
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/main/config/bundle.yaml
+kubectl create -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/main/config/bundle.yaml
 ```
 
 > Note: When using non-default namespaces, make sure that the ClusterRoleBinding in the namespace is adapted.
@@ -71,7 +70,7 @@ If you have already installed the OpenFunction platform, refer to [OpenFunction 
 - Uninstall the latest stable version
 
 ```shell
-kubectl delete -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/release-0.3/config/bundle.yaml
+kubectl delete -f https://raw.githubusercontent.com/OpenFunction/OpenFunction/release-0.4/config/bundle.yaml
 ```
 
 - Uninstall the development version
