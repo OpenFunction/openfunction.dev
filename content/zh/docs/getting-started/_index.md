@@ -23,25 +23,42 @@ OpenFunction有两个主要框架：
 - 由 CustomResourceDefinitions（CRD）[Function]({{<ref "../concepts/function">}})、[Builder]({{<ref "../concepts/builder">}})、[Serving]({{<ref "../concepts/serving">}}) 提供支持的无服务计算（Serverless）框架
 - 由 CustomResourceDefinitions（CRD）[EventSource]({{<ref "../concepts/eventsource">}})、[EventBus (ClusterEventBus)]({{<ref "../concepts/eventbus">}})、[Trigger]({{<ref "../concepts/trigger">}}) 提供支持的事件管理框架
 
+## 兼容性
+
+### Kubernetes 兼容性矩阵
+
+我们对下列版本进行了测试验证，以确保他们可以按照所示的对应关系正常运行。但请注意，使用其他版本也可能正常运行！
+
+| OpenFunction                                                 | Kubernetes 1.19 | Kubernetes 1.20 | Kubernetes 1.21 | Kubernetes 1.22 |
+| ------------------------------------------------------------ | --------------- | --------------- | --------------- | --------------- |
+| [`release-0.3`](https://github.com/OpenFunction/OpenFunction/tree/v0.3.0) | &radic;         | &radic;         | &radic;         | &radic;         |
+| [`release-0.4`](https://github.com/OpenFunction/OpenFunction/tree/v0.4.0) | &times;         | &radic;         | &radic;         | &radic;         |
+| [`HEAD`](https://github.com/OpenFunction/OpenFunction/tree/main) | &times;         | &radic;         | &radic;         | &radic;         |
+
+
 ## 前提准备
 
 当前版本的 OpenFunction 要求你有一个版本为 `等于或高于 1.18.6` 的 Kubernetes 集群。
 
-你可以通过执行下面的命令来安装 OpenFunction `Builder` 和 `Serving` 的依赖软件：
+此外，你需要为 OpenFunction 的 `Builder` 和 `Serving` 部署一些依赖项。
+
+你可以使用以下命令来安装 OpenFunction 的 `Builder` 和 `Serving`：
 
 ```shell
 sh hack/deploy.sh --all
 ```
 
+这个命令将安装 `Builder` 和 `Serving` 的所有依赖项到你的集群中。
+
 你也可以用以下参数来定制安装的依赖软件。
 
 | 参数                               | 用途说明                                                    |
 | ---------------------------------- | ----------------------------------------------------------- |
-| --all                              | 安装所有 `Builder` 和 `Serving` 的依赖软件                  |
-| --with-shipwright                  | 安装 ShipWright（Builder 的依赖软件）                       |
-| --with-knative                     | 安装 Knative（Serving 的依赖软件）                          |
-| --with-openFuncAsync               | 安装 OpenFuncAsync（Serving 的依赖软件，包含 KEDA 与 Dapr） |
-| --poor-network                     | 用于当你正使用无法有效访问 GitHub/Googleapis 的网络时       |
+| -\-all                              | 安装所有 `Builder` 和 `Serving` 的依赖软件                  |
+| -\-with-shipwright                  | 安装 ShipWright（Builder 的依赖软件）                       |
+| -\-with-knative                     | 安装 Knative（Serving 的依赖软件）                          |
+| -\-with-openFuncAsync               | 安装 OpenFuncAsync（Serving 的依赖软件，包含 KEDA 与 Dapr） |
+| -\-poor-network                     | 用于当你正使用无法有效访问 GitHub/Googleapis 的网络时       |
 
 ## 安装
 

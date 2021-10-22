@@ -23,25 +23,41 @@ OpenFunction has two main capabilities:
 - Serverless framework with CustomResourceDefinitions (CRD) [Function]({{<ref "../concepts/function">}}), [Builder]({{<ref "../concepts/builder">}}), [Serving]({{<ref "../concepts/serving">}})
 - Events framework with CustomResourceDefinitions (CRD) [EventSource]({{<ref "../concepts/eventsource">}}), [EventBus (ClusterEventBus)]({{<ref "../concepts/eventbus">}}), [Trigger]({{<ref "../concepts/trigger">}})
 
+## Compatibility
+
+### Kubernetes compatibility matrix
+
+The following versions are supported and work as we test against these versions in their respective branches. But note that other versions might work!
+
+| OpenFunction                                                 | Kubernetes 1.19 | Kubernetes 1.20 | Kubernetes 1.21 | Kubernetes 1.22 |
+| ------------------------------------------------------------ | --------------- | --------------- | --------------- | --------------- |
+| [`release-0.3`](https://github.com/OpenFunction/OpenFunction/tree/v0.3.0) | &radic;         | &radic;         | &radic;         | &radic;         |
+| [`release-0.4`](https://github.com/OpenFunction/OpenFunction/tree/v0.4.0) | &times;         | &radic;         | &radic;         | &radic;         |
+| [`HEAD`](https://github.com/OpenFunction/OpenFunction/tree/main) | &times;         | &radic;         | &radic;         | &radic;         |
+
 ## Prerequisites
 
 The current version of OpenFunction requires that you have a Kubernetes cluster with version ``>=1.18.6``.
 
-You can install the dependencies of OpenFunction Builder and Serving by executing the following command:
+In addition, you need to deploy several dependencies for the OpenFunction ```Builder``` and ```Serving```.
+
+You can use the following command to setup OpenFunction ```Builder``` and ```Serving```:
 
 ```shell
 sh hack/deploy.sh --all
 ```
 
+This command will install dependencies of all supported ```Builder``` and ```Serving``` to your cluster.
+
 You can also customize the installation with the following parameters:
 
-| Parameter                          | Comment                                                      |
-| ---------------------------------- | ------------------------------------------------------------ |
-| --all                              | Install all supported ```Builder``` and ```Serving```        |
-| --with-shipwright                  | Install Shipwright builder (Builder dependency)              |
-| --with-knative                     | Install Knative serving runtime (Serving dependency)         |
-| --with-openFuncAsync               | Install OpenFuncAsync serving runtime (Serving dependency, include KEDA and Dapr) |
-| --poor-network                     | Use this if you have poor network connectivity to GitHub/Googleapis |
+| Parameter             | Comment                                                      |
+| --------------------- | ------------------------------------------------------------ |
+| -\-all                | Install all supported ```Builder``` and ```Serving```        |
+| -\-with-shipwright    | Install Shipwright builder                                   |
+| -\-with-knative       | Install Knative serving runtime                              |
+| -\-with-openFuncAsync | Install OpenFuncAsync serving runtime                        |
+| -\-poor-network       | Use this if you have poor network connectivity to GitHub/Googleapis |
 
 ## Install
 
