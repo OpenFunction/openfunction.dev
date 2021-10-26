@@ -48,3 +48,17 @@ description: >
 | **namespace** *string*  | The namespace of the referenced resource, by default the same as the namespace of the Trigger |
 | **name** *string*       | Name of the referenced resource, e.g. `function-ksvc`        |
 | **apiVersion** *string* | The apiVersion of the referenced resource. Default is `serving.knative.dev/v1` |
+
+### GenericScaleOption
+
+*Belong to scaleOption*
+
+| Field                                                        | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **pollingInterval** *int*                                    | This is the interval to check each trigger on. Default is `30` seconds |
+| **cooldownPeriod** *int*                                     | The period to wait after the last trigger reported active before scaling the resource back to 0. Default is `300` seconds |
+| **minReplicaCount** *int*                                    | Minimum number of replicas KEDA will scale the resource down to. Default is `0` |
+| **maxReplicaCount** *int*                                    | This setting is passed to the HPA definition that KEDA will create for a given resource |
+| **advanced** *[kedav1alpha1.AdvancedConfig](https://pkg.go.dev/github.com/kedacore/keda/v2/api/v1alpha1#AdvancedConfig)* | See [KEDA docs](https://keda.sh/docs/2.4/concepts/scaling-deployments/) |
+| **metadata** *map[string]string*                             | KEDA trigger's metadata                                      |
+| **authRef** *[kedav1alpha1.ScaledObjectAuthRef](https://pkg.go.dev/github.com/kedacore/keda/v2/api/v1alpha1#ScaledObjectAuthRef)* | Every parameter you define in `TriggerAuthentication` definition does not need to be included in the `metadata` of the trigger for your `ScaledObject` definition. To reference a `TriggerAuthentication` from a `ScaledObject` you add the `authenticationRef` to the trigger, refer to [KEDA docs](https://keda.sh/docs/2.4/concepts/authentication/) |

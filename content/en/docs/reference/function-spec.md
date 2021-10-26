@@ -10,7 +10,7 @@ description: >
 
 | Field                                                        | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **apiVersion** *string*                                      | core.openfunction.io/v1alpha1                                |
+| **apiVersion** *string*                                      | core.openfunction.io/v1alpha2                                |
 | **kind** *string*                                            | Function                                                     |
 | **metadata** *[v1.ObjectMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ObjectMeta)* | *(Optional)* Refer to [v1.ObjectMeta](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#ObjectMeta) |
 | **spec** *[FunctionSpec](#functionspec)*                     | Refer to [FunctionSpec](#functionspec)                       |
@@ -39,7 +39,7 @@ description: >
 | **builderCredentials** *[v1.LocalObjectReference](https://pkg.go.dev/k8s.io/api/core/v1#LocalObjectReference)* | *(Optional)* Credentials for accessing the image repository, refer to [v1.LocalObjectReference](https://pkg.go.dev/k8s.io/api/core/v1#LocalObjectReference) |
 | **shipwright** *[ShipwrightEngine](#shipwrightengine)*       | *(Optional)* Specification of the Shipwright engine, refer to [ShipwrightEngine](#shipwrightengine) |
 | **params** *map[string]string*                               | *(Optional)* Parameters passed to Shipwright                 |
-| **env** map[string]string                                    | *(Optional)* Parameters to be passed to the buildpacks builder |
+| **env** map[string]string                                    | *(Optional)* Parameters passed to the buildpacks builder     |
 | **srcRepo** *[GitRepo](#gitrepo)*                            | The configuration of the source code repository, refer to [GitRepo](#gitrepo) |
 | **dockerfile** *string*                                      | *(Optional)* Path to the Dockerfile file to guide Shipwright in using Dockerfile to build images |
 
@@ -99,29 +99,9 @@ description: >
 | Field                                                        | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **annotations** *map[string]string*                          | *(Optional)* Annotations for Dapr components, see [Dapr docs](https://docs.dapr.io/reference/arguments-annotations-overview/) |
-| **components** *\[][DaprComponent](#daprcomponent)*          | *(Optional)* Dapr Components Spec arrays, see [DaprComponent](#daprcomponent) |
-| **subscriptions** *\[][DaprSubscription](#daprsubscription)* | *(Optional)* Dapr Subscription Spec arrays, see [DaprSubscription](#daprsubscription) |
+| **components** *map\[string][componentsv1alpha1.ComponentSpec](https://docs.dapr.io/reference/components-reference/)* | *(Optional)* Dapr Components Spec map, key is component's name, value is [componentsv1alpha1.ComponentSpec](https://docs.dapr.io/reference/components-reference/) |
 | **inputs** *\[][DaprIO](#daprio)*                            | *(Optional)* The definition of the inputs of the function, see [DaprIO](#daprio) |
 | **outputs** *\[][DaprIO](#daprio)*                           | *(Optional)* The definition of the outputs of the function, see [DaprIO](#daprio) |
-
-### DaprComponent
-
-*Belong to [Dapr](#dapr)*
-
-| Field                                                        | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **name** *string*                                            | Name of Dapr component                                       |
-| *[v1alpha1.ComponentSpec](https://pkg.go.dev/github.com/dapr/dapr/pkg/apis/components/v1alpha1#ComponentSpec)* | Dapr Components Specification, see [Dapr docs](https://docs.dapr.io/reference/components-reference/) |
-
-### DaprSubscription
-
-*Belong to [Dapr](#dapr)*
-
-| Field                                                        | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **name** *string*                                            | Name of Dapr subscription                                    |
-| *[v1alpha1.SubscriptionSpec](https://pkg.go.dev/github.com/dapr/dapr/pkg/apis/subscriptions/v1alpha1#SubscriptionSpec)* | Dapr Subscription Specification, see [Dapr docs](https://docs.dapr.io/reference/api/pubsub_api/#provide-a-route-for-dapr-to-discover-topic-subscriptions) |
-| **scopes** *[]string*                                        |                                                              |
 
 ### DaprIO
 
@@ -129,10 +109,11 @@ description: >
 
 | Field                          | Description                                                  |
 | ------------------------------ | ------------------------------------------------------------ |
-| **name** *string*              | Name of the input and output of the function. Consistent with the name of [DaprComponent](#daprcomponent) means associated. |
-| **type** *string*              | Type of Dapr component, optional: `bindings`, `pubsub`, `invoke` |
+| **name** *string*              | Name of the input and output of the function. Consistent with the name of [DaprComponent](#daprcomponent) means associated |
+| **component** *string*         | Indicates the name of components                             |
+| **type** *string*              | Type of Dapr component, optional: `bindings`, `pubsub`       |
 | **topic** *string*             | *(Optional)* When the **type** is `pubsub`, you need to set the topic |
-| **methodName** *string*        | *(Optional)* When the **type** is `invoke`, the methodName needs to be set, see [Dapr docs](https://docs.dapr.io/reference/api/service_invocation_api/#url-parameters) |
+| **operation** *string*         | *(Optional)* Operation field tells the Dapr component which operation it should perform, refer to [Dapr docs](https://docs.dapr.io/reference/components-reference/supported-bindings/kafka/#binding-support) |
 | **params** *map[string]string* | *(Optional)* Parameters passed to Dapr                       |
 
 ### Keda
