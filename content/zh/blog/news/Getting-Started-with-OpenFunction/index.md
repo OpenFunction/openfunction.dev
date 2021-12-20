@@ -153,3 +153,4 @@ $ curl http://serving-rjgqg-ksvc-zf8j2.default.127.0.0.1.sslip.io
 由于`OpenFunction` 使用 `Knative` 实现自身的运行时组件，所以可以兼容所有的[Knative examples](https://knative.dev/docs/serving/samples/) 。从个人经验来看，对于已经使用`Kubernetes`集群的团队，无服务器框架可以让开发人员快速运行任意的业务函数(例如：当事件X发生时发送邮件、当webhoo被k触发时执行一个数据转换任务)。在本文的第二部分中，我们将探索一个更现实的无服务器场景。
 
 
+[原文地址](https://yitaek.medium.com/getting-started-with-openfunction-896e7b27b690)
