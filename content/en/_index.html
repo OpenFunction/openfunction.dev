@@ -14,7 +14,7 @@ linkTitle = "OpenFunction"
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/OpenFunction/OpenFunction">
 		GitHub <i class="fab fa-github ml-2 "></i>
 	</a>
-	<p class="lead mt-5">OpenFunction is a cloud-native open source FaaS (Function as a Service) platform aiming to enable users to focus on their business logic without worrying about the underlying runtime environment and infrastructure. Users only need to submit business-related source code in the form of functions.</p>
+	<p class="lead mt-5">OpenFunction is a cloud-native open-source FaaS (Function as a Service) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure. You can concentrate on developing business-related source code in the form of functions.</p>
 	{{< blocks/link-down color="info" >}}
 </div>
 {{< /blocks/cover >}}
@@ -27,19 +27,19 @@ linkTitle = "OpenFunction"
 
 <div style="margin:0 auto; max-width:800px">
 
-<h2 style="text-align:center">OpenFunction features</h2>
+<h2 style="text-align:center">OpenFunction Features</h2>
 
 <p style="text-align:left">
 
-- Cloud-native, open source
+- Cloud-native and open-source
 
 - Automatically build code into OCI-compliant images
 
-- Automatically deploys application with dynamic scaling capabilities
+- Automatically deploy application with dynamic scaling capabilities
 
-- Provides events framework to make functions event-driven
+- Provide events framework to make functions event-driven
 
-- Provides function version control and ingress traffic management capabilities
+- Provide function version control and ingress traffic management capabilities
 </p>
 </div>
 </div>
@@ -48,34 +48,34 @@ linkTitle = "OpenFunction"
 
 {{% blocks/lead color="primary" %}}
 <div class="col" >
-<h1>CustomResourceDefinitions</h1>
-<p>The core function of OpenFunction is to enable users to develop, run, and manage business applications as execution units of code functions. OpenFunction implements the following custom resource definitions</p>
+<h1>Custom Resource Definitions</h1>
+<p>The core functionality of OpenFunction enables you to develop, run, and manage business applications with functions acting as execution units. Thus, OpenFunction implements the following custom resource definitions.</p>
 </div>
 {{% /blocks/lead %}}
 
 {{% blocks/section color="secondary" %}}
 {{% blocks/feature icon="fa-lightbulb" title="Function" %}}
-<b>Function</b> is a resource that is directly defined and controlled by the user. It is a description of the user's application, i.e. what raw materials (source code) are used to make the product (application image) and how it will ultimately work (workload, runtime).
+<b>Function</b> is a resource that you can define and manage according to your needs. It describes your applications, including what raw materials (source code) are used to make an artifact (application image) and the way it works (workload, runtime).
 
-In OpenFunction, the Function resource controls the coordination of Builder and Serving in an orderly manner according to the configuration, thus implementing the lifecycle management of user functions.
+In OpenFunction, the Function resource controls the coordination between Builder and Serving in an orderly manner based on your configurations to implement the lifecycle management of your functions.
 
-See [Function concept]({{<ref "docs/concepts/function">}}) for more information.
+See [Function]({{<ref "docs/concepts/function">}}) for more information.
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-lightbulb" title="Builder" %}}
-<b>Builder</b> defines the build work in OpenFunction for generating application images from source code.
+<b>Builder</b> defines the build process in OpenFunction for generating application images from source code.
 
-Currently, OpenFunction Builder uses Shipwright and Cloud Native Buildpacks to build application images. It controls the build process of application images through Shipwright, including acquiring code, generating image artefacts and publishing images through Cloud Native Buildpacks.
+Currently, OpenFunction Builder uses Shipwright and Cloud Native Buildpacks to build application images. It uses Shipwright to control the process of building application images, including acquiring code, generating image artifacts, and publishing images through Cloud Native Buildpacks.
 
-See [Builder concept]({{<ref "docs/concepts/builder">}}) for more information.
+See [Builder]({{<ref "docs/concepts/builder">}}) for more information.
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-lightbulb" title="Serving" %}}
-The goal of <b>Serving</b> is to run applications in a highly elastic way (dynamic scaling: 0 <-> N).
+<b>Serving</b> aims to run applications in a highly elastic way (dynamic scaling: 0 <-> N).
 
-Currently, OpenFunction Serving supports two kinds of workload runtimes: Knative and OpenFuncAsync. Serving will only work when one of the them is set.
+Currently, OpenFunction Serving supports two kinds of workload runtimes: Knative and OpenFuncAsync. You need to configure a runtime to ensure that Serving works properly.
 
-See [Serving concept]({{<ref "docs/concepts/serving">}}) for more information.
+See [Serving]({{<ref "docs/concepts/serving">}}) for more information.
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
@@ -83,7 +83,7 @@ See [Serving concept]({{<ref "docs/concepts/serving">}}) for more information.
 
 {{% blocks/lead color="orange" %}}
 
-If you have already installed the OpenFunction platform, 
+After you install OpenFunction, 
 
 refer to [OpenFunction samples](https://github.com/OpenFunction/samples) to run a sample function.
 
@@ -91,11 +91,11 @@ refer to [OpenFunction samples](https://github.com/OpenFunction/samples) to run 
 
 
 {{% blocks/lead color="primary" icon="fab fa-github" title="" url="https://github.com/OpenFunction/OpenFunction" %}}
-<h1>Contributions welcome!</h1>
+<h1>Contributions Welcome!</h1>
 
-We do a [Pull Request](https://github.com/OpenFunction/OpenFunction/pulls) contributions workflow on [GitHub](https://github.com/OpenFunction/OpenFunction). New users are always welcome!
+New contributors are always welcome!
 
-Find us in [GitHub <i class="fab fa-github"></i>](https://github.com/OpenFunction/OpenFunction) 
+Find us on [GitHub <i class="fab fa-github"></i>](https://github.com/OpenFunction/OpenFunction) and create a [pull request](https://github.com/OpenFunction/OpenFunction/pulls).
 
 {{% /blocks/lead %}}
 

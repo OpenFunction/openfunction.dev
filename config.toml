@@ -54,7 +54,7 @@ id = "UA-00000000-0"
 [languages]
 [languages.en]
 title = "OpenFunction"
-description = "OpenFunction is a cloud-native open source FaaS (Function as a Service) platform aiming to enable users to focus on their business logic without worrying about the underlying runtime environment and infrastructure."
+description = "OpenFunction is a cloud-native open-source FaaS (Function as a Service) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure."
 languageName ="English"
 # Weight used for sorting.
 weight = 1
