@@ -1,7 +1,7 @@
 ---
 title: "Elastic Kubernetes Log Alerts with OpenFunction and Kafka" 
 linkTitle: "Elastic Kubernetes Log Alerts with OpenFunction and Kafka" 
-date: 2021-1-11
+date: 2021-01-11
 weight: 100
 ---
 
