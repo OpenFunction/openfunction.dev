@@ -1,6 +1,6 @@
 ---
-title: '再见 Dockerfile，拥抱新型镜像构建技术 Buildpacks'
-linkTitle: "再见 Dockerfile，拥抱新型镜像构建技术 Buildpacks" 
+title: 'Cloud Native Buildpacks 入门教程'
+linkTitle: "Cloud Native Buildpacks 入门教程" 
 date: 2022-01-04
 weight: 100
 ---
