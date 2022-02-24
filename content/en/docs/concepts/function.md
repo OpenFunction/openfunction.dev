@@ -1,16 +1,19 @@
 ---
 title: "Function"
 linkTitle: "Function"
-weight: 10
-description: >
-    Concept of OpenFunction, a resource of the serverless framework, Function
+weight: 3100
+description: >	
+    Learn about the concept of Function in OpenFunction.
 ---
 
-**Function** is a resource that is directly defined and controlled by the user. It is a description of the user's application, i.e. what raw materials (source code) are used to make the product (application image) and how it will ultimately work (workload, runtime).
+This document describes the concept of Function in OpenFunction.
 
-In OpenFunction, the **Function** resource controls the coordination of **[Builder]({{<ref "builder">}})** and **[Serving]({{<ref "serving">}})** in an orderly manner according to the configuration, thus implementing the lifecycle management of user functions.
+## Function
 
-### Reference
+Function is a [Custom Resource Definition (CRD)](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) that you can define and manage. It is a description of your application, including what source code is used to build the application image and how the workload works in certain runtime environments.
 
-Function is a [CustomResourceDefinitions(CRD)](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) . You can refer to [Function CRD Spec]({{< ref "../reference/function-spec" >}}) for more information.
+Function aims to realize the lifecycle management from your source code to the final application workloads that respond to events through a single profile. It manages and coordinates [Builder](../builder/) and [Serving](../serving/) to handle details of the process.
 
+## Reference
+
+For more information, see [Function Specifications](../../reference/component-reference/function-spec).

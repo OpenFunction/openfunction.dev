@@ -1,30 +1,25 @@
 ---
 title: "Builder"
 linkTitle: "Builder"
-weight: 15
-description: >
-    Concept of OpenFunction, a resource of the serverless framework, Builder
+weight: 3200
+description: >	
+    Learn about the concept of Builder in OpenFunction.
 ---
 
-**Builder** defines the build work in OpenFunction for generating application images from source code.
+This document describes the concept of Builder in OpenFunction.
 
-Currently, OpenFunction Builder uses [Shipwright](#shipwright) and [Cloud Native Buildpacks](#cloud-native-buildpacks) to build application images. It controls the build process of application images through Shipwright, including acquiring code, generating image artefacts and publishing images through Cloud Native Buildpacks.
+## Builder
 
-### Available builders
+Builder is a [Custom Resource Definition (CRD)](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) that defines the build work in OpenFunction for generating application images from source code.
 
-- [OpenFunction Builder](https://github.com/OpenFunction/builder)
-- [GoogleCloudPlatform Builder](https://github.com/GoogleCloudPlatform/buildpacks)
-- [Paketo Builder](https://paketo.io/docs/)
+Currently, Builder uses [Shipwright](https://github.com/shipwright-io/build) and [Cloud Native Buildpacks](https://buildpacks.io/) to build your function source code into application images. It controls the process of building application images through Shipwright, including acquiring code, generating image artifacts, and publishing images through Cloud Native Buildpacks.
 
-### Shipwright
+The following languages are supported:
 
-[Shipwright](https://github.com/shipwright-io/build) is a scalable image pipeline framework for building container images on Kubernetes.
-
-### Cloud Native Buildpacks
-
-[Cloud Native Buildpacks](https://buildpacks.io/) is an OCI-standard image building framework that transforms source code into container image artefacts in custom steps (buildpack) without Dockerfiles.
-
-### Reference
-
-Builder is a [CustomResourceDefinitions(CRD)](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) . You can refer to [Builder CRD Spec]({{< ref "../reference/function-spec#buildimpl" >}}) for more information.
+| Runtime | Serving Support        | Eventing Type Support | Version                                                      |
+| ------- | ---------------------- | --------------------- | ------------------------------------------------------------ |
+| Go      | OpenFuncAsync, Knative | HTTP, CloudEvent      | [1.15](https://github.com/OpenFunction/builder/blob/main/builders/go115), [1.16](https://github.com/OpenFunction/builder/blob/main/builders/go116) |
+| Node.js | Knative                | HTTP                  | [10](https://github.com/OpenFunction/builder/blob/main/builders/node10), [12](https://github.com/OpenFunction/builder/blob/main/builders/node12), [14](https://github.com/OpenFunction/builder/blob/main/builders/node14), [16](https://github.com/OpenFunction/builder/blob/main/builders/node16) |
+| Python  | Knative                | HTTP                  | [3.7](https://github.com/OpenFunction/builder/blob/main/builders/py37), [3.8](https://github.com/OpenFunction/builder/blob/main/builders/py38), [3.9](https://github.com/OpenFunction/builder/blob/main/builders/py39) |
+| Java    | Knative                | HTTP                  | [11](https://github.com/OpenFunction/builder/blob/main/builders/java11) |
 

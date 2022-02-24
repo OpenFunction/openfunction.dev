@@ -1,8 +1,8 @@
 ---
 title: "Concepts"
 linkTitle: "Concepts"
-weight: 10
+weight: 3000
 description: >	
-    Introduction to the concepts in OpenFunction
+    Learn about the core concepts of OpenFunction.
 ---
 
