@@ -14,7 +14,7 @@ Events is the event management framework for OpenFunction. It provides the follo
 
 - Support for triggering target functions by synchronous and asynchronous calls
 - User-defined trigger judgment logic
-- The components of OpenFunction Events can be driven by OpenFunction itself啥意思？
+- The components of OpenFunction Events can be driven by OpenFunction itself
 
 ## Architecture
 
