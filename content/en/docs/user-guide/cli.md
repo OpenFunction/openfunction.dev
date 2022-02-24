@@ -85,7 +85,7 @@ The following table describes parameters available for the `ofn install` command
 | --upgrade                         | For upgrading components to target versions during installation. |
 | --yes                             | For automatically passing yes to prompts. (`-y` for short)   |
 | --verbose                         | For displaying detailed information.                         |
-| --version &lt; version number&gt; | For specifying any stable version or the latest version of OpenFunction for installation. (default "v0.4.0"这个不对吧？) If not specified, the latest stable version will be installed. |
+| --version &lt; version number&gt; | For specifying any stable version or the latest version of OpenFunction for installation. (default "v0.4.0") If not specified, the latest stable version will be installed. |
 | --timeout &lt; duration &gt;      | For specifying the timeout duration, which defaults to 5 minutes. |
 
 ## `ofn uninstall` Parameters
