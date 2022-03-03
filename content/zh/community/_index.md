@@ -16,12 +16,12 @@ section1:
 
 section2:
   name: '社区会议'
-  content: '欢迎参加我们的 zoom 会议！'
-  link: 'https://us02web.zoom.us/j/89684762679?pwd=U1JNWVdzbElScVFMSEdQQnV0YnR4UT09' 
+  content: '欢迎参加我们的腾讯会议！'
+  link: 'https://meeting.tencent.com/dm/HMec1CjT8F2i' 
   children:
-    - content: '会议时间：北京时间每周三 15:30~16:30 (每两周进行一次，从2021年6月23日开始)'
+    - content: '会议时间：北京时间每周四 15:00~16:00（每两周进行一次，从 2022 年 3 月 17 日开始）'
     - link: 'https://kubesphere.io/contribution'
       linkContent: '会议日程'
-    - link: 'https://docs.google.com/document/d/1bh5-kVPegjNlIjjq_e37mS3ZhyXWhmmUaysFgeI9_-o/edit?usp=sharing'
+    - link: 'https://docs.google.com/document/d/1bh5-kVPegjNlIjjq_e37mS3ZhyXWhmmUaysFgeI9_-o/edit#'
       linkContent: '会议记录'
 ---
