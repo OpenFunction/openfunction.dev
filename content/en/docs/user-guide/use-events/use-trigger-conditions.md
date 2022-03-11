@@ -10,9 +10,11 @@ This document describes how to use Trigger conditions.
 
 ## Prerequisites
 
-You need to be familiar with the example given in [Use EventBus and Trigger](../use-event-bus-and-trigger).
+You have finished the steps described in [Use EventBus and Trigger](../use-event-bus-and-trigger).
 
 ## Use Trigger Conditions
+
+### Create two event sources
 
 1. Use the following content to create an EventSource configuration file (for example, `eventsource-a.yaml`).
 
@@ -22,15 +24,16 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
    metadata:
      name: eventsource-a
    spec:
+     logLevel: "2"
      eventBus: "default"
      kafka:
        sample-five:
-         brokers: dapr-kafka.kafka:9092
-         topic: sample
+         brokers: "kafka-server-kafka-brokers.default.svc.cluster.local:9092"
+         topic: "events-sample"
          authRequired: false
    ```
    
-1. Use the following content to create another EventSource configuration file (for example, `eventsource-a.yaml`).
+1. Use the following content to create another EventSource configuration file (for example, `eventsource-b.yaml`).
 
    ```yaml
    apiVersion: events.openfunction.io/v1alpha1
@@ -38,13 +41,23 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
    metadata:
      name: eventsource-b
    spec:
+     logLevel: "2"
      eventBus: "default"
      cron:
        sample-five:
-         schedule: "@every 5s"
+         schedule: "@every 5s" 
    ```
    
-3. Use the following content to create a configuration file (for example, `condition-trigger.yaml`) for a Trigger with `condition`.
+1. Run the following commands to apply these two configuration files.
+
+   ```shell
+   kubectl apply -f eventsource-a.yaml
+   kubectl apply -f eventsource-b.yaml
+   ```
+
+### Create a trigger with condition
+
+1. Use the following content to create a configuration file (for example, `condition-trigger.yaml`) for a Trigger with `condition`.
 
    ```yaml
    apiVersion: events.openfunction.io/v1alpha1
@@ -52,6 +65,7 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
    metadata:
      name: condition-trigger
    spec:
+     logLevel: "2"
      eventBus: "default"
      inputs:
        eventA:
@@ -63,29 +77,23 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
      subscribers:
      - condition: eventB
        sink:
-         ref:
-           apiVersion: serving.knative.dev/v1
-           kind: Service
-           name: function-sample-serving-qrdx8-ksvc-fwml8
-           namespace: default
+         uri: "http://openfunction.io.svc.cluster.local/default/sink"
      - condition: eventA && eventB
        topic: "metrics"
    ```
 
    {{% alert title="Note" color="success" %}}
 
-   In this example, two input sources and two subscribers are defined, and their triggering relationship is as follows:
+   In this example, two input sources and two subscribers are defined, and their triggering relationship is described as follows:
 
    - When input `eventB` is received, the input event is sent to the Knative service.
-   - When input `eventB` and input `eventA` are received, the input event is sent to the metrics topic of the event bus. (The above step is also effective)
+   - When input `eventB` and input `eventA` are received, the input event is sent to the metrics topic of the event bus and sent to the Knative service at the same time.
 
    {{% /alert %}}
 
-4. Run the following commands to apply the configuration files.
+2. Run the following commands to apply the configuration files.
 
    ```shell
-   kubectl apply -f eventsource-a.yaml
-   kubectl apply -f eventsource-b.yaml
    kubectl apply -f condition-trigger.yaml
    ```
 
@@ -93,40 +101,42 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
 
    ```shell
    $ kubectl get eventsources.events.openfunction.io
-   NAME            EVENTBUS   SINK   STATUS    COMPONENTS   WORKLOADS
-   eventsource-a   default           Running   2/2          1/1
-   eventsource-b   default           Running   2/2          1/1
+   NAME            EVENTBUS   SINK   STATUS
+   eventsource-a   default           Ready
+   eventsource-b   default           Ready
    
    $ kubectl get triggers.events.openfunction.io
-   NAME                EVENTBUS   STATUS    COMPONENTS   WORKLOADS
-   condition-trigger   default    Running   2/2          1/1
+   NAME                EVENTBUS   STATUS
+   condition-trigger   default    Ready
    
    $ kubectl get eventbus.events.openfunction.io
    NAME      AGE
    default   12s
    ```
 
-6. Run the following command, and the output shows that the `eventB` condition in the Trigger is matched and the Knative service is triggered as the event source `eventsource-b` is a cron task.
+4. Run the following command and you can see from the output that the `eventB` condition in the Trigger is matched and the Knative service is triggered because the event source `eventsource-b` is a cron task.
 
    ```shell
+   $ kubectl get functions.core.openfunction.io
+   NAME                                  BUILDSTATE   SERVINGSTATE   BUILDER   SERVING         URL                                   AGE
+   sink                                  Skipped      Running                  serving-4x5wh   http://openfunction.io/default/sink   3h25m
+   
    $ kubectl get po
-   NAME                                                              READY   STATUS    RESTARTS   AGE
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-7n4kpd   2/2     Running   0          11m
+   NAME                                                        READY   STATUS    RESTARTS   AGE
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-k2jdg   2/2     Running   0          46s
    ```
 
-7. Create an event producer by referring to [Create an Event Producer](../use-event-bus-and-trigger#create-an-event-producer).
+5. Create an event producer by referring to [Create an Event Producer](../../use-event-bus-and-trigger#create-an-event-producer).
 
-   {{% alert title="Note" color="success" %}}
-
-   Modity the value of `TARGET_NAME` to `eventsource-eventsource-a-kafka-sample-five`.
-
-   {{% /alert %}}
-
-8. Run the following command, and the output shows that the `eventA && eventB` condition in the Trigger is matched and the event is sent to the `metrics` topic of the event bus at the same time. The OpenFuncAsync function is triggered.
+6. Run the following command and you can see from the output that the `eventA && eventB` condition in the Trigger is matched and the event is sent to the `metrics` topic of the event bus at the same time. The OpenFuncAsync function is triggered.
 
    ```shell
+   $ kubectl get functions.core.openfunction.io
+   NAME                                  BUILDSTATE   SERVINGSTATE   BUILDER   SERVING         URL                                   AGE
+   trigger-target                        Skipped      Running                  serving-7hghp                                         103s
+   
    $ kubectl get po
-   NAME                                                              READY   STATUS    RESTARTS   AGE
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88dts99v   2/2     Running   0          6s 
+   NAME                                                        READY   STATUS    RESTARTS   AGE
+   serving-7hghp-deployment-v100-z8wrf-946b4854d-svf55         2/2     Running   0          18s
    ```
 

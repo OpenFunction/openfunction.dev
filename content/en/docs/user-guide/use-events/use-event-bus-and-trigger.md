@@ -10,98 +10,70 @@ This document gives an example of how to use EventBus and Trigger.
 
 ## Prerequisites
 
-- You need to prepare a Knative runtime function as a target function. For more information about how to create a Knative runtime function, see [Your First Function: Go](../../../getting-started/your-first-function/function-go).
+- You need to create a function as the target function to be triggered. For more information, see [Use EventSource](../use-event-source#create-a-function).
+- You need to create a Kafka cluster. For more information, see [Use EventSource](../use-event-source#create-a-kafka-cluster).
 
-  {{% alert title="Note" color="success" %}}
+## Deploy an NATS streaming server
 
-  This document uses `function-sample-serving-ksvc` as an example of the name of the target function (Knative service). To obtain the name of your function, run the `kubectl get ksvc` command.
+Run the following commands to deploy an NATS streaming server. This document uses `nats://nats.default:4222` as the access address of the NATS streaming server and `stan` as the cluster ID. For more information, see [NATS Streaming (STAN)](https://github.com/nats-io/k8s/tree/main/helm/charts/stan#tldr).
 
-  {{% /alert %}}
-
-- You need to prepare a Kafka server as the event source. For more information, see [Setting up a Kafka in Kubernetes](https://github.com/dapr/quickstarts/tree/master/bindings#setting-up-a-kafka-in-kubernetes).
-
-  {{% alert title="Note" color="success" %}}
-
-  This document uses `dapr-kafka.kafka:9092` as an example of the access address of the Kafka server.
-
-  {{% /alert %}}
-  
-- You need to prepare a NATS streaming server as the event bus. For more information, see [Running NATS on Kubernetes](https://nats-io.github.io/k8s/).
-
-  {{% alert title="Note" color="success" %}}
-
-  This document uses `nats://nats.default:4222` as an example of the access address of the NATS streaming server and `stan` as an example of the cluster ID.
-
-  {{% /alert %}}
+```shell
+helm repo add nats https://nats-io.github.io/k8s/helm/charts/
+helm install nats nats/nats
+helm install stan nats/stan --set stan.nats.url=nats://nats:4222
+```
 
 ## Create an OpenFuncAsync Runtime Function
 
-1. Use the following content to create a configuration file (for example, `openfuncasync-function.yaml`) for a function, which serves to print the received message.
-
-   {{% alert title="Note" color="success" %}}
-
-   Make sure you replace the `<your Docker Hub ID>` in `spec.image` with your Docker Hub ID.
-
-   {{% /alert %}}
+1. Use the following content to create a configuration file (for example, `openfuncasync-function.yaml`) for the target function, which is triggered by the Trigger CRD and prints the received message.
 
    ```yaml
-   apiVersion: core.openfunction.io/v1alpha1
+   apiVersion: core.openfunction.io/v1beta1
    kind: Function
    metadata:
-     name: autoscaling-subscriber
+     name: trigger-target
    spec:
      version: "v1.0.0"
-     image: <your Docker Hub ID>/autoscaling-subscriber:latest
-     imageCredentials:
-       name: push-secret
-     build:
-       builder: openfunctiondev/go115-builder:v0.2.0
-       env:
-         FUNC_NAME: "Subscriber"
-       srcRepo:
-         url: "https://github.com/OpenFunction/samples.git"
-         sourceSubPath: "functions/OpenFuncAsync/pubsub/subscriber"
+     image: openfunctiondev/v1beta1-trigger-target:latest
+     port: 8080
      serving:
-       runtime: "OpenFuncAsync"
-       openFuncAsync:
-         dapr:
-           inputs:
-             - name: autoscaling-pubsub
-               type: pubsub
-               topic: metrics
-           annotations:
-             dapr.io/log-level: "debug"
-           components:
-             - name: autoscaling-pubsub
-               type: pubsub.natsstreaming
-               version: v1
-               metadata:
-                 - name: natsURL
-                   value: "nats://nats.default:4222"
-                 - name: natsStreamingClusterID
-                   value: "stan"
-                 - name: subscriptionType
-                   value: "queue"
-                 - name: durableSubscriptionName
-                   value: "ImDurable"
-                 - name: consumerID
-                   value: "grp1"
+       runtime: "async"
+       scaleOptions:
          keda:
            scaledObject:
              pollingInterval: 15
              minReplicaCount: 0
              maxReplicaCount: 10
              cooldownPeriod: 30
-             triggers:
-               - type: stan
-                 metadata:
-                   natsServerMonitoringEndpoint: "stan-0.stan.default.svc.cluster.local:8222"
-                   queueGroup: "grp1"
-                   durableName: "ImDurable"
-                   subject: "metrics"
-                   lagThreshold: "10"
+       triggers:
+         - type: stan
+           metadata:
+             natsServerMonitoringEndpoint: "stan.default.svc.cluster.local:8222"
+             queueGroup: "grp1"
+             durableName: "ImDurable"
+             subject: "metrics"
+             lagThreshold: "10"
+       inputs:
+         - name: autoscaling-pubsub
+           component: eventbus
+           topic: metrics
+       pubsub:
+         eventbus:
+           type: pubsub.natsstreaming
+           version: v1
+           metadata:
+             - name: natsURL
+               value: "nats://nats.default:4222"
+             - name: natsStreamingClusterID
+               value: "stan"
+             - name: subscriptionType
+               value: "queue"
+             - name: durableSubscriptionName
+               value: "ImDurable"
+             - name: consumerID
+               value: "grp1"
    ```
-
+   
 2. Run the following command to apply the configuration file.
 
    ```shell
@@ -110,7 +82,7 @@ This document gives an example of how to use EventBus and Trigger.
 
 ## Create an EventBus and an EventSource
 
-1. Use the following content to create a configuration file (for example, `eventbus-default.yaml`) for an EventBus.
+1. Use the following content to create a configuration file (for example, `eventbus.yaml`) for an EventBus.
 
    ```yaml
    apiVersion: events.openfunction.io/v1alpha1
@@ -121,10 +93,11 @@ This document gives an example of how to use EventBus and Trigger.
      natsStreaming:
        natsURL: "nats://nats.default:4222"
        natsStreamingClusterID: "stan"
-       subscriptionType: queue
+       subscriptionType: "queue"
+       durableSubscriptionName: "ImDurable"
    ```
 
-2. Use the following content to create a configuration file (for example, `eventsource-eventbus.yaml`) for an EventSource.
+2. Use the following content to create a configuration file (for example, `eventsource.yaml`) for an EventSource.
 
    {{% alert title="Note" color="success" %}}
 
@@ -138,52 +111,57 @@ This document gives an example of how to use EventBus and Trigger.
    metadata:
      name: my-eventsource
    spec:
+     logLevel: "2"
      eventBus: "default"
      kafka:
        sample-two:
-         brokers: dapr-kafka.kafka:9092
-         topic: sample
+         brokers: "kafka-server-kafka-brokers.default.svc.cluster.local:9092"
+         topic: "events-sample"
          authRequired: false
    ```
 
 3. Run the following commands to apply these configuration files.
 
    ```shell
-   kubectl apply -f eventbus-default.yaml
-   kubectl apply -f eventsource-eventbus.yaml
+   kubectl apply -f eventbus.yaml
+   kubectl apply -f eventsource.yaml
    ```
 
 4. Run the following commands to check the results.
 
    ```shell
    $ kubectl get eventsources.events.openfunction.io
-   NAME             EVENTBUS   SINK
-   my-eventsource   default
+   NAME             EVENTBUS   SINK   STATUS
+   my-eventsource   default           Ready
    
    $ kubectl get eventbus.events.openfunction.io
    NAME      AGE
-   default   10m
+   default   6m53s
    
    $ kubectl get components
-   NAME                                          AGE
-   eventsource-eventbus-my-eventsource           28s
-   eventsource-my-eventsource-kafka-sample-two   28s
+   NAME                                                 AGE
+   serving-6r5dl-component-eventbus-jlpqf               11m
+   serving-9689d-component-ebfes-my-eventsource-cmcbw   6m57s
+   serving-9689d-component-esc-kafka-sample-two-l99cg   6m57s
+   serving-k6zw8-component-cron-9x8hl                   61m
+   serving-k6zw8-component-kafka-server-sjrzs           61m
    
    $ kubectl get deployments.apps
-   NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
-   eventsource-my-eventsource-kafka-sample-two    1/1     1            1           4m53s
+   NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
+   serving-6r5dl-deployment-v100-m7nq2        0/0     0            0           12m
+   serving-9689d-deployment-v100-5qdvk        1/1     1            1           7m17s
    ```
 
    {{% alert title="Note" color="success" %}}
-
-   In the case of using the event bus, the workflow of the EventSource controller is as follows:
-
+   
+   In the case of using the event bus, the workflow of the EventSource controller is described as follows:
+   
    1. Create an EventSource custom resource named `my-eventsource`.
-   2. Retrieve and reorganize the configuration of the EventBus, including the EventBus name (`default` in this example) and the name of the Dapr component associated with the EventBus (`eventsource-eventbus-my-eventsource` in this example).
-   3. Create a Dapr component named `eventsource-eventbus-my-eventsource` for associating the event bus.
-   4. Create a Dapr component named `eventsource-my-eventsource-kafka-sample-two` for associating the event source.
-   5. Create a Deployment named `eventsource-my-eventsource-kafka-sample-two` for processing events.
-
+   2. Retrieve and reorganize the configuration of the EventBus, including the EventBus name (`default` in this example) and the name of the Dapr component associated with the EventBus.
+   3. Create a Dapr component named `serving-xxxxx-component-ebfes-my-eventsource-xxxxx` to enable the EventSource to associate with the event bus.
+   4. Create a Dapr component named `serving-xxxxx-component-esc-kafka-sample-two-xxxxx` to enable the EventSource to associate with the event source.
+   5. Create a Deployment named `serving-xxxxx-deployment-v100-xxxxx` for processing events.
+   
    {{% /alert %}}
 
 ## Create a Trigger
@@ -194,7 +172,7 @@ This document gives an example of how to use EventBus and Trigger.
 
    - Set the event bus associated with the Trigger through `spec.eventBus`.
    - Set the event input source through `spec.inputs`.
-   - This is a simple trigger that collects events from the EventBus `default`. When it retrieves a `sample-two` event from the EventSource `my-eventsource`, it triggers a Knative service named `function-sample-serving-qrdx8-ksvc-fwml8` and sends the event to the topic `metrics` of the event bus at the same time. 
+   - This is a simple trigger that collects events from the EventBus named `default`. When it retrieves a `sample-two` event from the EventSource `my-eventsource`, it triggers a Knative service named `function-sample-serving-qrdx8-ksvc-fwml8` and sends the event to the topic `metrics` of the event bus at the same time. 
 
    {{% /alert %}}
 
@@ -204,22 +182,17 @@ This document gives an example of how to use EventBus and Trigger.
    metadata:
      name: my-trigger
    spec:
+     logLevel: "2"
      eventBus: "default"
      inputs:
        inputDemo:
          eventSource: "my-eventsource"
          event: "sample-two"
      subscribers:
-     - condition: inputDemo
-       sink:
-         ref:
-           apiVersion: serving.knative.dev/v1
-           kind: Service
-           name: function-sample-serving-qrdx8-ksvc-fwml8
-           namespace: default
-       topic: "metrics"
+       - condition: inputDemo
+         topic: "metrics"
    ```
-
+   
 2. Run the following command to apply the configuration file.
 
    ```shell
@@ -230,23 +203,19 @@ This document gives an example of how to use EventBus and Trigger.
 
    ```shell
    $ kubectl get triggers.events.openfunction.io
-   NAME         AGE
-   my-trigger   34m
+   NAME         EVENTBUS   STATUS
+   my-trigger   default    Ready
    
    $ kubectl get eventbus.events.openfunction.io
    NAME      AGE
    default   62m
    
    $ kubectl get components
-   autoscaling-pubsub                                                         90m
-   eventbus-eventsource-my-eventsource                                        161m
-   eventbus-trigger-my-trigger                                                161m
-   eventsource-my-eventsource-kafka-sample-two                                161m
-   trigger-sink-my-trigger-default-function-sample-serving-qrdx8-ksvc-fwml8   161m
-   
-   $ kubectl get deployments.apps
-   NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-   trigger-my-trigger      1/1     1            1           2m52s
+   NAME                                                 AGE
+   serving-9689d-component-ebfes-my-eventsource-cmcbw   46m
+   serving-9689d-component-esc-kafka-sample-two-l99cg   46m
+   serving-dxrhd-component-eventbus-t65q7               13m
+   serving-zwlj4-component-ebft-my-trigger-4925n        100s
    ```
    
    {{% alert title="Note" color="success" %}}
@@ -254,10 +223,9 @@ This document gives an example of how to use EventBus and Trigger.
    In the case of using the event bus, the workflow of the Trigger controller is as follows:
    
    1. Create a Trigger custom resource named `my-trigger`.
-   2. Retrieve and reorganize the configuration of the EventBus, including the EventBus name (`default` in this example) and the name of the Dapr component associated with the EventBus (`eventbus-trigger-my-trigger` in this example).
-   3. Create a Dapr component named `eventbus-trigger-my-trigger` for associating the event bus.
-   4. Create a Dapr component named `trigger-sink-my-trigger-default-function-sample-serving-qrdx8-ksvc-fwml8` for associating the target Knative function.
-   5. Create a Deployment named `trigger-my-trigger` for processing trigger tasks.
+   2. Retrieve and reorganize the configuration of the EventBus, including the EventBus name (`default` in this example) and the name of the Dapr component associated with the EventBus.
+   3. Create a Dapr component named `serving-xxxxx-component-ebft-my-trigger-xxxxx` to enable the Trigger to associatie with the event bus.
+   5. Create a Deployment named `serving-xxxxx-deployment-v100-xxxxx` for processing trigger tasks.
    
    {{% /alert %}}
 
@@ -265,73 +233,72 @@ This document gives an example of how to use EventBus and Trigger.
 
 1. Use the following content to create an event producer configuration file (for example, `events-producer.yaml`).
 
-   {{% alert title="Note" color="success" %}}
-
-   - This document uses the image `openfunctiondev/events-producer:latest` as an example image, which publishes events to the event source at a rate of one event per 5 seconds.
-   - To use this image as an event producer, you need to use an environment variable to set the value of `TARGET_NAME` to the name of the Dapr component for associating the event source, namely `eventsource-my-eventsource-kafka-sample-two`.
-
-   {{% /alert %}}
-
    ```yaml
-   apiVersion: apps/v1
-   kind: Deployment
+   apiVersion: core.openfunction.io/v1beta1
+   kind: Function
    metadata:
      name: events-producer
-     labels:
-       app: eventsproducer
    spec:
-     replicas: 1
-     selector:
-       matchLabels:
-         app: eventsproducer
-     template:
-       metadata:
-         labels:
-           app: eventsproducer
-         annotations:
-           dapr.io/enabled: "true"
-           dapr.io/app-id: "events-producer"
-           dapr.io/log-as-json: "true"
-       spec:
+     version: "v1.0.0"
+     image: openfunctiondev/v1beta1-bindings:latest
+     serving:
+       template:
          containers:
-           - name: producer
-             image: openfunctiondev/events-producer:latest
+           - name: function
              imagePullPolicy: Always
-             env:
-               - name: TARGET_NAME
-                 value: "eventsource-my-eventsource-kafka-sample-two"
+       runtime: "async"
+       inputs:
+         - name: cron
+           component: cron
+       outputs:
+         - name: target
+           component: kafka-server
+           operation: "create"
+       bindings:
+         cron:
+           type: bindings.cron
+           version: v1
+           metadata:
+             - name: schedule
+               value: "@every 2s"
+         kafka-server:
+           type: bindings.kafka
+           version: v1
+           metadata:
+             - name: brokers
+               value: "kafka-server-kafka-brokers:9092"
+             - name: topics
+               value: "events-sample"
+             - name: consumerGroup
+               value: "bindings-with-output"
+             - name: publishTopic
+               value: "events-sample"
+             - name: authRequired
+               value: "false"
    ```
 
-2. Run the following command to apply the configuration file.
+1. Run the following command to apply the configuration file.
 
    ```shell
    kubectl apply -f events-producer.yaml
    ```
-
-3. Run the following command to check the results in real time.
+   
+3. Run the following commands to observe changes of the target asynchronous function.
 
    ```shell
+   $ kubectl get functions.core.openfunction.io
+   NAME                                  BUILDSTATE   SERVINGSTATE   BUILDER   SERVING         URL                                   AGE
+   trigger-target                        Skipped      Running                  serving-dxrhd                                         20m
+   
    $ kubectl get po --watch
-   NAME                                                           READY   STATUS              RESTARTS   AGE
-   events-producer-86679d99fb-4tlbt                               0/2     ContainerCreating   0          2s
-   eventsource-my-eventsource-kafka-sample-two-7695c6cfdd-j2g5b   2/2     Running             0          58m
-   trigger-my-trigger-7b799c7f7d-4ph77                            2/2     Running             0          37m
-   events-producer-86679d99fb-4tlbt                               0/2     ContainerCreating   0          2s
-   events-producer-86679d99fb-4tlbt                               1/2     Running             0          6s
-   events-producer-86679d99fb-4tlbt                               2/2     Running             0          10s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     Pending             0          0s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     Pending             0          0s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     ContainerCreating   0          0s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     ContainerCreating   0          2s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   1/2     Running             0          3s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   1/2     Running             0          4s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   2/2     Running             0          4s
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88d8bf6m   0/2     Pending             0          0s
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88d8bf6m   0/2     Pending             0          0s
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88d8bf6m   0/2     ContainerCreating   0          0s
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88d8bf6m   0/2     ContainerCreating   0          1s
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88d8bf6m   1/2     Running             0          3s
-   autoscaling-subscriber-serving-5qzlq-v100-xp9dw-77bc8cc88d8bf6m   2/2     Running             0          11s
+   NAME                                                     READY   STATUS              RESTARTS   AGE
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      0/2     Pending             0          0s
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      0/2     Pending             0          0s
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      0/2     ContainerCreating   0          0s
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      0/2     ContainerCreating   0          2s
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      1/2     Running             0          4s
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      1/2     Running             0          4s
+   serving-dxrhd-deployment-v100-xmrkq-785cb5f99-6hclm      2/2     Running             0          4s
    ```
 
 

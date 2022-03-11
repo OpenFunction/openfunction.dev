@@ -16,6 +16,7 @@ This document describes how to install OpenFunction.
 
 | OpenFunction Version | Kubernetes 1.17 | Kubernetes 1.18 | Kubernetes 1.19 | Kubernetes 1.20+ |
 | -------------------- | --------------- | --------------- | --------------- | ---------------- |
+| v0.6.0               | √               | √               | √               | √                |
 | v0.5.0               | √               | √               | √               | √                |
 | v0.4.0               | √               | √               | √               | √                |
 | v0.3.x               | √               | √               | √               | √                |
@@ -23,7 +24,7 @@ This document describes how to install OpenFunction.
 
 {{% alert title="Note" color="success" %}}
 
-For more information about OpenFunction components compatibility with Kubernetes, refer to [Component Compatibility Matrix](../../best-practices/customize-components#component-compatibility-matrix).
+OpenFunction has added the [Domain](../../concepts/domain) feature since v0.5.0. To use this feature, you have to install OpenFunction in Kubernetes 1.19 or later. For more information about OpenFunction components compatibility with Kubernetes, refer to [Component Compatibility Matrix](../../best-practices/customize-components#component-compatibility-matrix).
 
 {{% /alert %}}
 

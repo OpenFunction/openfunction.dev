@@ -8,25 +8,127 @@ description: >
 
 This document gives an example of how to use an event source to trigger a synchronous function.
 
-In this example, an EventSource is defined for synchronous invocation to use the event source (a Kafka server) as an input bindings of a function (a Knative service). When the event source generates an event, it will invoke the function and get a synchronous return through the `EventSource.Sink` configuration.
+In this example, an EventSource is defined for synchronous invocation to use the event source (a Kafka server) as an input bindings of a function (a Knative service). When the event source generates an event, it will invoke the function and get a synchronous return through the `spec.sink` configuration.
 
-## Prerequisites
+## Create a Function
 
-- You need to prepare a Knative runtime function as the target function. For more information about how to create a Knative runtime function, see [Your First Function: Go](../../../getting-started/your-first-function/function-go).
+Use the following content to create a function as the EventSource Sink. For more information about how to create a function, see [Your First Function: Go](../../../getting-started/your-first-function/function-go).
 
-  {{% alert title="Note" color="success" %}}
+```yaml
+apiVersion: core.openfunction.io/v1beta1
+kind: Function
+metadata:
+  name: sink
+spec:
+  version: "v1.0.0"
+  image: "openfunction/sink-sample:latest"
+  port: 8080
+  serving:
+    runtime: "knative"
+    template:
+      containers:
+        - name: function
+          imagePullPolicy: Always
+```
 
-  This document uses `function-sample-serving-qrdx8-ksvc-fwml8` as an example of the name of the target function (Knative service). To obtain the name of your function, run the `kubectl get ksvc` command.
+After the function is created, run the following command to get the URL of the function.
 
-  {{% /alert %}}
+{{% alert title="Note" color="success" %}}
 
-- You need to prepare a Kafka server as the event source. For more information, see [Setting up a Kafka in Kubernetes](https://github.com/dapr/quickstarts/tree/master/bindings#setting-up-a-kafka-in-kubernetes).
+In the URL of the function, the `openfunction` is the name of the Kubernetes Service and the `io` is the namespace where the Kubernetes Service runs. For more information, see [Namespaces of Services](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
 
-  {{% alert title="Note" color="success" %}}
+{{% /alert %}}
 
-  This document uses `dapr-kafka.kafka:9092` as an example of the access address of the Kafka server.
+```shell
+$ kubectl get functions.core.openfunction.io
+NAME   BUILDSTATE   SERVINGSTATE   BUILDER   SERVING         URL                                   AGE
+sink   Skipped      Running                  serving-4x5wh   http://openfunction.io/default/sink   13s
+```
 
-  {{% /alert %}}
+## Create a Kafka Cluster
+
+1. Run the following commands to install [strimzi-kafka-operator](https://github.com/strimzi/strimzi-kafka-operator) in the default namespace.
+
+   ```shell
+   helm repo add strimzi https://strimzi.io/charts/
+   helm install kafka-operator -n default strimzi/strimzi-kafka-operator
+   ```
+
+2. Use the following content to create a file `kafka.yaml`.
+
+   ```yaml
+   apiVersion: kafka.strimzi.io/v1beta2
+   kind: Kafka
+   metadata:
+     name: kafka-server
+     namespace: default
+   spec:
+     kafka:
+       version: 3.1.0
+       replicas: 1
+       listeners:
+         - name: plain
+           port: 9092
+           type: internal
+           tls: false
+         - name: tls
+           port: 9093
+           type: internal
+           tls: true
+       config:
+         offsets.topic.replication.factor: 1
+         transaction.state.log.replication.factor: 1
+         transaction.state.log.min.isr: 1
+         default.replication.factor: 1
+         min.insync.replicas: 1
+         inter.broker.protocol.version: "3.1"
+       storage:
+         type: ephemeral
+     zookeeper:
+       replicas: 1
+       storage:
+         type: ephemeral
+     entityOperator:
+       topicOperator: {}
+       userOperator: {}
+   ---
+   apiVersion: kafka.strimzi.io/v1beta2
+   kind: KafkaTopic
+   metadata:
+     name: events-sample
+     namespace: default
+     labels:
+       strimzi.io/cluster: kafka-server
+   spec:
+     partitions: 10
+     replicas: 1
+     config:
+       retention.ms: 7200000
+       segment.bytes: 1073741824
+   ```
+
+3. Run the following command to deploy a 1-replica Kafka server named `kafka-server` and 1-replica Kafka topic named `events-sample` in the default namespace. The Kafka and Zookeeper clusters created by this command have a storage type of **ephemeral** and are demonstrated using emptyDir.
+
+   ```shell
+   kubectl apply -f kafka.yaml
+   ```
+
+4. Run the following command to check pod status and wait for Kafka and Zookeeper to be up and running.
+
+   ```shell
+   $ kubectl get po
+   NAME                                              READY   STATUS        RESTARTS   AGE
+   kafka-server-entity-operator-568957ff84-nmtlw     3/3     Running       0          8m42s
+   kafka-server-kafka-0                              1/1     Running       0          9m13s
+   kafka-server-zookeeper-0                          1/1     Running       0          9m46s
+   strimzi-cluster-operator-687fdd6f77-cwmgm         1/1     Running       0          11m
+   ```
+
+5. Run the following command to view the metadata of the Kafka cluster.
+
+   ```shell
+   kafkacat -L -b kafka-server-kafka-brokers:9092
+   ```
 
 ## Trigger a Synchronous Function
 
@@ -36,8 +138,8 @@ In this example, an EventSource is defined for synchronous invocation to use the
 
    {{% alert title="Note" color="success" %}}
 
-   - The following example defines an event source named `my-eventsource` and mark the events generated by the specified Kafka server as `sample-one`.
-   - `EventSource.Sink` references the target function (Knative service). 
+   - The following example defines an event source named `my-eventsource` and mark the events generated by the specified Kafka server as `sample-one` events.
+   - `spec.sink` references the target function (Knative service) created in the prerequisites. 
 
    {{% /alert %}}
 
@@ -47,19 +149,16 @@ In this example, an EventSource is defined for synchronous invocation to use the
    metadata:
      name: my-eventsource
    spec:
+     logLevel: "2"
      kafka:
        sample-one:
-         brokers: dapr-kafka.kafka:9092
-         topic: sample
+         brokers: "kafka-server-kafka-brokers.default.svc.cluster.local:9092"
+         topic: "events-sample"
          authRequired: false
      sink:
-       ref:
-         apiVersion: serving.knative.dev/v1
-         kind: Service
-         name: function-sample-serving-qrdx8-ksvc-fwml8
-         namespace: default
+       uri: "http://openfunction.io.svc.cluster.local/default/sink"
    ```
-
+   
 2. Run the following command to apply the configuration file.
 
    ```shell
@@ -70,69 +169,78 @@ In this example, an EventSource is defined for synchronous invocation to use the
 
    ```shell
    $ kubectl get eventsources.events.openfunction.io
-   NAME             EVENTBUS   SINK
-   my-eventsource              function-sample-serving-ksvc
+   NAME             EVENTBUS   SINK   STATUS
+   my-eventsource                     Ready
    
    $ kubectl get components
-   NAME                                          AGE
-   eventsource-my-eventsource-kafka-sample-one   3m45s
-   eventsource-sink-my-eventsource               3m45s
+   NAME                                                      AGE
+   serving-8f6md-component-esc-kafka-sample-one-r527t        68m
+   serving-8f6md-component-ts-my-eventsource-default-wz8jt   68m
    
    $ kubectl get deployments.apps
    NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
-   eventsource-my-eventsource-kafka-sample-one    1/1     1            1           4m14s
+   serving-8f6md-deployment-v100-pg9sd            1/1     1            1           68m
    ```
 
    {{% alert title="Note" color="success" %}}
 
-   In this example of triggering a synchronous function, the workflow of the EventSource controller is as follows:
+   In this example of triggering a synchronous function, the workflow of the EventSource controller is described as follows:
 
    1. Create an EventSource custom resource named `my-eventsource`.
-   2. Create a Dapr component named `eventsource-my-eventsource-kafka-sample-one` for associating the event source.
-   3. Create a Dapr component named `eventsource-sink-my-eventsource` for associating the target function.
-   4. Create a Deployment named `eventsource-my-eventsource-kafka-sample-one` for processing events.
+   2. Create a Dapr component named `serving-xxxxx-component-esc-kafka-sample-one-xxxxx` to enable the EventSource to associate with the event source.
+   3. Create a Dapr component named `serving-xxxxx-component-ts-my-eventsource-default-xxxxx` enable the EventSource to associate with the sink function.
+   4. Create a Deployment named `serving-xxxxx-deployment-v100-xxxxx-xxxxxxxxxx-xxxxx` for processing events.
 
    {{% /alert %}}
 
 ### Create an event producer
 
+To start the target function, you need to create some events to trigger the function. 
+
 1. Use the following content to create an event producer configuration file (for example, `events-producer.yaml`).
 
-   {{% alert title="Note" color="success" %}}
-
-   - This document uses the image `openfunctiondev/events-producer:latest` as an example image, which publishes events to the event source at a rate of one event per 5 seconds.
-   - To use this image as an event producer, you need to use an environment variable to set the value of `TARGET_NAME` to the name of the Dapr component for associating the event source, namely `eventsource-my-eventsource-kafka-sample-one`.
-
-   {{% /alert %}}
-
    ```yaml
-   apiVersion: apps/v1
-   kind: Deployment
+   apiVersion: core.openfunction.io/v1beta1
+   kind: Function
    metadata:
      name: events-producer
-     labels:
-       app: eventsproducer
    spec:
-     replicas: 1
-     selector:
-       matchLabels:
-         app: eventsproducer
-     template:
-       metadata:
-         labels:
-           app: eventsproducer
-         annotations:
-           dapr.io/enabled: "true"
-           dapr.io/app-id: "events-producer"
-           dapr.io/log-as-json: "true"
-       spec:
+     version: "v1.0.0"
+     image: openfunctiondev/v1beta1-bindings:latest
+     serving:
+       template:
          containers:
-           - name: producer
-             image: openfunctiondev/events-producer:latest
+           - name: function
              imagePullPolicy: Always
-             env:
-               - name: TARGET_NAME
-                 value: "eventsource-my-eventsource-kafka-sample-one"
+       runtime: "async"
+       inputs:
+         - name: cron
+           component: cron
+       outputs:
+         - name: target
+           component: kafka-server
+           operation: "create"
+       bindings:
+         cron:
+           type: bindings.cron
+           version: v1
+           metadata:
+             - name: schedule
+               value: "@every 2s"
+         kafka-server:
+           type: bindings.kafka
+           version: v1
+           metadata:
+             - name: brokers
+               value: "kafka-server-kafka-brokers:9092"
+             - name: topics
+               value: "events-sample"
+             - name: consumerGroup
+               value: "bindings-with-output"
+             - name: publishTopic
+               value: "events-sample"
+             - name: authRequired
+               value: "false"
    ```
 
 2. Run the following command to apply the configuration file.
@@ -146,18 +254,18 @@ In this example, an EventSource is defined for synchronous invocation to use the
    ```shell
    $ kubectl get po --watch
    NAME                                                           READY   STATUS              RESTARTS   AGE
-   events-producer-86b49654-8stj6                                 0/2     ContainerCreating   0          1s
-   eventsource-my-eventsource-kafka-sample-one-789b767c79-45bdf   2/2     Running             0          23m
-   events-producer-86b49654-8stj6                                 0/2     ContainerCreating   0          1s
-   events-producer-86b49654-8stj6                                 1/2     Running             0          5s
-   events-producer-86b49654-8stj6                                 2/2     Running             0          8s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     Pending             0          0s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     Pending             0          0s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     ContainerCreating   0          0s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   0/2     ContainerCreating   0          2s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   1/2     Running             0          4s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   1/2     Running             0          4s
-   function-sample-serving-qrdx8-ksvc-fwml8-v100-deployment-8cpxsj   2/2     Running             0          4s
+   serving-k6zw8-deployment-v100-fbtdc-dc96c4589-s25dh            0/2     ContainerCreating   0          1s
+   serving-8f6md-deployment-v100-pg9sd-6666c5577f-4rpdg           2/2     Running             0          23m
+   serving-k6zw8-deployment-v100-fbtdc-dc96c4589-s25dh            0/2     ContainerCreating   0          1s
+   serving-k6zw8-deployment-v100-fbtdc-dc96c4589-s25dh            1/2     Running             0          5s
+   serving-k6zw8-deployment-v100-fbtdc-dc96c4589-s25dh            2/2     Running             0          8s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      0/2     Pending             0          0s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      0/2     Pending             0          0s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      0/2     ContainerCreating   0          0s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      0/2     ContainerCreating   0          2s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      1/2     Running             0          4s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      1/2     Running             0          4s
+   serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-8n6mk      2/2     Running             0          4s
    ```
 
 

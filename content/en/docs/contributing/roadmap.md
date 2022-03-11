@@ -10,27 +10,33 @@ This document introduces the roadmap of OpenFunction.
 
 ## Roadmap
 
-### v0.6.0+ (2022 Q1–Q2)
+### v0.7.0+ (2022 Q2–Q4)
 
-- [ ] Functions framework refactoring.
-- [ ] Add plug-in mechanism to functions framework.
-- [ ] Refactoring OpenFunctionAsync runtime definition.
-- [ ] Add binding to knative sync functions (Integrate Dapr with Knative).
-- [ ] Add the ability to control min/max replicas.
 - [ ] Add the ability to control concurrent access to functions.
-- [ ] Add function invoking ability to the CLI ofn.
-- [ ] Use emissary-ingress as Knative network layer and Kubernetes Ingress & Gateway.
+- [ ] Add function invoking ability to ofn cli.
+- [ ] Use Contour as Knative network layer and K8s Ingress & Gateway.
 - [ ] Support more EventSources.
 - [ ] Add OpenFunction sync function.
-- [ ] Nodejs functions frameworks & builder.
+- [ ] Nodejs async functions frameworks.
 - [ ] Python functions frameworks & builder.
 - [ ] OpenFunction API & Console.
 - [ ] [Serverless workflow](https://serverlessworkflow.io/) support, refer to [Serverless Workflow Project Deep Dive](https://www.youtube.com/watch?v=dsuo1VQQZ2E&list=PLj6h78yzYM2MqBm19mRz9SYLsw4kfQBrC&index=166) for more info. Reference implementations include [
   SYNAPSE](https://github.com/serverlessworkflow/synapse), [FunctionGraph](https://www.huaweicloud.com/en-us/product/functiongraph.html), [Kogito](https://kogito.kie.org/), [Automatiko](https://automatiko.io/).
 - [ ] Use [ShipWright](https://github.com/shipwright-io/build) to build functions with Dockerfile.
-- [ ] Function tracing: support using Skywalking for tracing.
 - [ ] Function tracing: support using OpenTelemtry for tracing.
 - [ ] Support Rust functions & WebAssembly runtime.
+
+### v0.6.0 (Mar. 2022)
+
+- [x] Upgrade core API from v1alpha2 to v1beta1.
+- [x] Functions framework refactoring.
+- [x] Add plug-in mechanism to functions framework.
+- [x] Refactoring OpenFunctionAsync runtime definition.
+- [x] Add binding to knative sync functions (Integrate Dapr with Knative).
+- [x] Add the ability to control min/max replicas.
+- [x] Node.js sync functions frameworks & builder.
+- [x] Function tracing: support using Skywalking for function tracing.
+- [x] Add more e2e tests.
 
 ### v0.5.0 (Dec. 2021)
 

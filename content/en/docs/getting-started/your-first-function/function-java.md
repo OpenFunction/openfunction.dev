@@ -31,27 +31,31 @@ kubectl create secret docker-registry push-secret \
 1. Use the following example YAML file to create a manifest `function-sample.yaml` for your function, and modify the value of `spec.image` to set your own image registry address.
 
    ```yaml
-   apiVersion: core.openfunction.io/v1alpha2
+   apiVersion: core.openfunction.io/v1beta1
    kind: Function
    metadata:
      name: java-sample
    spec:
      version: "v1.0.0"
-     image: "<your_registry_username>/sample-java-func:v0.5"
+     image: "<your registry name>/sample-java-func:v1"
      imageCredentials:
        name: push-secret
-     port: 8080 # Defaults to 8080.
+     port: 8080 # Default to 8080.
      build:
        builder: "openfunction/gcp-builder:v1"
        env:
          GOOGLE_FUNCTION_TARGET: "com.openfunction.HelloWorld"
          GOOGLE_FUNCTION_SIGNATURE_TYPE: "http"
        srcRepo:
-         revision: "release-0.5"
          url: "https://github.com/OpenFunction/samples.git"
          sourceSubPath: "functions/Knative/hello-world-java"
+         revision: "release-0.6"
      serving:
-       runtime: Knative # Defaults to Knative.
+       runtime: knative # Default to knative.
+       template:
+         containers:
+           - name: function
+             imagePullPolicy: IfNotPresent
    ```
 
 2. Run the following command to create the function.
@@ -60,6 +64,6 @@ kubectl create secret docker-registry push-secret \
    kubectl apply -f function-sample.yaml
    ```
 
-### Check the result
+### Access the function
 
-For more information about how to check the result, refer to [Check the result](../function-go#check-the-result).
+For more information about how to access the function, refer to [Access the function](../function-go#access-the-function).

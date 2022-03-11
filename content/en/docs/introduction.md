@@ -16,7 +16,7 @@ OpenFunction is a cloud-native open source FaaS (Function as a Service) platform
 
 ## Architecture and Design
 
-![](/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.png)
+![](/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg)
 
 OpenFunction manages resources in the form of Custom Resource Definitions (CRDs) throughout the lifecycle of a function. 
 
@@ -30,8 +30,8 @@ OpenFunction manages resources in the form of Custom Resource Definitions (CRDs)
 
 OpenFunction has two main capabilities:
 
-- Serverless framework with CRDs: [Function](../../concepts/function), [Builder](../../concepts/builder), and [Serving](../../concepts/serving).
-- Events framework with CRDs: [EventSource](../../concepts/events#eventsource), [EventBus (ClusterEventBus)](../../concepts/events#eventbus-clustereventbus), and [Trigger](../../concepts/events#trigger).
+- Serverless framework with CRDs: [Function](../concepts/function), [Builder](../concepts/builder), and [Serving](../concepts/serving).
+- Events framework with CRDs: [EventSource](../concepts/events#eventsource), [EventBus (ClusterEventBus)](../concepts/events#eventbus-clustereventbus), and [Trigger](../concepts/events#trigger).
 
 ## Use Cases
 
