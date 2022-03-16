@@ -225,7 +225,7 @@ helm install stan nats/stan --set stan.nats.url=nats://nats:4222
    1. Create a Trigger custom resource named `my-trigger`.
    2. Retrieve and reorganize the configuration of the EventBus, including the EventBus name (`default` in this example) and the name of the Dapr component associated with the EventBus.
    3. Create a Dapr component named `serving-xxxxx-component-ebft-my-trigger-xxxxx` to enable the Trigger to associatie with the event bus.
-   5. Create a Deployment named `serving-xxxxx-deployment-v100-xxxxx` for processing trigger tasks.
+   4. Create a Deployment named `serving-xxxxx-deployment-v100-xxxxx` for processing trigger tasks.
    
    {{% /alert %}}
 
@@ -277,7 +277,7 @@ helm install stan nats/stan --set stan.nats.url=nats://nats:4222
                value: "false"
    ```
 
-1. Run the following command to apply the configuration file.
+2. Run the following command to apply the configuration file.
 
    ```shell
    kubectl apply -f events-producer.yaml

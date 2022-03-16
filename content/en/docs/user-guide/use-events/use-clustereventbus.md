@@ -35,13 +35,13 @@ You have finished the steps described in [Use EventBus and Trigger](../use-event
    kubectl delete eventbus.events.openfunction.io default
    ```
 
-2. Run the following command to apply the configuration file.
+3. Run the following command to apply the configuration file.
 
    ```shell
    kubectl apply -f clustereventbus.yaml
    ```
 
-3. Run the following commands to check the results.
+4. Run the following commands to check the results.
 
    ```shell
    $ kubectl get eventbus.events.openfunction.io

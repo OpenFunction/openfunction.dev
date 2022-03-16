@@ -33,7 +33,7 @@ You have finished the steps described in [Use EventBus and Trigger](../use-event
          authRequired: false
    ```
    
-1. Use the following content to create another EventSource configuration file (for example, `eventsource-b.yaml`).
+2. Use the following content to create another EventSource configuration file (for example, `eventsource-b.yaml`).
 
    ```yaml
    apiVersion: events.openfunction.io/v1alpha1
@@ -48,7 +48,7 @@ You have finished the steps described in [Use EventBus and Trigger](../use-event
          schedule: "@every 5s" 
    ```
    
-1. Run the following commands to apply these two configuration files.
+3. Run the following commands to apply these two configuration files.
 
    ```shell
    kubectl apply -f eventsource-a.yaml
