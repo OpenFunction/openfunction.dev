@@ -69,6 +69,6 @@ The following table describes the environment variables in a YAML file for a com
 
 {{% alert title="Note" color="success" %}}
 
-You can use any value supported by kubectl's `--filename` option.
+You can use any value supported by the `--filename` parameter of kubectl.
 
 {{% /alert %}}

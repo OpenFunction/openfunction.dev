@@ -12,8 +12,6 @@ Welcome to the OpenFunction documentation site!
 
 [OpenFunction](https://github.com/OpenFunction/OpenFunction.git) is a cloud-native open source FaaS (Function as a Service) platform aiming to enable users to focus on their business logic without worrying about the underlying runtime environment and infrastructure. Users only need to submit business-related source code in the form of functions.
 
-Current Version: **v0.5.0**
-
-[Click here to get started](getting-started/).
+Current Version: **v0.6.0**
 
 {{% /alert %}}

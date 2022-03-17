@@ -10,11 +10,11 @@ This document describes how to use a ClusterEventBus.
 
 ## Prerequisites
 
-You need to be familiar with the example given in [Use EventBus and Trigger](../use-event-bus-and-trigger).
+You have finished the steps described in [Use EventBus and Trigger](../use-event-bus-and-trigger).
 
 ## Use a ClusterEventBus
 
-1. Use the following content to create a ClusterEventBus configuration file (for example, `clustereventbus-default.yaml`).
+1. Use the following content to create a ClusterEventBus configuration file (for example, `clustereventbus.yaml`).
 
    ```yaml
    apiVersion: events.openfunction.io/v1alpha1
@@ -25,7 +25,8 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
      natsStreaming:
        natsURL: "nats://nats.default:4222"
        natsStreamingClusterID: "stan"
-       subscriptionType: queue
+       subscriptionType: "queue"
+       durableSubscriptionName: "ImDurable"
    ```
    
 2. Run the following command to delete EventBus.
@@ -34,13 +35,13 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
    kubectl delete eventbus.events.openfunction.io default
    ```
 
-2. Run the following command to apply the configuration file.
+3. Run the following command to apply the configuration file.
 
    ```shell
-   kubectl apply -f clustereventbus-default.yaml
+   kubectl apply -f clustereventbus.yaml
    ```
 
-3. Run the following commands to check the results.
+4. Run the following commands to check the results.
 
    ```shell
    $ kubectl get eventbus.events.openfunction.io
@@ -51,9 +52,5 @@ You need to be familiar with the example given in [Use EventBus and Trigger](../
    default   21s
    ```
    
-   {{% alert title="Note" color="success" %}}
    
-   If there are no other changes, you can see that the event bus is still working properly in the whole sample.
-   
-   {{% /alert %}}
 
