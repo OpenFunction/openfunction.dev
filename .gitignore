@@ -5,4 +5,6 @@ node_modules/
 tech-doc-hugo
 
 .idea
+.vscode
+.history
 .DS_Store
