@@ -41,8 +41,8 @@ OpenFunction 的创始人霍秉杰先生在 Dapr 社区会议上介绍了 OpenFu
 
 您可以观看下面这两段视频，并按照实践指南进行练习。
 
-<iframe src="//player.bilibili.com/player.html?aid=510142597&bvid=BV1zu411v7rp&cid=562833539&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 640px; height: 430px; max-width: 100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=510142597&bvid=BV1zu411v7rp&cid=562833539&page=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 640px; height: 430px; max-width: 100%"> </iframe>
 
-<iframe src="//player.bilibili.com/player.html?aid=767412996&bvid=BV1mr4y1i71W&cid=554331549&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 640px; height: 430px; max-width: 100%"></iframe>
+<iframe src="//player.bilibili.com/player.html?aid=767412996&bvid=BV1mr4y1i71W&cid=554331549&page=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 640px; height: 430px; max-width: 100%"></iframe>
 
 您还可以从 [发布说明](https://github.com/OpenFunction/OpenFunction/releases/tag/v0.6.0) 中了解更多关于 OpenFunction 0.6.0 的信息。参照 [快速入门](https://github.com/OpenFunction/OpenFunction#-quickstart) 和 [样例](https://github.com/OpenFunction/samples) 开始使用 OpenFunction。
