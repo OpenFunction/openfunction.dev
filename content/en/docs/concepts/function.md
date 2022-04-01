@@ -17,3 +17,5 @@ Function aims to realize the lifecycle management from your source code to the f
 ## Reference
 
 For more information, see [Function Specifications](../../reference/component-reference/function-spec).
+
+For more information about OpenFunction Functions Framework, see [OpenFunction Functions Framework](https://github.com/OpenFunction/functions-framework).
