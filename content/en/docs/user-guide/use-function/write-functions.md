@@ -1,7 +1,7 @@
 ---
 title: "Write Functions"
 linkTitle: "Write Functions"
-weight: 4220
+weight: 4210
 description: >	
     Learn how to write functions.
 ---
