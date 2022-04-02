@@ -1,18 +1,18 @@
 ---
-title: "Use SkyWalking for OpenFunction as a Distributed Tracing Solution"
-linkTitle: "Use SkyWalking for OpenFunction as a Distributed Tracing Solution"
+title: "Use SkyWalking for OpenFunction as an Observability Solution"
+linkTitle: "Use SkyWalking for OpenFunction as an Observability Solution"
 weight: 5300
 description: >	
-    Learn how to use SkyWalking for OpenFunction as a distributed tracing solution.
+    Learn how to use SkyWalking for OpenFunction as an observability solution.
 ---
 
-This document describes how to use SkyWalking for OpenFunction as a distributed tracing solution.
+This document describes how to use SkyWalking for OpenFunction as an observability solution.
 
 ## Overview
 
 Although FaaS allows developers to focus on their business code without worrying about the underlying implementations, it is difficult to troubleshoot the service system. OpenFunction tries to introduce capabilities of observability to improve its usability and stability.
 
-SkyWalking provides solutions for observing and monitoring distributed systems in many different scenarios. OpenFunction has introduced SkyWalking (go2sky) as a distributed tracing solution for Go language functions.
+SkyWalking provides solutions for observing and monitoring distributed systems in many different scenarios. OpenFunction has bundled go2sky(SkyWalking's Golang agent) in OpenFunction tracer options to provide distributed tracing, statistics of function performance, and functions dependency map.
 
 ## Prerequisites
 
