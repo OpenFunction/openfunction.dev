@@ -18,7 +18,7 @@ SkyWalking provides solutions for observing and monitoring distributed systems i
 
 - You have [installed OpenFunction](../../getting-started/installation/).
 - You have [created a secret](../../getting-started/your-first-function/function-go/#create-a-secret).
-- You have [installed SkyWalking](https://github.com/apache/skywalking-kubernetes#apache-skywalking-kubernetes).
+- You have [installed SkyWalking v9](https://github.com/apache/skywalking-kubernetes#apache-skywalking-kubernetes).
 - You have [created a Kafka server and topic](../interact-with-dapr-output-binding/#create-a-kafka-server-and-topic).
 
 ## Tracing Parameters
