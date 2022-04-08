@@ -71,7 +71,7 @@ The following diagram illustrates the relationship between these functions.
    apiVersion: kafka.strimzi.io/v1beta2
    kind: KafkaTopic
    metadata:
-     name: events-sample
+     name: sample-topic
      namespace: default
      labels:
        strimzi.io/cluster: kafka-server
@@ -100,10 +100,13 @@ The following diagram illustrates the relationship between these functions.
    strimzi-cluster-operator-687fdd6f77-cwmgm         1/1     Running       0          11m
    ```
 
-5. Run the following command to view the metadata of the Kafka cluster.
+5. Run the following commands to view the metadata of the Kafka cluster.
 
    ```shell
-   kafkacat -L -b kafka-server-kafka-brokers:9092
+   # Starts a utility pod.
+   $ kubectl run utils --image=arunvelsriram/utils -i --tty --rm
+   # Checks metadata of the Kafka cluster.
+   $ kafkacat -L -b kafka-server-kafka-brokers:9092
    ```
 
 ## Create Functions
