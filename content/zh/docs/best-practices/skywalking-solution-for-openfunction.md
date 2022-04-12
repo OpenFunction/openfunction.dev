@@ -59,7 +59,7 @@ SkyWalking 提供了在许多不同场景下观测和监控分布式系统的解
 
 ### 选项一：全局配置
 
-下文使用 `skywalking-opa.default:11800` 作为集群中 `skywalking-opa` 服务的样例地址。
+下文使用 `skywalking-oap.default:11800` 作为集群中 `skywalking-oap` 服务的样例地址。
 
 1. 运行下面的命令，修改 `openfunction` 命名空间中的 ConfigMap `openfunction-config`。
 
