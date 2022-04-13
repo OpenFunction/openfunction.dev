@@ -71,7 +71,7 @@ The following diagram illustrates the relationship between these functions.
    apiVersion: kafka.strimzi.io/v1beta2
    kind: KafkaTopic
    metadata:
-     name: events-sample
+     name: sample-topic
      namespace: default
      labels:
        strimzi.io/cluster: kafka-server
@@ -100,15 +100,18 @@ The following diagram illustrates the relationship between these functions.
    strimzi-cluster-operator-687fdd6f77-cwmgm         1/1     Running       0          11m
    ```
 
-5. Run the following command to view the metadata of the Kafka cluster.
+5. Run the following commands to view the metadata of the Kafka cluster.
 
    ```shell
-   kafkacat -L -b kafka-server-kafka-brokers:9092
+   # Starts a utility pod.
+   $ kubectl run utils --image=arunvelsriram/utils -i --tty --rm
+   # Checks metadata of the Kafka cluster.
+   $ kafkacat -L -b kafka-server-kafka-brokers:9092
    ```
 
 ## Create Functions
 
-1. Use the following example YAML file to create a manifest `kafka-input.yaml`. The field `spec.serving.inputs` defines an input source that points to a Dapr component of the Kafka server. It means that the `kafka-input` function will be driven by events in the topic `sample-topic` of the Kafka server.
+1. Use the following example YAML file to create a manifest `kafka-input.yaml` and modify the value of `spec.image` to set your own image registry address. The field `spec.serving.inputs` defines an input source that points to a Dapr component of the Kafka server. It means that the `kafka-input` function will be driven by events in the topic `sample-topic` of the Kafka server.
 
    ```yaml
    apiVersion: core.openfunction.io/v1beta1
@@ -137,9 +140,20 @@ The following diagram illustrates the relationship between these functions.
          keda:
            scaledObject:
              pollingInterval: 15
-             # minReplicaCount: 0
-             # maxReplicaCount: 10
-             cooldownPeriod: 45
+             minReplicaCount: 0
+             maxReplicaCount: 10
+             cooldownPeriod: 60
+             advanced:
+               horizontalPodAutoscalerConfig:
+                 behavior:
+                   scaleDown:
+                     stabilizationWindowSeconds: 45
+                     policies:
+                     - type: Percent
+                       value: 50
+                       periodSeconds: 15
+                   scaleUp:
+                     stabilizationWindowSeconds: 0
        triggers:
          - type: kafka
            metadata:
@@ -177,7 +191,7 @@ The following diagram illustrates the relationship between these functions.
    kubectl apply -f kafka-input.yaml
    ```
 
-3. Use the following example YAML file to create a manifest `function-front.yaml`.
+3. Use the following example YAML file to create a manifest `function-front.yaml` and modify the value of `spec.image` to set your own image registry address.
 
    ```yaml
    apiVersion: core.openfunction.io/v1beta1
