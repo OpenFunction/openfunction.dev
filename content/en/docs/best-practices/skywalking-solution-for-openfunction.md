@@ -61,7 +61,7 @@ The following is a JSON formatted configuration reference that guides the format
 
 ### Option 1: global configuration
 
-This document uses `skywalking-opa.default:11800` as an example of the skywalking-opa address in the cluster.
+This document uses `skywalking-oap.default:11800` as an example of the skywalking-oap address in the cluster.
 
 1. Run the following command to modify the configmap `openfunction-config` in the `openfunction` namespace.
 
