@@ -1,12 +1,12 @@
 ---
-title: "Logs Handler Function"
-linkTitle: "Logs Handler Function"
+title: "Elastic Log Alerting"
+linkTitle: "Elastic Log Alerting"
 weight: 5400
 description: >	
-    Learn how to use a logs handler function.
+    Learn how to create an async function to find out error logs.
 ---
 
-This document describes how to use a logs handler function.
+This document describes how to create an async function to find out error logs.
 
 ## Overview
 
