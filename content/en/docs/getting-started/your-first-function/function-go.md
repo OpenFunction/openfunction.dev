@@ -48,7 +48,7 @@ kubectl create secret docker-registry push-secret \
          FUNC_CLEAR_SOURCE: "true"
        srcRepo:
          url: "https://github.com/OpenFunction/samples.git"
-         sourceSubPath: "functions/Knative/hello-world-go"
+         sourceSubPath: "functions/knative/hello-world-go"
          revision: "release-0.6"
      serving:
        template:
