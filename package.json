@@ -16,7 +16,9 @@
     "url": "https://github.com/OpenFunction/website/issues"
   },
   "homepage": "https://github.com/OpenFunction/website#readme",
-  "dependencies": {},
+  "dependencies": {
+    "postcss": "^8.4.14"
+  },
   "devDependencies": {
     "autoprefixer": "^9.8.8",
     "postcss-cli": "^7.1.2"

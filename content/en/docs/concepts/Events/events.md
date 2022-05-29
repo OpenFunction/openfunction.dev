@@ -20,7 +20,7 @@ Events is the event management framework for OpenFunction. It provides the follo
 
 The following diagram illustrates the architecture of Events.
 
-![of-events-architecture](/images/docs/en/concepts/events/of-events-architecture.svg)
+![openfunction-events](/images/docs/en/concepts/events/openfunction-events.svg)
 
 ## Concepts
 

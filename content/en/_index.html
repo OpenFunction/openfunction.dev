@@ -57,17 +57,17 @@ linkTitle = "OpenFunction"
 {{% blocks/feature icon="fa-lightbulb" title="Function" %}}
 <b>Function</b> is a resource that you can define and manage according to your needs. It describes your applications, including what raw materials (source code) are used to make an artifact (application image) and the way it works (workload, runtime).
 
-In OpenFunction, the Function resource controls the coordination between Builder and Serving in an orderly manner based on your configurations to implement the lifecycle management of your functions.
+In OpenFunction, the Function resource controls the coordination between Build and Serving in an orderly manner based on your configurations to implement the lifecycle management of your functions.
 
-See [Function]({{<ref "docs/concepts/function">}}) for more information.
+See [Function]({{<ref "docs/concepts/function/function">}}) for more information.
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fa-lightbulb" title="Builder" %}}
-<b>Builder</b> defines the build process in OpenFunction for generating application images from source code.
+{{% blocks/feature icon="fa-lightbulb" title="Build" %}}
+<b>Build</b> defines the build process in OpenFunction for generating application images from source code.
 
-Currently, OpenFunction Builder uses Shipwright and Cloud Native Buildpacks to build application images. It uses Shipwright to control the process of building application images, including acquiring code, generating image artifacts, and publishing images through Cloud Native Buildpacks.
+Currently, OpenFunction Build uses Shipwright and Cloud Native Buildpacks to build application images. It uses Shipwright to control the process of building application images, including acquiring code, generating image artifacts, and publishing images through Cloud Native Buildpacks.
 
-See [Builder]({{<ref "docs/concepts/builder">}}) for more information.
+See [Build]({{<ref "docs/concepts/function/build">}}) for more information.
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-lightbulb" title="Serving" %}}
@@ -75,7 +75,7 @@ See [Builder]({{<ref "docs/concepts/builder">}}) for more information.
 
 Currently, OpenFunction Serving supports two kinds of workload runtimes: Knative and OpenFuncAsync. You need to configure a runtime to ensure that Serving works properly.
 
-See [Serving]({{<ref "docs/concepts/serving">}}) for more information.
+See [Serving]({{<ref "docs/concepts/function/serving">}}) for more information.
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
