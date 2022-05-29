@@ -14,7 +14,7 @@ description: >
 
 ### Go
 
-OpenFunction 基于 [Kubernetes](https://github.com/kubernetes/kubernetes)。它们都是用 [Go](http://golang.org/) 编写的。如果你没有 Go 开发环境，请先 [设置 Go 开发环境](http://golang.org/doc/code.html)。
+OpenFunction 基于 [Kubernetes](https://github.com/kubernetes/kubernetes)。它们都是用 [Go](https://go.dev/) 编写的。如果你没有 Go 开发环境，请先 [设置 Go 开发环境](https://go.dev/doc/code)。
 
 | Kubernetes | 要求的 Go 版本 |
 | ---------- | -------------- |
