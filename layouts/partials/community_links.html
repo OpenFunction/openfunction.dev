@@ -1,33 +1,33 @@
 {{ $links := .Site.Params.links }}
 <section class="row td-box td-box--4 td-box--gradient td-box--height-auto linkbox">
 
-<div class="section-1 col-xs-12 col-sm-6 col-md-6 col-lg-6">
-{{ with .Params.section1 }}
-<h2>{{ .name }}</h2><br>
-{{ .content }}
-<br><br>{{ range .children }}
-<br>{{ .content }}
-<a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
-{{ end }}
-{{ with index $links "developer"}}
-{{ template "community-links-list"  . }}
-{{ end }}
-<br></br><br></br>
-</li>
-</div>
-{{ end }}
+    <div class="section-1 col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        {{ with .Params.section1 }}
+        <h2>{{ .name }}</h2><br>
+        {{ .content }}
+        <br><br>{{ range .children }}
+        <br>{{ .content }}
+        <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
+        {{ end }}
+        {{ with index $links "developer"}}
+        {{ template "community-links-list"  . }}
+        {{ end }}
+        <br></br><br></br>
+        </li>
+    </div>
+    {{ end }}
 
-<div class="section-2 col-xs-12 col-sm-6 col-md-6 col-lg-6">
-{{ with .Params.section2 }}
-<h2>{{ .name }}</h2><br>
-<a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .Content }}</a>
-<br><br>{{ range .children }}
-<li>{{ .content }}
-<a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
-</li>
-{{ end }}
-</div>
-{{ end }}
+    <div class="section-2 col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        {{ with .Params.section2 }}
+        <h2>{{ .name }}</h2><br>
+        <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .Content }}</a>
+        <br><br>{{ range .children }}
+        <li>{{ .content }}
+            <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
+        </li>
+        {{ end }}
+    </div>
+    {{ end }}
 </section>
 
 {{ define "community-links-list" }}

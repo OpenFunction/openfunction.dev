@@ -21,3 +21,22 @@ footer {
 footer a {
   color: #d0e0f6;
 }
+
+.hide_doc_zh{
+  &::after{
+    display: none;
+  }
+}
+
+.td-navbar {
+  background: rgba(0, 170, 137, 0.9);;
+  text-shadow: 1px 1px 2px #403f4c;
+}
+
+.td-overlay--dark::after {
+  background-color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,.9);
+}
