@@ -5,4 +5,13 @@
   HUGO_VERSION = "0.99.1"
 
 [context.deploy-preview]
-command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+command = "cd themes/docsy && git submodule update -f --init && cd ../.. && hugo --gc --minify"
+
+[build]
+  publish = "public"
+  command = "cd themes/docsy && git submodule update -f --init && cd ../.. && hugo --gc --minify"
+
+[[plugins]]
+package = "@algolia/netlify-plugin-crawler"
+  [plugins.inputs]
+  branches = ["main"]

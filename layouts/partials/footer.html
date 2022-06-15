@@ -1,0 +1,62 @@
+{{ $links := .Site.Params.links }}
+<footer class="bg-primary py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row mb-5">
+      <div class="col-12 text-center cncf-block flex-column td-box--primary">
+        <p class="h3 text-white">We are a <a href="https://www.cncf.io/">CNCF (Cloud Native Computing Foundation)</a> sandbox project.</p>
+        <img class="img-fluid" src="/images/cncf-white.svg" alt="cncf">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        {{ with $links }}
+        {{ with index . "user"}}
+        {{ template "footer-links-block"  . }}
+        {{ end }}
+        {{ end }}
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        {{ with $links }}
+        {{ with index . "developer"}}
+        {{ template "footer-links-block"  . }}
+        {{ end }}
+        {{ end }}
+      </div>
+      <div class="col-12 col-sm-4 text-center py-1 order-sm-2">
+        {{ with .Site.Params.copyright }}<small class="text-white">&copy; {{ now.Year}} {{ .}} {{ T "footer_all_rights_reserved" }}</small>{{ end }}
+        <!--        {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank">{{ T "footer_privacy_policy" }}</a></small>{{ end }}-->
+        {{ if not .Site.Params.ui.footer_about_disable }}
+        {{ with .Site.GetPage "about" }}<p class="mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
+        {{ end }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center py-1 text-white">
+        <small>
+          Copyright © 2022 The Linux Foundation ®. All rights reserved.
+        </small>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-center py-1 text-white">
+        <small>
+          The Linux Foundation® (TLF) has registered trademarks and uses trademarks. For a list of TLF trademarks, see
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a>.
+        </small>
+      </div>
+    </div>
+  </div>
+</footer>
+{{ define "footer-links-block" }}
+<ul class="list-inline mb-0">
+  {{ range . }}
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="{{ .name }}" aria-label="{{ .name }}">
+    <a class="text-white" target="_blank" aria-label="icon" rel="noopener noreferrer" href="{{ .url }}">
+      <i class="{{ .icon }}"></i>
+    </a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
