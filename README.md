@@ -18,22 +18,26 @@ Contributions of any kind are welcome!
    ```
 ### Build and preview the website
 
-You have to install [Hugo](https://gohugo.io/) to build the website in order to **preview it as static content**.
+#### Pre-requisites
 
-#### Install Hugo extended
+- [Hugo extended version](https://gohugo.io/getting-started/installing)
+- [Node.js](https://nodejs.org/en/)
 
-Go to the [Hugo releases page](https://github.com/gohugoio/hugo/releases) and download the `hugo_extended` version that suits your OS (version 0.75+).
+#### Environment setup
 
-**EXTENDED version is MANDATORY to properly build the static content!**
-
-Note: If you install Hugo on Windows, you need to add environment variables for the .exe file of Hugo. Run `hugo version` to check if the installation is successful.
+1. Ensure pre-requisites are installed
+1. Clone repository
+1. Change to website directory: `cd website`
+1. Add Docsy submodule: `git submodule add https://github.com/google/docsy.git themes/docsy`
+1. Update submodules: `git submodule update --init --recursive`
+1. Install npm packages: `npm install`
 
 ### Running the website locally
 
-After you install Hugo, run the following command:
+After you setup the environment, run the following command:
 
 ```
-hugo server
+hugo server -D
 ```
 
 Now you can preview the website in your browser at `http://localhost:1313/`.
