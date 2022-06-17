@@ -22,7 +22,7 @@ Once a function is created, it will controll the lifecycle of `Build` and `Servi
 
 - `Serving` can be defined without `Build`, the function will use a previously built function image for serving.
 
-<div align=center><img width="70%" height="70%" src=/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg/></div>
+<div align=center><img width="80%" height="80%" src=/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg/></div>
 
 ## Reference
 

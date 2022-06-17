@@ -8,3 +8,4 @@ tech-doc-hugo
 .vscode
 .history
 .DS_Store
+.hugo_build.lock
