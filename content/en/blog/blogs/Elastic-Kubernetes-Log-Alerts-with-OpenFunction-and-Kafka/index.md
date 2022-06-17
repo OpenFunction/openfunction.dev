@@ -19,17 +19,17 @@ Our general design idea is to add a Kafka server as a log receiver, and then use
 
 ![](imgs/kubesphere-snapshot.png)
 
-In this scenario, we will make use of the serverless capabilities of[ OpenFunction](https://github.com/OpenFunction/OpenFunction).
+In this scenario, we will make use of the serverless capabilities of[OpenFunction](https://github.com/OpenFunction/OpenFunction).
 
 > [OpenFunction](https://github.com/OpenFunction/OpenFunction) is an open-source FaaS (serverless) project initiated by the KubeSphere community. It is designed to allow users to focus on their business logic without the hassle of caring about the underlying operating environment and infrastructure. Currently, the project provides the following key capabilities:
 > 
 > - Builds OCI images from Dockerfile or Buildpacks.
-> - Runs serverless workloads using Knative Serving or OpenFunctionAsync (backed by KEDA + Dapr) as a runtime.
+> - Runs serverless workloads using Knative Serving or Async (backed by KEDA + Dapr) as a runtime.
 > - Equipped with a built-in event-driven framework.
 
 ## Use Kafka as a Log Receiver
 
-First, enable the **logging** component for the KubeSphere platform (For more information, please refer to[ Enable Pluggable Components](https://kubesphere.io/docs/pluggable-components/). Next, we can use [strimzi-kafka-operator](https://github.com/strimzi/strimzi-kafka-operator) to build a minimal Kafka server.
+First, enable the **logging** component for the KubeSphere platform (For more information, please refer to[Enable Pluggable Components](https://kubesphere.io/docs/pluggable-components/). Next, we can use [strimzi-kafka-operator](https://github.com/strimzi/strimzi-kafka-operator) to build a minimal Kafka server.
 
 1. In the `default` namespace, install [strimzi-kafka-operator.](https://github.com/strimzi/strimzi-kafka-operator)
    
@@ -147,7 +147,7 @@ sh hack/deploy.sh --with-shipwright --with-openFuncAsync --poor-network
 
 Deploy OpenFunction.
 
-> We install the latest stable version here. Alternatively, you can use the development version. For more information, please refer to the[ Install OpenFunction](https://github.com/OpenFunction/OpenFunction#install) section.
+> We install the latest stable version here. Alternatively, you can use the development version. For more information, please refer to the[Install OpenFunction](https://github.com/OpenFunction/OpenFunction#install) section.
 > 
 > To make sure that Shipwright works properly, we provide a default build policy, and you can run the following commands to set the policy.
 > 

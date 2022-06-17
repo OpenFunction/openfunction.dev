@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/OpenFunction/website#readme",
   "dependencies": {
+    "docsy": "^0.10.0",
     "postcss": "^8.4.14"
   },
   "devDependencies": {
