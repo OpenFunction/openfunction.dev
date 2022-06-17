@@ -12,13 +12,14 @@ This document introduces what is OpenFunction.
 
 OpenFunction is a cloud-native open source FaaS (Function as a Service) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure. You can generate event-driven and dynamically scaling Serverless workloads by simply submitting business-related source code in the form of functions.
 
-![](/images/docs/en/introduction/what-is-openfunction/function-lifecycle.svg)
+<div align=center><img width="70%" height="70%" src=/images/docs/en/introduction/what-is-openfunction/function-lifecycle.svg/></div>
+
 
 ## Architecture and Design
 
-![](/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg)
+There're four components in OpenFunction: Function, Build, Serving, and Events.
 
-OpenFunction manages resources in the form of Custom Resource Definitions (CRDs) throughout the lifecycle of a function. 
+<div align=center><img width="80%" height="80%" src=/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg/></div>
 
 ## Core Features
 
