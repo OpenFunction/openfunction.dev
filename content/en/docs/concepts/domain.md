@@ -2,8 +2,7 @@
 title: "Domain"
 linkTitle: "Domain"
 weight: 4700
-description: >	
-    Learn about the concept of Domain in OpenFunction.
+description:
 ---
 
 This document describes the concept of Domain in OpenFunction.

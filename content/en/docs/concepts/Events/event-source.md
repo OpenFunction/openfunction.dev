@@ -2,8 +2,7 @@
 title: "Use EventSource"
 linkTitle: "Use EventSource"
 weight: 4510
-description: >	
-    Learn how to use an EventSource to trigger a synchronous function.
+description:
 ---
 
 This document gives an example of how to use an event source to trigger a synchronous function.

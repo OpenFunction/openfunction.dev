@@ -2,8 +2,7 @@
 title: "Use EventBus and Trigger"
 linkTitle: "Use EventBus and Trigger"
 weight: 4520
-description: >	
-    Learn how to use EventBus and Trigger.
+description:
 ---
 
 This document gives an example of how to use EventBus and Trigger.
