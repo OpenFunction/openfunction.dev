@@ -95,7 +95,7 @@ spec:
             value: "autoscaling-subscriber"
 ```
 
-Sync functions can also send output to Dapr output binding compoents or Pub/sub components, [here](https://github.com/OpenFunction/samples/tree/main/functions/knative/with-output-binding) is an example:
+Sync functions can also send output to Dapr output binding components or Pub/sub components, [here](https://github.com/OpenFunction/samples/tree/main/functions/knative/with-output-binding) is an example:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1
