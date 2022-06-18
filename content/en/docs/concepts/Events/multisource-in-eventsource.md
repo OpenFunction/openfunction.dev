@@ -2,8 +2,7 @@
 title: "Use Multiple Sources in One EventSource"
 linkTitle: "Use Multiple Sources in One EventSource"
 weight: 4530
-description: >	
-    Learn how to use multiple sources in one EventSource.
+description:
 ---
 
 This document describes how to use multiple sources in one EventSource.

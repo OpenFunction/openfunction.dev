@@ -2,8 +2,7 @@
 title: "Introduction"
 linkTitle: "Introduction"
 weight: 1000
-description: >	
-    Introduces the OpenFunction project.
+description: 
 ---
 
 This document introduces what is OpenFunction.
@@ -31,7 +30,7 @@ There're four components in OpenFunction: Function, Build, Serving, and Events.
 
 OpenFunction has two main capabilities:
 
-- Serverless framework with CRDs: [Function](../concepts/function), [Builder](../concepts/builder), and [Serving](../concepts/serving).
+- Serverless framework with CRDs: [Function](../concepts/function/#function), [Builder](../concepts/function/#build), and [Serving](../concepts/function/#serving).
 - Events framework with CRDs: [EventSource](../concepts/events#eventsource), [EventBus (ClusterEventBus)](../concepts/events#eventbus-clustereventbus), and [Trigger](../concepts/events#trigger).
 
 ## Use Cases

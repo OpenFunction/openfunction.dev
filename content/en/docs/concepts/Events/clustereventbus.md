@@ -2,8 +2,7 @@
 title: "Use ClusterEventBus"
 linkTitle: "Use ClusterEventBus"
 weight: 4540
-description: >	
-    Learn how to use a ClusterEventBus.
+description:
 ---
 
 This document describes how to use a ClusterEventBus.

@@ -2,8 +2,7 @@
 title: "Events"
 linkTitle: "Events"
 weight: 3400
-description: >	
-    Learn about the concept of Events in OpenFunction.
+description: 
 ---
 
 This document describes the concept of Events in OpenFunction.

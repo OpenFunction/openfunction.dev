@@ -2,8 +2,7 @@
 title: "Use Trigger Conditions"
 linkTitle: "Use Trigger Conditions"
 weight: 4550
-description: >	
-    Learn how to use Trigger conditions.
+description: 
 ---
 
 This document describes how to use Trigger conditions.
