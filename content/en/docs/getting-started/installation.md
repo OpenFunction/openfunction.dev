@@ -2,8 +2,7 @@
 title: "Installation"
 linkTitle: "Installation"
 weight: 2100
-description: >	
-    Learn how to install OpenFunction.
+description:
 ---
 
 This document describes how to install OpenFunction.
