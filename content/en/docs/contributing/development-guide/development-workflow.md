@@ -2,8 +2,7 @@
 title: "Development Workflow"
 linkTitle: "Development Workflow"
 weight: 7220
-description: >	
-    Learn how to follow the development workflow for OpenFunction.
+description:
 ---
 
 This document describes the development workflow for OpenFunction.

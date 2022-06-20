@@ -2,8 +2,7 @@
 title: "Build OpenFunction Locally"
 linkTitle: "Build OpenFunction Locally"
 weight: 7210
-description: >	
-    Learn how to build OpenFunction locally.
+description:
 ---
 
 This document describes how to build OpenFunction locally.
