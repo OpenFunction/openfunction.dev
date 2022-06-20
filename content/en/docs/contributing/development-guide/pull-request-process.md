@@ -2,8 +2,7 @@
 title: "Pull Request Best Practices"
 linkTitle: "Pull Request Best Practices"
 weight: 7230
-description: >	
-    Learn about the best practices for creating pull requests on the OpenFunction repository.
+description:
 ---
 
 This document describes the best practices of creating pull requests on the OpenFunction repository.
