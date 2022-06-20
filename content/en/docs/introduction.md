@@ -4,9 +4,6 @@ linkTitle: "Introduction"
 weight: 1000
 description: 
 ---
-
-This document introduces what is OpenFunction.
-
 ## Overview
 
 OpenFunction is a cloud-native open source FaaS (Function as a Service) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure. You can generate event-driven and dynamically scaling Serverless workloads by simply submitting business-related source code in the form of functions.
@@ -16,31 +13,20 @@ OpenFunction is a cloud-native open source FaaS (Function as a Service) platform
 
 ## Architecture and Design
 
-There're four components in OpenFunction: Function, Build, Serving, and Events.
-
 <div align=center><img width="80%" height="80%" src=/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg/></div>
 
 ## Core Features
 
-- Converts business-related function source code to application source code.
-- Generates OCI-compliant container images from the converted application source code.
-- Deploys generated container images to any runtime with dynamic scaling capabilities.
-- Provides events framework to make functions event-driven.
-- Provides function version management and ingress management.
-
-OpenFunction has two main capabilities:
-
-- Serverless framework with CRDs: [Function](../concepts/function/#function), [Builder](../concepts/function/#build), and [Serving](../concepts/function/#serving).
-- Events framework with CRDs: [EventSource](../concepts/events#eventsource), [EventBus (ClusterEventBus)](../concepts/events#eventbus-clustereventbus), and [Trigger](../concepts/events#trigger).
-
-## Use Cases
-
-To name a few use cases:
-
-- Web applications
-- Event-driven data processing
-- Stream processing
-- Serverless workflows
+- Cloud agnostic and decoupled with cloud proviers' BaaS
+- Pluggable architecture that allows multiple function runtimes
+- Support both sync and async functions
+- Unique async functions support that can consume events directly from event source
+- Support generating OCI-Compliant container images directly from function source code.
+- Flexible autoscaling between 0 and N
+- Advanced async function autoscaling based on event source specific metrics 
+- Easy to use BaaS integration for both sync and async functions by introducing [Dapr](https://dapr.io/) 
+- Advanced function ingress & traffic management powered by [K8s Gateway API](https://gateway-api.sigs.k8s.io/) (In Progress)
+- Flexible and easy to use events management framework
 
 ## License
 
