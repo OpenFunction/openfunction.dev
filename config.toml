@@ -168,5 +168,5 @@ enable = false
 	icon = "fab fa-github"
 [[params.links.developer]]
 	name = "Slack"
-	url = "https://kubesphere.slack.com/?redir=%2Farchives%2FC021XAR3CG3"
+	url = "https://cloud-native.slack.com/archives/C03ETDMD3LZ"
 	icon = "fab fa-slack"

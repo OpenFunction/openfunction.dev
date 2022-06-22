@@ -10,9 +10,15 @@ section1:
   content: 'If you want to get more involved: '
   children:
     - content: 'Find out how to contribute here → '
-      link: 'http://localhost:1313/docs/development/' 
-      linkContent: 'Development Guide'
-    - content: 'join us here → '
+      link: 'https://openfunction.dev/docs/contributing/overview/' 
+      linkContent: 'Contribution Guide'
+    - content: 'Join us in Discord → '
+      link: 'https://discord.gg/hG3yc6uAyC' 
+      linkContent: 'Discord'    
+    - content: 'Create a CNCF Slack account and then search #openfunction to join→ '
+      link: 'https://slack.cncf.io/' 
+      linkContent: 'Slack'    
+    - content: 'Join us → '
 
 section2:
   name: 'Community Call'
