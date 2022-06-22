@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Contribution overview"
+title: "Overview"
 linkTitle: "Overview"
 weight: 7100
 description:
