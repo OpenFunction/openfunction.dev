@@ -28,6 +28,31 @@ OpenFunction has added the [Domain](../../concepts/domain) feature since v0.5.0.
 
 ## Install OpenFunction
 
+### Option 1: Helm
+This option is the **recommended** installation method for Kubernetes version: `>=v1.20.0-0`
+1. Run the following command to add the OpenFunction chart repository.
+   ```shell
+   helm repo add openfunction https://openfunction.github.io/charts/
+   helm repo update
+   ```
+
+2. Run the following command to install the OpenFunction chart.
+   ```shell
+   kubectl create namespace openfunction
+   helm install openfunction openfunction/openfunction -n openfunction
+   ```
+   {{% alert title="Note" color="success" %}}
+
+   For more information about how to install OpenFunction with Helm, see [Install OpenFunction with Helm](https://github.com/OpenFunction/charts/blob/main/README.md#install-the-chart).
+
+   {{% /alert %}}
+
+3. Run the following command to verify OpenFunction is ready.
+   ```shell
+   kubectl get pods -namespace openfunction
+   ```
+
+### Option 2: CLI
 1. Run the following command to download `ofn`, the CLI of OpenFunction.
 
    ```shell
@@ -53,9 +78,19 @@ OpenFunction has added the [Domain](../../concepts/domain) feature since v0.5.0.
    {{% /alert %}}
 
 ## Uninstall OpenFunction
+### Helm
+If you installed OpenFunction with Helm, run the following command to uninstall OpenFunction and its dependencies.
+```shell
+helm uninstall openfunction -n openfunction
+```
+{{% alert title="Note" color="success" %}}
 
-Run the following command to uninstall OpenFunction and its dependencies.
+For more information about how to uninstall OpenFunction with Helm, see [Uninstall OpenFunction with Helm](https://github.com/OpenFunction/charts/blob/main/README.md#uninstall-the-chart).
 
+{{% /alert %}}
+
+### CLI
+If you installed OpenFunction with CLI, run the following command to uninstall OpenFunction and its dependencies.
 ```shell
 ofn uninstall --all
 ```
