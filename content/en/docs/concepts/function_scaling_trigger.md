@@ -70,14 +70,14 @@ spec:
     scaleOptions:
       knative:
         autoscaling:
-          min-scale: 0
-          max-scale: 10
-          initial-scale: "1"
-          scale-down-delay: "0"
-          window: "60s"
-          panic-window-percentage: "10.0"
-          metric: "concurrency"
-          target: 100
+          autoscaling.knative.dev/min-scale: 0
+          autoscaling.knative.dev/max-scale: 10
+          autoscaling.knative.dev/initial-scale: "1"
+          autoscaling.knative.dev/scale-down-delay: "0"
+          autoscaling.knative.dev/window: "60s"
+          autoscaling.knative.dev/panic-window-percentage: "10.0"
+          autoscaling.knative.dev/metric: "concurrency"
+          autoscaling.knative.dev/target: 100
 ```
 
 ## Triggers
