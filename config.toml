@@ -170,3 +170,7 @@ enable = false
 	name = "Slack"
 	url = "https://cloud-native.slack.com/archives/C03ETDMD3LZ"
 	icon = "fab fa-slack"
+[[params.links.developer]]
+	name = "Discord"
+	url = "https://discord.gg/hG3yc6uAyC"
+	icon = "fab fa-discord"
