@@ -29,7 +29,13 @@ OpenFunction has added the [Domain](../../concepts/domain) feature since v0.5.0.
 ## Install OpenFunction
 
 ### Option 1: Helm
-This option is the **recommended** installation method for Kubernetes version: `>=v1.20.0-0`
+This option is the **recommended** installation method.
+
+#### Requirements
+- Kubernetes version: `>=v1.20.0-0`
+- Helm version: `>=v3.6.3`
+
+#### install the chart
 1. Run the following command to add the OpenFunction chart repository.
    ```shell
    helm repo add openfunction https://openfunction.github.io/charts/
