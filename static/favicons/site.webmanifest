@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "OpenFunction is a cloud-native open-source FaaS (Function as a Service) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure.",
+    "short_name": "OpenFunction",
     "icons": [
         {
             "src": "/favicons/android-chrome-192x192.png",
