@@ -5,7 +5,6 @@ weight: 3200
 description: 
 ---
 Functions usually have inputs and outputs.
-
 ## Function Inputs
 
 For a sync function, the input is always the payload of the HTTP request.
