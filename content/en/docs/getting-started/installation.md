@@ -15,14 +15,19 @@ This document describes how to install OpenFunction.
 
 | OpenFunction Version | Kubernetes 1.17 | Kubernetes 1.18 | Kubernetes 1.19 | Kubernetes 1.20+ |
 | -------------------- | --------------- | --------------- | --------------- | ---------------- |
-| v0.6.0               | √               | √               | √               | √                |
-| v0.5.0               | √               | √               | √               | √                |
+| HEAD                 | √*              | √*              | √               | √                |
+| v0.6.0               | √*              | √*              | √               | √                |
+| v0.5.0               | √*              | √*              | √               | √                |
 | v0.4.0               | √               | √               | √               | √                |
-| HEAD                 | √               | √               | √               | √                |
 
 {{% alert title="Note" color="success" %}}
 
-OpenFunction has added the [Domain](../../concepts/domain) feature since v0.5.0. To use this feature, you have to install OpenFunction in Kubernetes 1.19 or later. For more information about OpenFunction components compatibility with Kubernetes, refer to [Component Compatibility Matrix](../../best-practices/customize-components#component-compatibility-matrix).
+OpenFunction has added the [function ingress](docs/concepts/Components.md#domain) in *release-0.5*, which means that:
+
+- You have to install OpenFunction in Kuberenetes ***v1.19*** or later if you enable this feature.
+- You can still use OpenFunction in Kubernetes ***v1.17—v1.20+*** without this feature enabled.
+
+For more information about OpenFunction components compatibility with Kubernetes, refer to [Component Compatibility Matrix](../../best-practices/customize-components#component-compatibility-matrix).
 
 {{% /alert %}}
 
