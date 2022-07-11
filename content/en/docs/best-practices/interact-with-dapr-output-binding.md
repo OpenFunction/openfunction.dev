@@ -281,7 +281,7 @@ The following diagram illustrates the relationship between these functions.
    $ kubectl get functions.core.openfunction.io
    
    NAME             BUILDSTATE   SERVINGSTATE   BUILDER         SERVING         URL                                             AGE
-   function-front   Succeeded    Running        builder-bhbtk   serving-vc6jw   http://openfunction.io/default/function-front   2m41s
+   function-front   Succeeded    Running        builder-bhbtk   serving-vc6jw   https://openfunction.io/default/function-front   2m41s
    kafka-input      Succeeded    Running        builder-dprfd   serving-75vrt                                                   2m21s
    ```
 

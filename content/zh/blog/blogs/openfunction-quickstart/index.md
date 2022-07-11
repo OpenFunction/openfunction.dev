@@ -416,7 +416,7 @@ builder-6ht76-buildrun-jvtwk-vjlgt-pod   2/4     NotReady   0          2m11s
 ```bash
 $ kubectl get function
 NAME              BUILDSTATE   SERVINGSTATE   BUILDER         SERVING         URL                                              AGE
-function-sample   Succeeded    Running        builder-6ht76   serving-6w4rn   http://openfunction.io/default/function-sample   6m
+function-sample   Succeeded    Running        builder-6ht76   serving-6w4rn   https://openfunction.io/default/function-sample   6m
 ```
 
 已经由之前的 **Building** 状态变成了 **Runing** 状态。

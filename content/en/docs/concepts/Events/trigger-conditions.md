@@ -118,7 +118,7 @@ You have finished the steps described in [Use EventBus and Trigger](../use-event
    ```shell
    $ kubectl get functions.core.openfunction.io
    NAME                                  BUILDSTATE   SERVINGSTATE   BUILDER   SERVING         URL                                   AGE
-   sink                                  Skipped      Running                  serving-4x5wh   http://openfunction.io/default/sink   3h25m
+   sink                                  Skipped      Running                  serving-4x5wh   https://openfunction.io/default/sink   3h25m
    
    $ kubectl get po
    NAME                                                        READY   STATUS    RESTARTS   AGE

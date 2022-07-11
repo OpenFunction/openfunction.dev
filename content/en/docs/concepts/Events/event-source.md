@@ -41,7 +41,7 @@ In the URL of the function, the `openfunction` is the name of the Kubernetes Ser
 ```shell
 $ kubectl get functions.core.openfunction.io
 NAME   BUILDSTATE   SERVINGSTATE   BUILDER   SERVING         URL                                   AGE
-sink   Skipped      Running                  serving-4x5wh   http://openfunction.io/default/sink   13s
+sink   Skipped      Running                  serving-4x5wh   https://openfunction.io/default/sink   13s
 ```
 
 ## Create a Kafka Cluster
