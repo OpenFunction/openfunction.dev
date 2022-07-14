@@ -21,6 +21,50 @@ kubectl create secret docker-registry push-secret \
  --docker-password=$REGISTRY_PASSWORD
 ```
 
+## Source repository Credential
+
+If your source code is in a private git repository, you'll need to create a secret containing the private git repo's username and password:
+
+```bash
+USERNAME=<your_git_username>
+PASSWORD=<your_git_password>
+kubectl create secret generic git-repo-secret \
+ --username=$USERNAME \
+ --password=$USERNAME
+```
+
+You can then reference this secret in the `Function` CR's spec.build.srcRepo.credentials
+
+```yaml
+apiVersion: core.openfunction.io/v1beta1
+kind: Function
+metadata:
+  name: function-sample
+spec:
+  version: "v2.0.0"
+  image: "openfunctiondev/sample-go-func:v1"
+  imageCredentials:
+    name: push-secret
+  port: 8080 # default to 8080
+  build:
+    builder: openfunction/builder-go:latest
+    env:
+      FUNC_NAME: "HelloWorld"
+      FUNC_CLEAR_SOURCE: "true"
+    srcRepo:
+      url: "https://github.com/OpenFunction/samples.git"
+      sourceSubPath: "functions/knative/hello-world-go"
+      revision: "main"
+      credentials:
+         name: git-repo-secret
+  serving:
+    template:
+      containers:
+        - name: function # DO NOT change this
+          imagePullPolicy: IfNotPresent 
+    runtime: "knative"
+```
+
 ## Kafka
 
 Async functions can be triggered by events in message queues like Kafka, here you can find steps to setup a Kafka cluster for demo purpose.
