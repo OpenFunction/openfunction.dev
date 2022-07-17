@@ -22,7 +22,7 @@ This document describes how to install OpenFunction.
 
 {{% alert title="Note" color="success" %}}
 
-OpenFunction has added the [function ingress](docs/concepts/Components.md#domain) in *release-0.5*, which means that:
+OpenFunction has added the [function ingress](../../concepts/domain) in *release-0.5*, which means that:
 
 - You have to install OpenFunction in Kuberenetes ***v1.19*** or later if you enable this feature.
 - You can still use OpenFunction in Kubernetes ***v1.17—v1.20+*** without this feature enabled.
@@ -84,7 +84,7 @@ This option is the **recommended** installation method.
 
    {{% alert title="Note" color="success" %}}
 
-   For more information about how to use the `ofn install` command, see [`ofn install` Parameters](../../user-guide/cli#ofn-install-parameters).
+   For more information about how to use the `ofn install` command, see [`ofn install` Parameters](../../reference/cli#ofn-install-parameters).
 
    {{% /alert %}}
 
@@ -108,7 +108,7 @@ ofn uninstall --all
 
 {{% alert title="Note" color="success" %}}
 
-For more information about how to use the `ofn uninstall` command, see [`ofn uninstall` Parameters](../../user-guide/cli#ofn-uninstall-parameters).
+For more information about how to use the `ofn uninstall` command, see [`ofn uninstall` Parameters](../../reference/cli#ofn-uninstall-parameters).
 
 {{% /alert %}}
 
