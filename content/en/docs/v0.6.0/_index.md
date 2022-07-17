@@ -1,5 +1,5 @@
 ---
-title: "Documentation"
+title: "v0.6.0"
 linkTitle: "Documentation"
 weight: 20
 menu:
