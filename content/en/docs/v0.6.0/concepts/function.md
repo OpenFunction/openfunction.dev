@@ -47,4 +47,4 @@ OpenFunction's asyn runtime is an event-driven runtime which is implemented base
 
 ## Reference
 
-For more information, see [Function Specifications](../../../reference/component-reference/function-spec).
+For more information, see [Function Specifications](../../reference/component-reference/function-spec).
