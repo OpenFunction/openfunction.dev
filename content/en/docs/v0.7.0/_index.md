@@ -1,10 +1,10 @@
 ---
 title: "OpenFunction Docs"
-linkTitle: "v0.6.0 (latest)"
-weight: 20
-menu:
-  main:
-    weight: 10
+linkTitle: "v0.7.0 (preview)"
+#weight: 20
+#menu:
+#  main:
+#    weight: 10
 ---
 Welcome to the OpenFunction documentation site!
 
