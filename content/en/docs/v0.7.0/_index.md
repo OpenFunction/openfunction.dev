@@ -1,6 +1,6 @@
 ---
-title: "OpenFunction Docs"
-linkTitle: "v0.7.0 (preview)"
+title: "v0.7.0 (preview)"
+linkTitle: "Docs (v0.7.0)"
 #weight: 20
 #menu:
 #  main:
