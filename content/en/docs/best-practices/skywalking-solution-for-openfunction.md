@@ -17,9 +17,8 @@ SkyWalking provides solutions for observing and monitoring distributed systems i
 ## Prerequisites
 
 - You have [installed OpenFunction](../../getting-started/installation/).
-- You have [created a secret](../../getting-started/your-first-function/function-go/#create-a-secret).
+- You have followed the OpenFunction [prerequisites](../../getting-started/quickstarts/prerequisites) to create a container registry secret, a Kafka cluster and a Kafka topic.
 - You have [installed SkyWalking v9](https://github.com/apache/skywalking-kubernetes#apache-skywalking-kubernetes).
-- You have [created a Kafka server and topic](../interact-with-dapr-output-binding/#create-a-kafka-server-and-topic).
 
 ## Tracing Parameters
 
@@ -115,7 +114,7 @@ It is recommended that you use the global tracing configuration, or you have to 
 
 ## Use SkyWalking as a Distributed Tracing Solution
 
-1. Create functions by referring to [this document](../interact-with-dapr-output-binding/).
+1. Create functions by referring to [this document](../interact-with-dapr-output-binding/). You can find more examples to create sync and async functions in OpenFunction [Quickstarts](../../getting-started/quickstarts).
 
 2. Then, you can observe the flow of entire link on the SkyWalking UI.
 
