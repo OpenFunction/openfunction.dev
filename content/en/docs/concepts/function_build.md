@@ -26,6 +26,9 @@ spec:
     env:
       FUNC_NAME: "LogsHandler"
       FUNC_CLEAR_SOURCE: "true"
+      ## Customize functions framework version, valid for functions-framework-go for now
+      ## Usually you needn't to do so because the builder will ship with the latest functions-framework
+      # FUNC_FRAMEWORK_VERSION: "v0.3.0"
       # Use FUNC_GOPROXY to set the goproxy
       # FUNC_GOPROXY: "https://goproxy.cn"
     srcRepo:
