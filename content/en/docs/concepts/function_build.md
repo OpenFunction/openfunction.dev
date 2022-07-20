@@ -35,7 +35,7 @@ spec:
 ```
 
 > To push the function image to a container registry, you have to create a secret containing the registry's credential and add the secret to `imageCredentials`.
-> You can refer to the [prerequisites](../getting-started/Quickstarts/prerequisites.md) for more info.
+> You can refer to the [prerequisites](../../getting-started/Quickstarts/prerequisites) for more info.
 
 ## Build functions with the pack CLI
 
@@ -48,7 +48,7 @@ It enables the following functionality:
 - Rebase application images created using buildpacks.
 - Creation of various components used within the ecosystem.
 
-Follow the instructions [here]((https://buildpacks.io/docs/tools/pack/)) to install the `pack` CLI tool.
+Follow the instructions [here](https://buildpacks.io/docs/tools/pack/) to install the `pack` CLI tool.
 You can find more details on how to use the pack CLI [here](https://buildpacks.io/docs/tools/pack/cli/pack/).
 
 To build OpenFunction function images from source code locally, you can follow the steps below:
