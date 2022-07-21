@@ -49,5 +49,5 @@ Trigger is an abstraction of the purpose of an event, such as what needs to be d
 
 ## Reference
 
-For more information, see [EventSource Specifications](../../reference/component-reference/eventsource-spec/eventsource-spec) and [EventBus Specifications](../../reference/component-reference/eventbus-spec/eventbus-spec).
+For more information, see [EventSource Specifications](../../../reference/component-reference/eventsource-spec/eventsource-spec) and [EventBus Specifications](../../../reference/component-reference/eventbus-spec/eventbus-spec).
 
