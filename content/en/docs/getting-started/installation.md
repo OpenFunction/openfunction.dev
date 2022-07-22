@@ -54,7 +54,7 @@ This option is the **recommended** installation method.
    ```
    {{% alert title="Note" color="success" %}}
 
-   For more information about how to install OpenFunction with Helm, see [Install OpenFunction with Helm](https://github.com/OpenFunction/charts/blob/main/README.md#install-the-chart).
+   For more information about how to install OpenFunction with Helm, see [Install OpenFunction with Helm](https://github.com/OpenFunction/charts/tree/release-0.6#install-the-chart).
 
    {{% /alert %}}
 
@@ -96,7 +96,7 @@ helm uninstall openfunction -n openfunction
 ```
 {{% alert title="Note" color="success" %}}
 
-For more information about how to uninstall OpenFunction with Helm, see [Uninstall OpenFunction with Helm](https://github.com/OpenFunction/charts/blob/main/README.md#uninstall-the-chart).
+For more information about how to uninstall OpenFunction with Helm, see [Uninstall OpenFunction with Helm](https://github.com/OpenFunction/charts/tree/release-0.6#uninstall-the-chart).
 
 {{% /alert %}}
 
