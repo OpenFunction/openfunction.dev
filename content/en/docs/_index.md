@@ -3,7 +3,7 @@ title: "v0.6.0"
 linkTitle: "Docs"
 weight: 20
 ---
-Welcome to the OpenFunction documentation site!
+Welcome to the OpenFunction documentation site! 
 
 {{% alert title="What is OpenFunction?" color="success" %}}
 
