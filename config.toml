@@ -108,7 +108,7 @@ version = "0.0"
 url_latest_version = "/"
 
 [[params.versions]]
-version = "latest"
+version = "v0.6.x"
 # url = "./docs" # If chinese document is avaliable
 url = '/docs'
 
@@ -120,7 +120,7 @@ github_repo = "https://github.com/OpenFunction/website"
 
 # Uncomment this if you have a newer GitHub repo with "main" as the default branch,
 # or specify a new value if you want to reference another branch in your GitHub links
-github_branch= "main"
+github_branch= "v0.6"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "d72aa9b2712488cc3"
