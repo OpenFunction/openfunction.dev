@@ -61,6 +61,10 @@ other = "Click here to print"
 other = "Return to the regular view of this page"
 [print_entire_section]
 other = "Print entire section"
+[WHO_WE_ARE]
+other = "OpenFuntion is a "
+[CNCF]
+other = " sandbox project."
 
 # Community
 [community_join]
