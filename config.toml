@@ -105,11 +105,11 @@ version = "0.6"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "https://openfunction.dev/docs/"
+url_latest_version = "/docs"
 
 [[params.versions]]
   version = "v0.6 (latest)"
-  url = "https://openfunction.dev/docs/"
+  url = "/docs"
 
 [[params.versions]]
   version = "v0.6"
