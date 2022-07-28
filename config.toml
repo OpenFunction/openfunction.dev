@@ -101,16 +101,19 @@ archived_version = false
 # The version number for the version of the docs represented in this doc set.
 # Used in the "version-banner" partial to display a version number for the 
 # current doc set.
-version = "0.0"
+version = "0.6"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "/"
+url_latest_version = "https://openfunction.dev/docs/"
 
 [[params.versions]]
-version = "v0.6.x"
-# url = "./docs" # If chinese document is avaliable
-url = '/docs'
+  version = "v0.6(latest)"
+  url = "https://openfunction.dev/docs/"
+
+[[params.versions]]
+  version = "v0.6"
+  url = "https://v0-6.openfunction.dev/docs/"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/OpenFunction/website"
