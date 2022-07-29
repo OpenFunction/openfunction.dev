@@ -41,24 +41,46 @@ This option is the **recommended** installation method.
 - Helm version: `>=v3.6.3`
 
 #### install the chart
-1. Run the following command to add the OpenFunction chart repository.
+
+1. Run the following command to add the OpenFunction chart repository first:
    ```shell
    helm repo add openfunction https://openfunction.github.io/charts/
    helm repo update
    ```
 
-2. Run the following command to install the OpenFunction chart.
-   ```shell
-   kubectl create namespace openfunction
-   helm install openfunction openfunction/openfunction -n openfunction
-   ```
+2. Then you have several options to setup OpenFunction, you can choose to:
+
+   - Install all components:
+      ```shell
+      kubectl create namespace openfunction
+      helm install openfunction openfunction/openfunction -n openfunction
+      ```
+   
+   - Install Serving only (without build):
+      ```shell
+      kubectl create namespace openfunction
+      helm install openfunction --set ShipwrightBuild.enabled=false --set TektonPipelines.enabled=false openfunction/openfunction -n openfunction
+      ```
+   
+   - Install Knative sync runtime only:
+      ```shell
+      kubectl create namespace openfunction
+      helm install openfunction --set Keda.enabled=false openfunction/openfunction -n openfunction
+      ```
+   
+   - Install OpenFunction async runtime only:
+      ```shell
+      kubectl create namespace openfunction
+      helm install openfunction --set IngressNginx.enabled=false  --set KnativeServing.enabled=false openfunction/openfunction -n openfunction
+      ```
+
    {{% alert title="Note" color="success" %}}
 
    For more information about how to install OpenFunction with Helm, see [Install OpenFunction with Helm](https://github.com/OpenFunction/charts/tree/release-0.6#install-the-chart).
 
    {{% /alert %}}
 
-3. Run the following command to verify OpenFunction is ready.
+3. Run the following command to verify OpenFunction is up and running:
    ```shell
    kubectl get pods -namespace openfunction
    ```
