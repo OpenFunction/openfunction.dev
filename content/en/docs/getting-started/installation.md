@@ -33,14 +33,13 @@ For more information about OpenFunction components compatibility with Kubernetes
 
 ## Install OpenFunction
 
-### Option 1: Helm
-This option is the **recommended** installation method.
+### Option 1: Install with helm chart (recommended)
 
 #### Requirements
 - Kubernetes version: `>=v1.20.0-0`
 - Helm version: `>=v3.6.3`
 
-#### install the chart
+#### Steps to install OpenFunction helm charts
 
 1. Run the following command to add the OpenFunction chart repository first:
    ```shell
@@ -85,7 +84,8 @@ This option is the **recommended** installation method.
    kubectl get pods -namespace openfunction
    ```
 
-### Option 2: CLI
+### Option 2: Install with CLI
+
 1. Run the following command to download `ofn`, the CLI of OpenFunction.
 
    ```shell

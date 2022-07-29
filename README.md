@@ -1,6 +1,6 @@
 # OpenFunction Website
 
-This project uses [Hugo](https://gohugo.io/) and [Hugo template Docsy](https://github.com/google/docsy) to build the OpenFunction website.
+openfunction.dev is OpenFunction's website which is built with [Hugo](https://gohugo.io/) and [Hugo template Docsy](https://github.com/google/docsy).
 
 ## Contribute
 
@@ -16,7 +16,7 @@ Contributions of any kind are welcome!
    git clone https://github.com/<Your GitHub ID>/openfunction.dev.git
    cd openfunction.dev
    ```
-### Build and preview the openfunction.dev
+### Build and preview openfunction.dev
 
 #### Pre-requisites
 
@@ -32,7 +32,7 @@ Contributions of any kind are welcome!
 1. Update submodules: `git submodule update --init --recursive`
 1. Install npm packages: `npm install`
 
-### Running the openfunction.dev locally
+### Running openfunction.dev locally
 
 After you setup the environment, run the following command:
 
@@ -40,11 +40,11 @@ After you setup the environment, run the following command:
 hugo server -D
 ```
 
-Now you can preview the openfunction.dev in your browser at `http://localhost:1313/`.
+Now you can preview openfunction.dev in your browser at `http://localhost:1313/`.
 
 ### Open a pull request
 
-Open a [pull request (PR)](https://help.github.com/en/desktop/contributing-to-projects/creating-an-issue-or-pull-request#creating-a-new-pull-request) to contribute to our openfunction.dev. Use DCO sign-off when you submit a PR by running the command below (add `-s`):
+Open a [pull request (PR)](https://help.github.com/en/desktop/contributing-to-projects/creating-an-issue-or-pull-request#creating-a-new-pull-request) to contribute to openfunction.dev. Use DCO sign-off when you submit a PR by running the command below (add `-s`):
 
 ```bash
 git commit -s -m "xxx"
