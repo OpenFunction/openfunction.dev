@@ -11,7 +11,7 @@ In this example, an EventSource is defined for synchronous invocation to use the
 
 ## Create a Function
 
-Use the following content to create a function as the EventSource Sink. For more information about how to create a function, see [Your First Function: Go](../../../getting-started/your-first-function/function-go).
+Use the following content to create a function as the EventSource Sink. For more information about how to create a function, see [Create sync functions](../../../getting-started/quickstarts/sync-functions).
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1

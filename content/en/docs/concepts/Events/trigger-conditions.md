@@ -9,7 +9,7 @@ This document describes how to use Trigger conditions.
 
 ## Prerequisites
 
-You have finished the steps described in [Use EventBus and Trigger](../use-event-bus-and-trigger).
+You have finished the steps described in [Use EventBus and Trigger](../event-bus-and-trigger).
 
 ## Use Trigger Conditions
 
@@ -125,7 +125,7 @@ You have finished the steps described in [Use EventBus and Trigger](../use-event
    serving-4x5wh-ksvc-wxbf2-v100-deployment-5c495c84f6-k2jdg   2/2     Running   0          46s
    ```
 
-5. Create an event producer by referring to [Create an Event Producer](../../use-event-bus-and-trigger#create-an-event-producer).
+5. Create an event producer by referring to [Create an Event Producer](../event-bus-and-trigger#create-an-event-producer).
 
 6. Run the following command and you can see from the output that the `eventA && eventB` condition in the Trigger is matched and the event is sent to the `metrics` topic of the event bus at the same time. The OpenFuncAsync function is triggered.
 
