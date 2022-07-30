@@ -9,8 +9,8 @@ This document gives an example of how to use EventBus and Trigger.
 
 ## Prerequisites
 
-- You need to create a function as the target function to be triggered. For more information, see [Use EventSource](../use-event-source#create-a-function).
-- You need to create a Kafka cluster. For more information, see [Use EventSource](../use-event-source#create-a-kafka-cluster).
+- You need to create a function as the target function to be triggered. Please refer to [Create a function](../event-source#create-a-function) for more details.
+- You need to create a Kafka cluster. Please refer to [Create a Kafka cluster](../event-source#create-a-kafka-cluster) for more details.
 
 ## Deploy an NATS streaming server
 
