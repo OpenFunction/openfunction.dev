@@ -1,15 +1,13 @@
 ---
-title: "Events"
-linkTitle: "Events"
+title: "Introduction"
+linkTitle: "Introduction"
 weight: 3400
 description: 
 ---
 
-This document describes the concept of Events in OpenFunction.
-
 ## Overview
 
-Events is the event management framework for OpenFunction. It provides the following core features:
+OpenFunction Events is OpenFunction's event management framework. It provides the following core features:
 
 - Support for triggering target functions by synchronous and asynchronous calls
 - User-defined trigger judgment logic
@@ -17,7 +15,7 @@ Events is the event management framework for OpenFunction. It provides the follo
 
 ## Architecture
 
-The following diagram illustrates the architecture of Events.
+The following diagram illustrates the architecture of OpenFunction Events.
 
 ![openfunction-events](/images/docs/en/concepts/events/openfunction-events.svg)
 

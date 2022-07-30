@@ -9,7 +9,7 @@ This document describes how to use a ClusterEventBus.
 
 ## Prerequisites
 
-You have finished the steps described in [Use EventBus and Trigger](../use-event-bus-and-trigger).
+You have finished the steps described in [Use EventBus and Trigger](../event-bus-and-trigger).
 
 ## Use a ClusterEventBus
 
