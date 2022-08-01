@@ -17,7 +17,7 @@ OpenFunction Gateway provides a more powerful and more flexible function gateway
 
 - Enable users to switch to any [gateway implementations](https://gateway-api.sigs.k8s.io/implementations/) that support  [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) such as Contour, Istio, Apache APISIX, Envoy Gateway (in the future) and more in an easier and vendor-neutral way.
 
-- Users can choose to install a default gateway implementation (Contour) and then define a new `gateway.networking.k8s.io` or use any existing gateway gateway implementations in their environment and then reference an existing `gateway.networking.k8s.io`.
+- Users can choose to install a default gateway implementation (Contour) and then define a new `gateway.networking.k8s.io` or use any existing gateway implementations in their environment and then reference an existing `gateway.networking.k8s.io`.
 
 - Allow users to customize their own function access pattern like `hostTemplate: "{{.Name}}.{{.Namespace}}.{{.Domain}}"` for host-based access.
 
