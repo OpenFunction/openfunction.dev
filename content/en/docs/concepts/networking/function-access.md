@@ -36,7 +36,7 @@ Access `Function` using curl in pod:
 ```shell=
 kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $FUNC_EXTERNAL_ADDRESS
 ```
-## Access Function outside the cluster
+## Access functions from outside the cluster
 ### Access via Kubernetes Gateway's ip address
 Get Kubernetes Gateway's ip address and port:
 ```shell
