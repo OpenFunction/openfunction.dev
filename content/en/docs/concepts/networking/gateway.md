@@ -16,12 +16,52 @@ Once a `Gateway` is created, the gateway controller will:
 - If `gatewayDef` is defined in a `Gateway`, a `gateway.networking.k8s.io` custom resource will be created based on `gatewaySpec.listenters`.
 - Create a service named `gateway.openfunction.svc.cluster.local`, this service defines a unified entry for sync functions through `Gateway` within the cluster.
 
-Once a `Gateway` is reconciled, the status of `Gateway` and `Gateway.gatewaySpec.listeners` will be shown in the `Gateway.status`.
+After a `Gateway` is deployed, you'll be able to find the status of `Gateway` and `Gateway.gatewaySpec.listeners` in the `Gateway.status` field, e.g:
+```yaml
+status:
+  conditions:
+  - lastTransitionTime: "2022-08-04T10:20:57Z"
+    message: Gateway is scheduled
+    observedGeneration: 2
+    reason: Scheduled
+    status: "True"
+    type: Scheduled
+  - lastTransitionTime: "2022-08-04T10:20:57Z"
+    message: Valid Gateway
+    observedGeneration: 2
+    reason: Valid
+    status: "True"
+    type: Ready
+  listeners:
+  - attachedRoutes: 0
+    conditions:
+    - lastTransitionTime: "2022-08-04T10:20:57Z"
+      message: Valid listener
+      observedGeneration: 2
+      reason: Ready
+      status: "True"
+      type: Ready
+    name: ofn-http-internal
+    supportedKinds:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+  - attachedRoutes: 0
+    conditions:
+    - lastTransitionTime: "2022-08-04T10:20:57Z"
+      message: Valid listener
+      observedGeneration: 2
+      reason: Ready
+      status: "True"
+      type: Ready
+    name: ofn-http-external
+    supportedKinds:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+```
 
 ## Default Gateway
-By default, OpenFunction use `Contour` as Kubernetes `Gateway` implementation. Kubernetes `GatewayClass` and Kubernetes `Gateway` will be automatically created during installation. 
-Then the following OpenFunction `Gateway` will be created:
-
+By default, OpenFunction use `Contour` as Kubernetes `Gateway` implementation. Kubernetes `GatewayClass` and Kubernetes `Gateway` will be automatically created during installation.
+The following OpenFunction `Gateway` will also be created automatically:
 ```yaml
 apiVersion: networking.openfunction.io/v1alpha1
 kind: Gateway
@@ -76,7 +116,8 @@ kubectl apply -f https://github.com/knative/net-istio/releases/download/knative-
 ```
 
 3. Create `GatewayClass` named `istio`:
-```yaml
+```shell
+kubectl apply -f - <<EOF
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: GatewayClass
 metadata:
@@ -84,10 +125,12 @@ metadata:
 spec:
   controllerName: istio.io/gateway-controller
   description: The default Istio GatewayClass
+EOF
 ```
 
 4. Create OpenFunction `Gateway`:
-```yaml
+```shell
+kubectl apply -f - <<EOF
 apiVersion: networking.openfunction.io/v1alpha1
 kind: Gateway
 metadata:
@@ -109,10 +152,12 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+EOF
 ```
 
 5. Reference custom `Gateway` via `gatewayRef` in `Function` definition:
-```yaml
+```shell
+kubectl apply -f - <<EOF
 apiVersion: core.openfunction.io/v1beta1
 kind: Function
 metadata:
@@ -131,6 +176,7 @@ spec:
     gatewayRef:
       name: custom-gateway
       namespace: openfunction
+EOF
 ```
 
 ## Multiple OpenFunction Gateway

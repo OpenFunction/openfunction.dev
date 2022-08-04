@@ -7,8 +7,8 @@ description:
 
 ## Configure Local Domain
 By configuring the local domain, you can access functions from within a Kubernetes cluster through the function's external address.
-### Configure `CoreDNS` based on `gateway.spec.domain`
-Assume you have a `gateway` that defines this `domain`: `*.ofn.io`, you need to update `CoreDNS` configuration via following commands:
+### Configure `CoreDNS` based on `Gateway.spec.domain`
+Assume you have a `Gateway` that defines this `domain`: `*.ofn.io`, you need to update `CoreDNS` configuration via following commands:
 1. Edit the `coredns` configmap:
 ```shell=
 kubectl -n kube-system edit cm coredns -o yaml
@@ -41,7 +41,7 @@ data:
     }
 ...
 ```
-### Configure `nodelocaldns` based on `gateway.spec.domain`
+### Configure `nodelocaldns` based on `Gateway.spec.domain`
 If you are also using `nodelocaldns` like `Kubesphere`, you need to update `nodelocaldns` configuration by the following commands:
 1. Edit the `nodelocaldns` configmap:
 ```shell=

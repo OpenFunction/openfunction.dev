@@ -5,11 +5,11 @@ weight: 3440
 description:
 ---
 
-> This documentation will assume you are using default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway) and you have a synchronous function named `function-sample`.
+> This documentation will assume you are using default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway) and you have a sync function named `function-sample`.
 
 ## Access functions from within the cluster
 ### Access functions by the internal address
-OpenFunction will create this service for every synchronous `Function`: `{{.Name}}.{{.Namespace}}.svc.cluster.local`. This service will be used to provide the Function internal address.
+OpenFunction will create this service for every sync `Function`: `{{.Name}}.{{.Namespace}}.svc.cluster.local`. This service will be used to provide the Function internal address.
 
 Get `Function` internal address by running following command:
 ```shell
