@@ -33,13 +33,14 @@ For more information about OpenFunction components compatibility with Kubernetes
 
 ## Install OpenFunction
 
-### Option 1: Install with helm chart (recommended)
+Now you can install OpenFunction and all its dependencies with helm charts.
+> The `ofn` CLI install method is deprecated.
 
-#### Requirements
+### Requirements
 - Kubernetes version: `>=v1.20.0-0`
 - Helm version: `>=v3.6.3`
 
-#### Steps to install OpenFunction helm charts
+### Steps to install OpenFunction helm charts
 
 1. Run the following command to add the OpenFunction chart repository first:
    ```shell
@@ -84,32 +85,6 @@ For more information about OpenFunction components compatibility with Kubernetes
    kubectl get pods -namespace openfunction
    ```
 
-### Option 2: Install with CLI
-
-1. Run the following command to download `ofn`, the CLI of OpenFunction.
-
-   ```shell
-   wget -c  https://github.com/OpenFunction/cli/releases/latest/download/ofn_linux_amd64.tar.gz -O - | tar -xz
-   ```
-
-2. Run the following commands to make `ofn` executable and move it to `/usr/local/bin/`.
-
-   ```shell
-   chmod +x ofn && mv ofn /usr/local/bin/
-   ```
-
-3. Run the following command to install OpenFunction.
-
-   ```shell
-   ofn install --all
-   ```
-
-   {{% alert title="Note" color="success" %}}
-
-   For more information about how to use the `ofn install` command, see [`ofn install` Parameters](../../reference/cli#ofn-install-parameters).
-
-   {{% /alert %}}
-
 ## Uninstall OpenFunction
 ### Helm
 If you installed OpenFunction with Helm, run the following command to uninstall OpenFunction and its dependencies.
@@ -121,16 +96,3 @@ helm uninstall openfunction -n openfunction
 For more information about how to uninstall OpenFunction with Helm, see [Uninstall OpenFunction with Helm](https://github.com/OpenFunction/charts/tree/release-0.6#uninstall-the-chart).
 
 {{% /alert %}}
-
-### CLI
-If you installed OpenFunction with CLI, run the following command to uninstall OpenFunction and its dependencies.
-```shell
-ofn uninstall --all
-```
-
-{{% alert title="Note" color="success" %}}
-
-For more information about how to use the `ofn uninstall` command, see [`ofn uninstall` Parameters](../../reference/cli#ofn-uninstall-parameters).
-
-{{% /alert %}}
-
