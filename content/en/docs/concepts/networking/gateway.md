@@ -6,7 +6,7 @@ description:
 ---
 
 ## Gateway Definition
-A OpenFunction `Gateway` defines how users can access synchronous functions and how the Kubernetes `Gateway` resource should be used.
+An OpenFunction `Gateway` defines how users can access sync functions and how the Kubernetes `Gateway` resource should be used.
 A OpenFunction `Gateway` is 1:1 with Kubernetes `Gateway`. 
 
 Once a `Gateway` is created, the gateway controller will:
