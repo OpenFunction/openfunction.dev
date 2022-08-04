@@ -54,7 +54,7 @@ Access `Function` using curl directly:
 curl -sv -HHOST:$FUNC_HOST http://$IP:$PORT$FUNC_PATH
 ```
 
-### Access via domain defined in OpenFunction Gateway
+### Access by domain defined in OpenFunction Gateway
 
 > You should configure your real DNS first, the relevant configuration is based on the network topology of your environment.
 
