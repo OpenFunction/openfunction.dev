@@ -7,7 +7,7 @@ description:
 
 ## Gateway Definition
 An OpenFunction `Gateway` defines how users can access sync functions and how the Kubernetes `Gateway` resource should be used.
-A OpenFunction `Gateway` is 1:1 with Kubernetes `Gateway`. 
+An OpenFunction `Gateway` is 1:1 with Kubernetes `Gateway`. 
 
 Once a `Gateway` is created, the gateway controller will:
 - If `gatewaySpec.listeners` does not contain the default listener named `ofn-http-internal`, it will be added to `gatewaySpec.listeners`.
