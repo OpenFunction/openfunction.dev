@@ -6,7 +6,7 @@ description:
 ---
 
 ## Configure Local Domain
-By configuring the local domain, you can access functions within kubernetes cluster through the Function external address.
+By configuring the local domain, you can access functions from within a Kubernetes cluster through the function's external address.
 ### Configure `CoreDNS` based on `gateway.spec.domain`
 Assume you have a `gateway` that defines this `domain`: `*.ofn.io`, you need to update `CoreDNS` configuration via following commands:
 1. Edit the `coredns` configmap:
