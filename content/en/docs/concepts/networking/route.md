@@ -7,7 +7,7 @@ description:
 
 ## Route
 `Route` is part of the `Function` resource. `Route` defines how traffic from the `Gateway` listener is routed to a function.
-`route` specify the `Gateway` they want to attach to using `GatewayRef`, this will allow the `route` to receive traffic from the `Gateway`.
+`Route` specifies the `Gateway` it wants to attach to using `GatewayRef`, this will allow the `Route` to receive traffic from the `Gateway`.
 
 Once a synchronous `Function` is created, the function controller will:
 - If `route.gatewayRef` is not defined in function, will look for `Gateway` called `openfunction` in `openfunction` namespace, then attach to this `Gateway`.
