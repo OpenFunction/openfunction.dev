@@ -52,7 +52,7 @@ http://function-sample.default.ofn.io/
 ```
 
 ## Path-Based Routing
-You can define specific `route.hostnames`, then function controller will only generate `route.rules` based on `gateway.spec.pathTemplate`.
+If you define `route.hostnames` in a function, `route.rules` will be generated based on `gateway.spec.pathTemplate`.
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1
