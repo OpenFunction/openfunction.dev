@@ -87,7 +87,7 @@ You can define both `route.hostnames` and `route.rules` to customize how traffic
 
 {{% alert title="Note" color="success" %}}
 
-In this mode, you need to resolve possible conflicts between HTTPRoutes yourself.
+In this mode, you'll need to resolve possible conflicts between HTTPRoutes by yourself.
 
 {{% /alert %}}
 ```yaml
