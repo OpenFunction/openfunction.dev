@@ -18,7 +18,7 @@ and label `HTTPRouteLabelKey` will be added to this `HTTPRoute`.
 - Create service `{{.Name}}.{{.Namespace}}.svc.cluster.local`, this service defines an entry for the function to access within the cluster.
 - If the `Gateway` referenced by `route.gatewayRef` changed, will update the `HTTPRoute`.
 
-Once a synchronous `Function` is reconciled, the `Function` addresses and status of `route` will be shown in the `Function.status`.
+After a sync `Function` is created or updated, you'll be able to find `Function` addresses and `Route` status in `Function`'s status field.
 
 ## Host-Based Routing
 `host-based` is the default routing mode. When `route.hostnames` are not defined in function,
