@@ -46,7 +46,7 @@ spec:
       namespace: openfunction
 ```
 
-> If you are using default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function external address will be as follows:
+> If you are using the default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function external address will be as below:
 ```
 http://function-sample.default.ofn.io/
 ```
