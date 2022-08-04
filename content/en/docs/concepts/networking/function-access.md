@@ -7,7 +7,7 @@ description:
 
 > This documentation will assume you are using default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway) and you have a synchronous function named `function-sample`.
 
-## Access Function within the cluster
+## Access functions from within the cluster
 ### Access via Function internal address
 OpenFunction will create this service for every synchronous `Function`: `{{.Name}}.{{.Namespace}}.svc.cluster.local`. This service will be used to provide the Function internal address.
 
