@@ -83,7 +83,7 @@ http://sample.default.ofn.io/default/function-sample/
 ```
 
 ## Define both `route.hostnames` and `route.rules`
-You can define both `route.hostnames` and `route.rules` to fully customize how traffic should be routed to the function.
+You can define both `route.hostnames` and `route.rules` to customize how traffic should be routed to a function.
 
 {{% alert title="Note" color="success" %}}
 
