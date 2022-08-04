@@ -21,7 +21,7 @@ and label `HTTPRouteLabelKey` will be added to this `HTTPRoute`.
 After a sync `Function` is created or updated, you'll be able to find `Function` addresses and `Route` status in `Function`'s status field.
 
 ## Host-Based Routing
-`host-based` is the default routing mode. When `route.hostnames` are not defined in function,
+`Host-based` is the default routing mode. When `route.hostnames` is not defined,
 function controller will generate `route.hostnames` based on `gateway.spec.hostTemplate`. 
 If `route.rules` is also not defined, will generate `route.rules` based on path of `/`.
 
