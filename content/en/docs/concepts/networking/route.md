@@ -22,7 +22,7 @@ After a sync `Function` is created or updated, you'll be able to find `Function`
 
 ## Host-Based Routing
 `Host-based` is the default routing mode. When `route.hostnames` is not defined,
-function controller will generate `route.hostnames` based on `gateway.spec.hostTemplate`. 
+`route.hostnames` will be generated based on `gateway.spec.hostTemplate`. 
 If `route.rules` is also not defined, will generate `route.rules` based on path of `/`.
 
 ```yaml
