@@ -14,7 +14,7 @@ Once a `Gateway` is created, the gateway controller will:
 - `gatewaySpec.listeners.[*].hostname` will be generated based on `domain` or `clusterDomain`.
 - If `gatewayRef` is defined in a `Gateway`, the corresponding `gateway.networking.k8s.io` custom resource will be injected base on `gatewaySpec.listenters`.
 - If `gatewayDef` is defined in a `Gateway`, a `gateway.networking.k8s.io` custom resource will be created based on `gatewaySpec.listenters`.
-- Create service `gateway.openfunction.svc.cluster.local`, this service defines a unified entry for synchronous functions through `Gateway` within the cluster.
+- Create a service named `gateway.openfunction.svc.cluster.local`, this service defines a unified entry for sync functions through `Gateway` within the cluster.
 
 Once a `Gateway` is reconciled, the status of `Gateway` and `Gateway.gatewaySpec.listeners` will be shown in the `Gateway.status`.
 
