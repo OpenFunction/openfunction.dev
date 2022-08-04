@@ -23,7 +23,7 @@ Access `Function` using curl in pod:
 kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $FUNC_INTERNAL_ADDRESS
 ```
 
-### Access via Function external address
+### Access functions by the external address
 > The Function external address is usually used for external access, but you can also use it within the cluster for development or testing.
 You should configure local domain first, see [Configure Local Domain](https://openfunction.dev/docs/concepts/networking/local-domain).
 
