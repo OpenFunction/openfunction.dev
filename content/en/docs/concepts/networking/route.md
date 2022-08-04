@@ -77,7 +77,7 @@ spec:
     - "sample.ofn.io"
 ```
 
-> If you are using default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function external address will be as follows:
+> If you are using the default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function's external address will be as below:
 ```
 http://sample.default.ofn.io/default/function-sample/
 ```
