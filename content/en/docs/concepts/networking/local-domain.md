@@ -42,7 +42,7 @@ data:
 ...
 ```
 ### Configure `nodelocaldns` based on `gateway.spec.domain`
-If you are also using `nodelocaldns`, such as the `kubesphere` user, you need update `nodelocaldns` configuration via following commands:
+If you are also using `nodelocaldns` like `Kubesphere`, you need to update `nodelocaldns` configuration by the following commands:
 1. Edit the `nodelocaldns` configmap:
 ```shell=
 kubectl -n kube-system edit cm nodelocaldns -o yaml
