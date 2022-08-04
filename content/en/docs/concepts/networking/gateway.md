@@ -61,7 +61,7 @@ kubectl edit gateway openfunction -n openfunction
 ```
 
 ## Custom Kubernetes Gateway implementation
-The following documentation will show using istio as Kubernetes Gateway implementation.
+The following documentation will demonstrate using Istio as the underlying Kubernetes Gateway implementation.
 
 1. Install OpenFunction without `Contour`:
 ```shell
