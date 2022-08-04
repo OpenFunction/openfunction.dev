@@ -6,7 +6,7 @@ description:
 ---
 
 ## Route
-`route` is part of `Function` resource. `route` defines how traffic from the `Gateway` listener is routed to function.
+`Route` is part of the `Function` resource. `Route` defines how traffic from the `Gateway` listener is routed to a function.
 `route` specify the `Gateway` they want to attach to using `GatewayRef`, this will allow the `route` to receive traffic from the `Gateway`.
 
 Once a synchronous `Function` is created, the function controller will:
