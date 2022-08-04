@@ -10,7 +10,7 @@ description:
 `Route` specifies the `Gateway` it wants to attach to using `GatewayRef`, this will allow the `Route` to receive traffic from the `Gateway`.
 
 Once a sync `Function` is created, the function controller will:
-- If `route.gatewayRef` is not defined in function, will look for `Gateway` called `openfunction` in `openfunction` namespace, then attach to this `Gateway`.
+- Look for the`Gateway` called `openfunction` in `openfunction` namespace, then attach to this `Gateway` if `route.gatewayRef` is not defined in the function.
 - If `route.hostnames` is not defined in function, will be automatically generated based on `Gateway.spec.hostTemplate`.
 - If `route.rules` is not defined in function, will be automatically generated based on `Gateway.spec.pathTemplate` or path of `/`.
 - a `HTTPRoute` custom resource will be created based on `route`. `BackendRefs` will be automatically link to the corresponding Knative service revision 
