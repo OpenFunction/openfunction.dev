@@ -109,7 +109,7 @@ url_latest_version = "/docs"
 
 [[params.versions]]
   version = "v0.7 (preview)"
-  url = "/docs"
+  url = "https://openfunction.dev/docs/"
 
 [[params.versions]]
   version = "v0.6"
