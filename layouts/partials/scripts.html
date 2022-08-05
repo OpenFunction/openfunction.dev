@@ -39,9 +39,9 @@
     const url = window.location.href;
     if (url.indexOf('/docs') !== -1) {
         $('.hide_select_in_en').hide();
-        $('.dropdown-toggle').addClass('hide_doc_zh')
+        $('.lang-dropdown-toggle').addClass('hide_doc_zh')
     } else {
-        $('.dropdown-toggle').removeClass('hide_doc_zh')
+        $('.lang-dropdown-toggle').removeClass('hide_doc_zh')
     }
 </script>
 {{ end }}
