@@ -40,7 +40,7 @@ kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $
 ### Access functions by the Kubernetes Gateway's IP address
 Get Kubernetes Gateway's ip address and port:
 ```shell
-export IP=$(<your node ip>)
+export IP=<your node ip>
 export PORT=$(kubectl get svc -n projectcontour contour-envoy -o=jsonpath='{.spec.ports[?(@.name=="http")].nodePort}')
 ```
 Get Function's HOST and PATH:

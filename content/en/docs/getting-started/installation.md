@@ -59,30 +59,30 @@ Now you can install OpenFunction and all its dependencies with helm charts.
    - Install Serving only (without build):
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set ShipwrightBuild.enabled=false --set TektonPipelines.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set global.ShipwrightBuild.enabled=false --set global.TektonPipelines.enabled=false openfunction/openfunction -n openfunction
       ```
    
    - Install Knative sync runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set Keda.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set global.Keda.enabled=false openfunction/openfunction -n openfunction
       ```
    
    - Install OpenFunction async runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set IngressNginx.enabled=false  --set KnativeServing.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set global.Contour.enabled=false  --set global.KnativeServing.enabled=false openfunction/openfunction -n openfunction
       ```
 
    {{% alert title="Note" color="success" %}}
 
-   For more information about how to install OpenFunction with Helm, see [Install OpenFunction with Helm](https://github.com/OpenFunction/charts/tree/release-0.6#install-the-chart).
+   For more information about how to install OpenFunction with Helm, see [Install OpenFunction with Helm](https://github.com/OpenFunction/charts#install-the-chart).
 
    {{% /alert %}}
 
 3. Run the following command to verify OpenFunction is up and running:
    ```shell
-   kubectl get pods -namespace openfunction
+   kubectl get po -n openfunction
    ```
 
 ## Uninstall OpenFunction
@@ -93,6 +93,6 @@ helm uninstall openfunction -n openfunction
 ```
 {{% alert title="Note" color="success" %}}
 
-For more information about how to uninstall OpenFunction with Helm, see [Uninstall OpenFunction with Helm](https://github.com/OpenFunction/charts/tree/release-0.6#uninstall-the-chart).
+For more information about how to uninstall OpenFunction with Helm, see [Uninstall OpenFunction with Helm](https://github.com/OpenFunction/charts#uninstall-the-chart).
 
 {{% /alert %}}

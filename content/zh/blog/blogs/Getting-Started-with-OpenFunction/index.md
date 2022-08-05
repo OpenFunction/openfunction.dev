@@ -65,7 +65,7 @@ $ kubectl create -f https://github.com/OpenFunction/OpenFunction/releases/downlo
 等待controller manager的状态变为`Running`且健康状态为正常.
 
 ```bash
-$ kubectl get pods -namespace openfunction -w
+$ kubectl get po -n openfunction -w
 NAME READY STATUS RESTARTS AGE
 openfunction-controller-manager-6955498c9b-hjql7 2/2 Running 0 2m2s
 ```
