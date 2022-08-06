@@ -1,11 +1,11 @@
 ---
-title: "Function Access"
-linkTitle: "Function Access"
+title: "Access functions"
+linkTitle: "Access functions"
 weight: 3440
 description:
 ---
 
-> This documentation will assume you are using default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway) and you have a sync function named `function-sample`.
+> This documentation will assume you are using default [OpenFunction Gateway](../gateway/#the-default-openfunction-gateway) and you have a sync function named `function-sample`.
 
 ## Access functions from within the cluster
 ### Access functions by the internal address
@@ -25,7 +25,7 @@ kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $
 
 ### Access functions by the external address
 > The Function external address is usually used for external access, but you can also use it within the cluster for development or testing.
-You should configure local domain first, see [Configure Local Domain](https://openfunction.dev/docs/concepts/networking/local-domain).
+You should configure local domain first, see [Configure Local Domain](../local-domain).
 
 Get `Function` external address by running following command:
 ```shell

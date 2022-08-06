@@ -5,11 +5,14 @@ weight: 3430
 description:
 ---
 
-## Route Definition
-`Route` is part of the `Function` resource. `Route` defines how traffic from the `Gateway` listener is routed to a function.
-`Route` specifies the `Gateway` it wants to attach to using `GatewayRef`, this will allow the `Route` to receive traffic from the `Gateway`.
+## What is `Route`?
+
+`Route` is part of the `Function` definition. `Route` defines how traffic from the `Gateway` listener is routed to a function. 
+
+A `Route` specifies the `Gateway` to which it will attach in `GatewayRef` which allow it to receive traffic from the `Gateway`.
 
 Once a sync `Function` is created, the function controller will:
+
 - Look for the`Gateway` called `openfunction` in `openfunction` namespace, then attach to this `Gateway` if `route.gatewayRef` is not defined in the function.
 - Automatically generate `route.hostnames` based on `Gateway.spec.hostTemplate`, if `route.hostnames` is not defined in function.
 - Automatically generate `route.rules` based on `Gateway.spec.pathTemplate` or path of `/`, if `route.rules` is not defined in function.
@@ -19,6 +22,7 @@ and label `HTTPRouteLabelKey` will be added to this `HTTPRoute`.
 - If the `Gateway` referenced by `route.gatewayRef` changed, will update the `HTTPRoute`.
 
 After a sync `Function` is deployed, you'll be able to find `Function` addresses and `Route` status in `Function`'s status field, e.g:
+
 ```yaml
 status:
   addresses:
@@ -59,11 +63,12 @@ This internal address is not affected by the `Gateway` referenced by `route.gate
 The Address of type `Internal` in `Funtion.status` provides the method for accessing functions from outside the cluster.
 This external address is generated based on `route.gatewayRef`, `router.hostnames` and `route.rules`. The routing mode only takes effect on this external address, The following documentation will explain how it works.
 
-For more information about how to access functions, see [Function Access](https://openfunction.dev/docs/concepts/networking/function-access/).
+For more information about how to access functions, see [Access functions](../../../concepts/networking/access-functions/).
 
 {{% /alert %}}
 
-## Host-Based Routing
+## Host Based Routing
+
 `Host-based` is the default routing mode. When `route.hostnames` is not defined,
 `route.hostnames` will be generated based on `gateway.spec.hostTemplate`. 
 If `route.rules` is not defined, `route.rules` will be generated based on path of `/`.
@@ -91,12 +96,14 @@ spec:
 EOF
 ```
 
-> If you are using the default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function external address will be as below:
-```
+> If you are using the default [OpenFunction Gateway](../gateway#the-default-openfunction-gateway), the function external address will be as below:
+
+```shell
 http://function-sample.default.ofn.io/
 ```
 
-## Path-Based Routing
+## Path Based Routing
+
 If you define `route.hostnames` in a function, `route.rules` will be generated based on `gateway.spec.pathTemplate`.
 
 ```shell
@@ -124,13 +131,15 @@ spec:
 EOF
 ```
 
-> If you are using the default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function's external address will be as below:
-```
+> If you are using the default [OpenFunction Gateway](../gateway#the-default-openfunction-gateway), the function external address will be as below:
+
+```shell
 http://sample.default.ofn.io/default/function-sample/
 ```
 
-## Define both `route.hostnames` and `route.rules`
-You can define both `route.hostnames` and `route.rules` to customize how traffic should be routed to a function.
+## Host and Path based routing
+
+You can define hostname and path at the same time to customize how traffic should be routed to your function.
 
 {{% alert title="Note" color="success" %}}
 
@@ -167,7 +176,8 @@ spec:
 EOF
 ```
 
-> If you are using the default OpenFunction [Gateway](https://openfunction.dev/docs/concepts/networking/gateway/#default-gateway), the function external address will be as below:
-```
+> If you are using the default [OpenFunction Gateway](../gateway#the-default-openfunction-gateway), the function external address will be as below:
+
+```shell
 http://sample.default.ofn.io/v2/foo/
 ```
