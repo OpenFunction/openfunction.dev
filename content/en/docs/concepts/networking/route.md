@@ -63,7 +63,7 @@ This internal address is not affected by the `Gateway` referenced by `route.gate
 The Address of type `Internal` in `Funtion.status` provides the method for accessing functions from outside the cluster.
 This external address is generated based on `route.gatewayRef`, `router.hostnames` and `route.rules`. The routing mode only takes effect on this external address, The following documentation will explain how it works.
 
-For more information about how to access functions, see [Access functions](../../../concepts/networking/access-functions/).
+For more information about how to access functions, please refer to [Function Entrypoints](../function-entrypoints/).
 
 {{% /alert %}}
 
