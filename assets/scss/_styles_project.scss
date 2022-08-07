@@ -51,4 +51,9 @@ footer a {
 
 .td-navbar .dropdown {
   min-width: auto;
+  &:last-child {
+    .dropdown-menu {
+      left: -38px;
+    }
+  }
 }
