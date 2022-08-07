@@ -9,7 +9,7 @@ description:
 
 `Route` is part of the `Function` definition. `Route` defines how traffic from the `Gateway` listener is routed to a function. 
 
-A `Route` specifies the `Gateway` to which it will attach in `GatewayRef` which allow it to receive traffic from the `Gateway`.
+A `Route` specifies the `Gateway` to which it will attach in `GatewayRef` that allows it to receive traffic from the `Gateway`.
 
 Once a sync `Function` is created, the function controller will:
 
