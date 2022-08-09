@@ -28,7 +28,7 @@ spec:
       FUNC_CLEAR_SOURCE: "true"
       ## Customize functions framework version, valid for functions-framework-go for now
       ## Usually you needn't to do so because the builder will ship with the latest functions-framework
-      # FUNC_FRAMEWORK_VERSION: "v0.3.0"
+      # FUNC_FRAMEWORK_VERSION: "v0.4.0"
       ## Use FUNC_GOPROXY to set the goproxy
       # FUNC_GOPROXY: "https://goproxy.cn"
     srcRepo:
@@ -66,7 +66,7 @@ cd samples/functions/Knative/hello-world-go
 ### Build the function image with the pack CLI
 
 ```shell
-pack build func-helloworld-go --builder openfunction/builder-go:v2.3.0-1.16 --env FUNC_NAME="HelloWorld"  --env FUNC_CLEAR_SOURCE=true
+pack build func-helloworld-go --builder openfunction/builder-go:v2.4.0-1.17 --env FUNC_NAME="HelloWorld"  --env FUNC_CLEAR_SOURCE=true
 ```
 
 ### Launch the function image locally
@@ -93,10 +93,10 @@ To build a function image with [Cloud Native Buildpacks](https://buildpacks.io/)
 
 Here you can find builders for popular languages maintained by the OpenFunction community:
 
-|           | Builders |
-|-----------|----------|
-| Go        | openfunction/builder-go:v2.3.0 (openfunction/builder-go:latest) |
-| Nodejs    | openfunction/builder-node:v2-16.15 (openfunction/builder-node:latest) |
+|           | Builders                                                                                                                           |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------|
+| Go        | openfunction/builder-go:v2.4.0 (openfunction/builder-go:latest)                                                                    |
+| Nodejs    | openfunction/builder-node:v2-16.15 (openfunction/builder-node:latest)                                                              |
 | Java      | openfunction/builder-java:v2-11, openfunction/builder-java:v2-16, openfunction/builder-java:v2-17, openfunction/builder-java:v2-18 |
-| Python    | openfunction/gcp-builder:v1 |
-| DotNet    | openfunction/gcp-builder:v1 |
+| Python    | openfunction/gcp-builder:v1                                                                                                        |
+| DotNet    | openfunction/gcp-builder:v1                                                                                                        |
