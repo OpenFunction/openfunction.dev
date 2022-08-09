@@ -63,7 +63,7 @@ spec:
           value: "false"
 ```
 
-[Here](https://github.com/OpenFunction/samples/tree/main/functions/async/pubsub/subscriber) is another async function example that use a Kafka Pub/sub component as input.
+[Here](https://github.com/OpenFunction/samples/tree/release-0.6/functions/async/pubsub/subscriber) is another async function example that use a Kafka Pub/sub component as input.
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1
@@ -94,7 +94,7 @@ spec:
             value: "autoscaling-subscriber"
 ```
 
-Sync functions can also send output to Dapr output binding components or Pub/sub components, [here](https://github.com/OpenFunction/samples/tree/main/functions/knative/with-output-binding) is an example:
+Sync functions can also send output to Dapr output binding components or Pub/sub components, [here](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/with-output-binding) is an example:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1
