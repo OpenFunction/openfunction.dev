@@ -11,10 +11,10 @@ Sync functions are funtions whose inputs are payloads of HTTP requests, and the 
 
 |           | Sync Functions |
 |-----------|----------------|
-| Go        | [Hello World](https://github.com/OpenFunction/samples/tree/main/functions/knative/hello-world-go), [Multi-functions](https://github.com/OpenFunction/samples/tree/main/functions/knative/multiple-functions-go), [log processing](https://github.com/OpenFunction/samples/blob/main/functions/knative/logs-handler-function/LogsHandler.go), [Sync function with output binding](https://github.com/OpenFunction/samples/tree/main/functions/knative/with-output-binding) |
-| Nodejs    | [Hello World](https://github.com/OpenFunction/samples/tree/main/functions/knative/hello-world-node), [Sync function with output binding](https://github.com/OpenFunction/samples/tree/main/functions/knative/with-output-binding-node) |
-| Python    | [Hello World](https://github.com/OpenFunction/samples/tree/main/functions/knative/hello-world-python) |
-| Java      | [Hello World](https://github.com/OpenFunction/samples/tree/main/functions/knative/hello-world-java) |
-| DotNet    | [Hello World](https://github.com/OpenFunction/samples/tree/main/functions/knative/hello-world-dotnet) |
+| Go        | [Hello World](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/hello-world-go), [Multi-functions](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/multiple-functions-go), [log processing](https://github.com/OpenFunction/samples/blob/main/functions/knative/logs-handler-function/LogsHandler.go), [Sync function with output binding](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/with-output-binding) |
+| Nodejs    | [Hello World](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/hello-world-node), [Sync function with output binding](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/with-output-binding-node) |
+| Python    | [Hello World](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/hello-world-python) |
+| Java      | [Hello World](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/hello-world-java) |
+| DotNet    | [Hello World](https://github.com/OpenFunction/samples/tree/release-0.6/functions/knative/hello-world-dotnet) |
 
 > You can find more function samples [here](../../../concepts/function_signatures/#samples)
