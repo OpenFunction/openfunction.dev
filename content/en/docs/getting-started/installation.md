@@ -52,25 +52,25 @@ For more information about OpenFunction components compatibility with Kubernetes
    - Install all components:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction openfunction/openfunction -n openfunction
+      helm install openfunction openfunction/openfunction -n openfunction --version 0.1.0
       ```
    
    - Install Serving only (without build):
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set ShipwrightBuild.enabled=false --set TektonPipelines.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set ShipwrightBuild.enabled=false --set TektonPipelines.enabled=false openfunction/openfunction -n openfunction --version 0.1.0
       ```
    
    - Install Knative sync runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set Keda.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set Keda.enabled=false openfunction/openfunction -n openfunction --version 0.1.0
       ```
    
    - Install OpenFunction async runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set IngressNginx.enabled=false  --set KnativeServing.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set IngressNginx.enabled=false  --set KnativeServing.enabled=false openfunction/openfunction -n openfunction --version 0.1.0
       ```
 
    {{% alert title="Note" color="success" %}}
