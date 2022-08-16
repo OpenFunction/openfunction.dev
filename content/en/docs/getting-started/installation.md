@@ -81,7 +81,7 @@ For more information about OpenFunction components compatibility with Kubernetes
 
 3. Run the following command to verify OpenFunction is up and running:
    ```shell
-   kubectl get pods -namespace openfunction
+   kubectl get po -n openfunction
    ```
 
 ### Option 2: Install with CLI
