@@ -7,7 +7,7 @@
         {{ .content }}
         <br><br>{{ range .children }}
         <br>{{ .content }}
-        <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
+        <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
         {{ end }}
         {{ with index $links "developer"}}
         {{ template "community-links-list"  . }}
@@ -20,10 +20,10 @@
     <div class="section-2 col-xs-12 col-sm-6 col-md-6 col-lg-6">
         {{ with .Params.section2 }}
         <h2>{{ .name }}</h2><br>
-        <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .Content }}</a>
+        <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .Content }}</a>
         <br><br>{{ range .children }}
         <li>{{ .content }}
-            <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
+            <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
         </li>
         {{ end }}
     </div>
