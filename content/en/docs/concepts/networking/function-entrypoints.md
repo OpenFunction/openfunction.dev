@@ -40,10 +40,9 @@ kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $
 ```
 ## Access functions from outside the cluster
 ### Access functions by the Kubernetes Gateway's IP address
-Get Kubernetes Gateway's ip address and port:
+Get Kubernetes Gateway's ip address:
 ```shell
-export IP=<your node ip>
-export PORT=$(kubectl get svc -n projectcontour contour-envoy -o=jsonpath='{.spec.ports[?(@.name=="http")].nodePort}')
+export IP=$(kubectl get node -l node-role.kubernetes.io/worker= -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
 ```
 Get Function's HOST and PATH:
 ```shell
@@ -53,13 +52,32 @@ export FUNC_PATH=$(kubectl get function function-sample -o=jsonpath='{.status.ro
 
 Access `Function` using curl directly:
 ```shell
-curl -sv -HHOST:$FUNC_HOST http://$IP:$PORT$FUNC_PATH
+curl -sv -HHOST:$FUNC_HOST http://$IP$FUNC_PATH
 ```
 
-### Access by domain defined in OpenFunction Gateway
+### Access functions by the external address
 
-> You should configure your real DNS first, the relevant configuration is based on the network topology of your environment.
+#### Configure DNS
+You have two options to configure DNS:
 
+- Option 1: Real DNS
+
+    The real DNS configuration is based on the network topology of your environment.
+
+- Option 2: Configure the local hosts file
+
+    Get Function's HOSTNAME and Gateway's ip:
+    ```shell
+    export HOSTNAME="function-sample.default.ofn.io"
+    export IP=$(kubectl get node -l node-role.kubernetes.io/worker= -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+    ```
+    
+    Append this line to /etc/hosts:
+    ```shell
+    echo $IP  $HOSTNAME | sudo tee -a /etc/hosts
+    ```
+
+#### Access Function
 Get `Function` external address by running following command:
 ```shell
 export FUNC_EXTERNAL_ADDRESS=$(kubectl get function function-sample -o=jsonpath='{.status.addresses[?(@.type=="External")].value}')
