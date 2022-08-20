@@ -22,9 +22,11 @@
         <h2>{{ .name }}</h2><br>
         <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .Content }}</a>
         <br><br>{{ range .children }}
-        <li>{{ .content }}
-            <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
-        </li>
+        <ul>
+            <li>{{ .content }}
+                <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
+            </li>
+        </ul>
         {{ end }}
     </div>
     {{ end }}
