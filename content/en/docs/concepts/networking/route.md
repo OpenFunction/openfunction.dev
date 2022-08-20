@@ -60,7 +60,7 @@ status:
 The Address of type `Internal` in `Funtion.status` provides the default method for accessing functions from within the cluster.
 This internal address is not affected by the `Gateway` referenced by `route.gatewayRef` and it's suitable for use as `sink.url` of `EventSource`.
 
-The Address of type `External` in `Funtion.status` provides the method for accessing functions from outside the cluster(you should configure your real DNS or local hosts file first, see [access functions by the external address](../function-entrypoints/#access-functions-by-the-external-address-1)).
+The Address of type `External` in `Funtion.status` provides methods for accessing functions from outside the cluster (You can choose to configure Magic DNS or real DNS, please refer to [access functions by the external address](../function-entrypoints/#access-functions-by-the-external-address) for more details).
 This external address is generated based on `route.gatewayRef`, `router.hostnames` and `route.rules`. The routing mode only takes effect on this external address, The following documentation will explain how it works.
 
 For more information about how to access functions, please refer to [Function Entrypoints](../function-entrypoints/).

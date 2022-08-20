@@ -25,24 +25,11 @@ Access `Function` using curl in pod:
 kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $FUNC_INTERNAL_ADDRESS
 ```
 
-### Access functions by the external address
-> The Function external address is usually used for external access, but you can also use it within the cluster for development or testing.
-You should configure local domain first, see [Configure Local Domain](../../../operations/networking/local-domain).
-
-Get `Function` external address by running following command:
-```shell
-export FUNC_EXTERNAL_ADDRESS=$(kubectl get function function-sample -o=jsonpath='{.status.addresses[?(@.type=="External")].value}')
-```
-
-Access `Function` using curl in pod:
-```shell=
-kubectl run --rm ofn-test -i --tty --image=radial/busyboxplus:curl -- curl -sv $FUNC_EXTERNAL_ADDRESS
-```
 ## Access functions from outside the cluster
 ### Access functions by the Kubernetes Gateway's IP address
 Get Kubernetes Gateway's ip address:
 ```shell
-export IP=$(kubectl get node -l node-role.kubernetes.io/worker= -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+export IP=$(kubectl get node -l "! node.kubernetes.io/exclude-from-external-load-balancers" -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
 ```
 Get Function's HOST and PATH:
 ```shell
@@ -57,32 +44,114 @@ curl -sv -HHOST:$FUNC_HOST http://$IP$FUNC_PATH
 
 ### Access functions by the external address
 
-#### Configure DNS
-You have two options to configure DNS:
+To access a sync function by the external address, you'll need to configure DNS first. Either Magic DNS or real DNS works:
 
-- Option 1: Real DNS
+- Magic DNS
 
-    The real DNS configuration is based on the network topology of your environment.
+  Get Kubernetes Gateway's ip address:
+  ```shell
+  export IP=$(kubectl get node -l "! node.kubernetes.io/exclude-from-external-load-balancers" -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+  ```
+  Replace domain defined in OpenFunction Gateway with Magic DNS:
+  ```shell
+  export DOMAIN="$IP.sslip.io"
+  kubectl patch gateway.networking.openfunction.io/openfunction -n openfunction --type merge --patch '{"spec": {"domain": "'$DOMAIN'"}}'
+  ```
+  Then, you can see `Function` external address in `Function`'s status field:
+  ```shell
+  kubectl get function function-sample -oyaml
+  ```
+  ```yaml
+  status:
+  addresses:
+  - type: External
+    value: http://function-sample.default.172.31.73.53.sslip.io/
+  - type: Internal
+    value: http://function-sample.default.svc.cluster.local/
+  build:
+    resourceHash: "14903236521345556383"
+    state: Skipped
+  route:
+    conditions:
+    - lastTransitionTime: "2022-08-20T11:03:14Z"
+      message: Valid HTTPRoute
+      observedGeneration: 13
+      reason: Valid
+      status: "True"
+      type: Accepted
+    hosts:
+    - function-sample.default.172.31.73.53.sslip.io
+    - function-sample.default.svc.cluster.local
+    paths:
+    - type: PathPrefix
+      value: /
+  serving:
+    lastSuccessfulResourceRef: serving-t56fq
+    resourceHash: "2638289828407595605"
+    resourceRef: serving-t56fq
+    service: serving-t56fq-ksvc-bv8ng
+    state: Running
+  ```
+  
+- Real DNS
 
-- Option 2: Configure the local hosts file
+  If you have an external IP address, you can configure a wildcard A record as your domain:
+  ```
+  # Here example.com is the domain defined in OpenFunction Gateway
+  *.example.com == A <external-ip>
+  ```
+  If you have a CNAME, you can configure a CNAME record as your domain:
+  ```
+  # Here example.com is the domain defined in OpenFunction Gateway
+  *.example.com == CNAME <external-name>
+  ```
+  Replace domain defined in OpenFunction Gateway with the domain you configured above:
+  ```shell
+  export DOMAIN="example.com"
+  kubectl patch gateway.networking.openfunction.io/openfunction -n openfunction --type merge --patch '{"spec": {"domain": "'$DOMAIN'"}}'
+  ```
+  Then, you can see `Function` external address in `Function`'s status field:
+  ```shell
+  kubectl get function function-sample -oyaml
+  ```
+  ```yaml
+  status:
+  addresses:
+  - type: External
+    value: http://function-sample.default.example.com/
+  - type: Internal
+    value: http://function-sample.default.svc.cluster.local/
+  build:
+    resourceHash: "14903236521345556383"
+    state: Skipped
+  route:
+    conditions:
+    - lastTransitionTime: "2022-08-20T13:07:17Z"
+      message: Valid HTTPRoute
+      observedGeneration: 14
+      reason: Valid
+      status: "True"
+      type: Accepted
+    hosts:
+    - function-sample.default.example.com
+    - function-sample.default.svc.cluster.local
+    paths:
+    - type: PathPrefix
+      value: /
+  serving:
+    lastSuccessfulResourceRef: serving-t56fq
+    resourceHash: "2638289828407595605"
+    resourceRef: serving-t56fq
+    service: serving-t56fq-ksvc-bv8ng
+    state: Running
+  ```
 
-    Get Function's HOSTNAME and Gateway's ip:
-    ```shell
-    export HOSTNAME="function-sample.default.ofn.io"
-    export IP=$(kubectl get node -l node-role.kubernetes.io/worker= -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
-    ```
-    
-    Append this line to /etc/hosts:
-    ```shell
-    echo $IP  $HOSTNAME | sudo tee -a /etc/hosts
-    ```
-
-#### Access Function
-Get `Function` external address by running following command:
+Then, you can get `Function` external address by running following command:
 ```shell
 export FUNC_EXTERNAL_ADDRESS=$(kubectl get function function-sample -o=jsonpath='{.status.addresses[?(@.type=="External")].value}')
 ```
-Access `Function` using curl directly:
+
+Now, you can access `Function` using curl directly:
 
 ```shell=
 curl -sv $FUNC_EXTERNAL_ADDRESS
