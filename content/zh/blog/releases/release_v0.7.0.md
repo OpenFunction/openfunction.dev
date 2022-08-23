@@ -1,5 +1,5 @@
 ---
-title: "OpenFunction 0.7.0 发布: OpenFunction Gateway、多语言支持及 Helm 安装方法"
+title: "OpenFunction 0.7.0 发布: OpenFunction Gateway、多语言及 Helm 安装支持"
 linkTitle: "Release v0.7.0"
 date: 2022-08-19
 weight: 94
