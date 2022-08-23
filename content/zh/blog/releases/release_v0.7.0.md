@@ -22,7 +22,7 @@ Kubernetes Ingress 的 Domain 来访问同步函数的方法。
 OpenFunction Gateway 提供了更强大、更灵活的函数网关，包含以下特性：
 
 - 可以选择任意支持 [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) 的 [Gateway 实现](https://gteaway-api.sigs.k8s.io/implementations/)，如 Contour, Istio, Apache APISIX, Envoy Gateway 等。
-- 可以选择安装默认的 Gateway 实现（Contour）, 此时 OpenFunction 将自动创建 Kubernetes Gateway。OpenFunction 也可以使用您环境中现有的 Kubernetes Gateway，只需要您在 OpenFunction Gateway 中引用它。
+- 可以选择安装默认的 Gateway 实现（Contour）, 此时 OpenFunction 将自动创建 Kubernetes Gateway。OpenFunction 也可以使用您环境中现有的 Kubernetes Gateway，只需要您在 OpenFunction Gateway 中引用它即可。
 - 可以自定义访问函数的模式，如基于主机的路由模式和基于路径的路由模式，在您没有定义函数路由时 OpenFunction 默认提供基于主机的路由模式来访问函数。
 - 可以在函数路由部分自定义流量应该如何到达函数，OpenFunction 基于 [Gateway API HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute/) 为您提供了强大的函数路由功能。
 - 可以通过函数外部地址在集群外部访问函数，只需要在OpenFunction Gateway 中配置好集群外部可以访问的域名（同时支持 Magic DNS 和 Real DNS）。
