@@ -34,7 +34,7 @@ OpenFunction Gateway 提供了更强大、更灵活的函数网关，包含以�
 OpenFunction 社区一直在努力完善多语言的支持：
 - Go
 
-  [functions-framework-go](https://github.com/OpenFunction/functions-framework-go) 发布了 0.4.0，支持在一个函数中定义多个子函数，并且可以通过不同的 Path 和 Method 进行分别调用。
+  [functions-framework-go](https://github.com/OpenFunction/functions-framework-go) 发布了 v0.4.0，支持在一个函数中定义多个子函数，并且可以通过不同的 Path 和 Method 分别调用。
 
 - Java
   
