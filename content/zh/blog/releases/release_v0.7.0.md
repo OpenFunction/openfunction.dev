@@ -10,7 +10,7 @@ Service，函数即服务）平台，旨在帮助开发者专注于业务逻辑�
 OpenFunction 0.7.0 已经正式发布了！感谢社区各位小伙伴的贡献和反馈！
 
 OpenFunction 0.7.0 为您带来了许多新功能，包括新增 OpenFunction Gateway 作为同步函数入口、 新增 Java 和 NodeJS 同步函数和异步函数支持、新增 Helm 安装方式。
-及所有依赖的组件。同时， 我们对 OpenFunction 依赖的组件都进行了版本升级。
+同时， 我们对 OpenFunction 依赖的组件都进行了版本升级。
 
 ### OpenFunction Gateway
 
