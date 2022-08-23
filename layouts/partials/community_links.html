@@ -21,13 +21,15 @@
         {{ with .Params.section2 }}
         <h2>{{ .name }}</h2><br>
         <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .Content }}</a>
-        <br><br>{{ range .children }}
+        <br>
+        <br>
         <ul>
-            <li>{{ .content }}
-                <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
-            </li>
+            {{ range .children }}
+                <li>{{ .content }}
+                    <a href="{{ .link }}" title="link" target="_blank" rel="noopener noreferrer">{{ .linkContent }}</a>
+                </li>
+            {{ end }}
         </ul>
-        {{ end }}
     </div>
     {{ end }}
 </section>
