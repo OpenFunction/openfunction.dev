@@ -42,7 +42,7 @@ OpenFunction 社区一直在努力完善多语言的支持：
 
 - NodeJS
 
-  [functions-framework-nodejs](https://github.com/OpenFunction/functions-framework-nodejs) 发布了 0.5.0， 支持同步函数和异步函数，并且支持同步函数触发异步函数。
+  [functions-framework-nodejs](https://github.com/OpenFunction/functions-framework-nodejs) 发布了 v0.5.0， 支持同步函数和异步函数，并且支持同步函数触发异步函数。
 
   我们将在近期发布 [functions-framework-nodejs](https://github.com/OpenFunction/functions-framework-nodejs) 0.6.0，为您带来更多功能。
 
