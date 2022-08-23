@@ -7,7 +7,7 @@ weight: 94
 ---
 [OpenFunction](https://github.com/OpenFunction/OpenFunction) 是一个开源的云原生 FaaS（Function as a
 Service，函数即服务）平台，旨在帮助开发者专注于业务逻辑的研发。在过去的几个月里，OpenFunction 社区一直在努力工作，为 OpenFunction 0.7.0 版本的发布做准备。今天，我们非常高兴地宣布
-OpenFunction 0.7.0 已经正式发布了！感谢社区各位小伙伴对新功能、增强功能和错误修复的各种帮助！
+OpenFunction 0.7.0 已经正式发布了！感谢社区各位小伙伴的贡献和反馈！
 
 OpenFunction 0.7.0 为您带来了许多新功能，包括新增 OpenFunction Gateway 作为同步函数入口、 Java、NodeJS 同步函数和异步函数支持及 Helm 方式安装 OpenFunction
 及所有依赖的组件。同时， 我们对 OpenFunction 依赖的组件都进行了版本升级。
