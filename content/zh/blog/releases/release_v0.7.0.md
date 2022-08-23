@@ -26,7 +26,7 @@ OpenFunction Gateway 提供了更强大、更灵活的函数网关，包含以�
 - 可以自定义访问函数的模式，如基于主机的路由模式和基于路径的路由模式，在您没有定义函数路由时 OpenFunction 默认提供基于主机的路由模式来访问函数。
 - 可以在函数路由部分自定义流量应该如何到达函数，OpenFunction 基于 [Gateway API HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute/) 为您提供了强大的函数路由功能。
 - 可以通过函数外部地址在集群外部访问函数，只需要在OpenFunction Gateway 中配置好集群外部可以访问的域名即可（同时支持 Magic DNS 和 Real DNS）。
-- 现在 OpenFunction 将流量直接转发到 Knative Revision 而不再经过 Knative 的 Local Gateway。 如果您不需要直接访问 Knative 服务, 您可以忽略 Knative Domain 相关的错误。
+- 现在 OpenFunction 将流量直接转发到 Knative Revision 而不再经过 Knative 的 Gateway。 如果不需要直接访问 Knative 服务, 您可以忽略 Knative Domain 相关的错误。
 
 将来，OpenFunction 将支持在函数的不同版本之间进行流量分发。
 
