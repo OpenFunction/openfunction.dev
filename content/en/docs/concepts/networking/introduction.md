@@ -25,7 +25,7 @@ OpenFunction Gateway provides a more powerful and more flexible function gateway
 
 - Allow users to customize each function's route rules (host-based, path-based or both) in function definition and default route rules are provided for each function if there're no customized route rules defined.
 
-- Send traffic to Knative service revisions directly without going through Knative's own gateway anymore. You'll need only one gateway that is OpenFunction Gateway starting from OpenFunction v0.7.0 to access OpenFunction sync functions, and you can ignore Knative's domain config errors if you needn't acess Knative service directly.
+- Send traffic to Knative service revisions directly without going through Knative’s own gateway anymore. You will need only OpenFunction Gateway since OpenFunction 0.7.0 to access OpenFunction sync functions, and you can ignore Knative’s domain config errors if you do not need to access Knative service directly.
 
 - Traffic splitting between function revisions (in the future)
 
