@@ -52,6 +52,6 @@ other = "返回常规视图"
 [print_entire_section]
 other = "打印整个页面"
 [WHO_WE_ARE]
-other = "OpenFuntion 是 "
+other = "OpenFunction 是 "
 [CNCF]
 other = " 沙箱项目。"
