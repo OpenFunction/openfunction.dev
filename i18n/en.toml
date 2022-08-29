@@ -62,7 +62,7 @@ other = "Return to the regular view of this page"
 [print_entire_section]
 other = "Print entire section"
 [WHO_WE_ARE]
-other = "OpenFuntion is a "
+other = "OpenFunction is a "
 [CNCF]
 other = " sandbox project."
 
