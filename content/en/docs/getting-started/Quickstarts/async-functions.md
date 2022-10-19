@@ -14,7 +14,7 @@ Async functions are event-driven and their inputs are usually events from Non-HT
 | Go        | [Kafka input & HTTP output binding](https://github.com/OpenFunction/samples/tree/main/functions/async/logs-handler-function), [Cron input & Kafka output binding](https://github.com/OpenFunction/samples/tree/main/functions/async/bindings/cron-input-kafka-output), [Cron input binding](https://github.com/OpenFunction/samples/tree/main/functions/async/bindings/cron-input), [Kafka input binding](https://github.com/OpenFunction/samples/tree/main/functions/async/bindings/kafka-input), [Kafka pubsub](https://github.com/OpenFunction/samples/tree/main/functions/async/pubsub) |
 | Nodejs    | [MQTT binding & pubsub](https://github.com/OpenFunction/samples/tree/main/functions/async/mqtt-io-node) |
 | Python    |  |
-| Java      |  |
+| Java      | [Cron input & Kafka output binding](https://github.com/OpenFunction/samples/tree/main/functions/async/java/cron-input-kafka-output), [Kafka pubsub](https://github.com/OpenFunction/samples/tree/main/functions/async/java/pubsub) |
 | DotNet    |  |
 
 > You can find more function samples [here](../../../concepts/function_signatures/#samples)
