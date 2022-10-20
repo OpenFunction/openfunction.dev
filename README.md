@@ -1,5 +1,7 @@
 # OpenFunction Website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ecf7df22-21fe-4e32-8cae-fc62fb20dff5/deploy-status)](https://app.netlify.com/sites/openfunction-dev/deploys)
+
 openfunction.dev is OpenFunction's website which is built with [Hugo](https://gohugo.io/) and [Hugo template Docsy](https://github.com/google/docsy).
 
 ## Contribute
