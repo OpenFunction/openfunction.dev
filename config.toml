@@ -101,15 +101,19 @@ archived_version = false
 # The version number for the version of the docs represented in this doc set.
 # Used in the "version-banner" partial to display a version number for the 
 # current doc set.
-version = "0.6"
+version = "0.8"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
 url_latest_version = "/docs"
 
 [[params.versions]]
-  version = "v0.7 (latest)"
+  version = "v0.8 (preview)"
   url = "/docs"
+
+[[params.versions]]
+  version = "v0.7"
+  url = "https://v0-7.openfunction.dev/docs/"
 
 [[params.versions]]
   version = "v0.6"
