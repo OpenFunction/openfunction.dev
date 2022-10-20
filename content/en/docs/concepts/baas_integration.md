@@ -29,7 +29,7 @@ So now you've 2 options to integrate with BaaS:
 
 You can choose the appropriate Dapr Service Mode for your functions. The `Dapr Standalone Mode` is the recommened and default mode. You can use `Dapr Sidecar Mode` if your function doesn't scale frequently or you've difficulty to use the `Dapr Standalone Mode`.
 
-You can control how to integrate with BaaS with 2 flags, both can be set in function's `serving.spec.annotations`:
+You can control how to integrate with BaaS with 2 flags, both can be set in function's `spec.serving.annotations`:
 
 - `openfunction.io/enable-dapr` can be set to `true` or `false`
 - `openfunction.io/dapr-service-mode` can be set to `standalone` or `sidecar`
@@ -38,7 +38,7 @@ You can control how to integrate with BaaS with 2 flags, both can be set in func
 
 There're default values for both of these two flags if they're not set.
 
-- The value of `openfunction.io/enable-dapr` will be set to `true` if it's not defined  in `serving.spec.annotations` and the function definition contains either `serving.spec.inputs` or `serving.spec.outputs`. Otherwise it will be set to `false`.
+- The value of `openfunction.io/enable-dapr` will be set to `true` if it's not defined  in `spec.serving.annotations` and the function definition contains either `spec.serving.inputs` or `spec.serving.outputs`. Otherwise it will be set to `false`.
 - The default value of `openfunction.io/dapr-service-mode` is `standalone` if not set.
 
 Below you can find a function example to set these two flags:
