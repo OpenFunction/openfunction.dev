@@ -108,7 +108,7 @@ version = "0.8"
 url_latest_version = "/docs"
 
 [[params.versions]]
-  version = "v0.8 (preview)"
+  version = "v0.8"
   url = "/docs"
 
 [[params.versions]]
