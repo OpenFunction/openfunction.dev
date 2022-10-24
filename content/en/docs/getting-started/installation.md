@@ -41,25 +41,25 @@ Now you can install OpenFunction and all its dependencies with helm charts.
    - Install all components:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction openfunction/openfunction -n openfunction
+      helm install openfunction openfunction/openfunction -n openfunction --version 0.2.0
       ```
    
    - Install Serving only (without build):
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set global.ShipwrightBuild.enabled=false --set global.TektonPipelines.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set global.ShipwrightBuild.enabled=false --set global.TektonPipelines.enabled=false openfunction/openfunction -n openfunction --version 0.2.0
       ```
    
    - Install Knative sync runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set global.Keda.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set global.Keda.enabled=false openfunction/openfunction -n openfunction --version 0.2.0
       ```
    
    - Install OpenFunction async runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set global.Contour.enabled=false  --set global.KnativeServing.enabled=false openfunction/openfunction -n openfunction
+      helm install openfunction --set global.Contour.enabled=false  --set global.KnativeServing.enabled=false openfunction/openfunction -n openfunction --version 0.2.0
       ```
 
    {{% alert title="Note" color="success" %}}
