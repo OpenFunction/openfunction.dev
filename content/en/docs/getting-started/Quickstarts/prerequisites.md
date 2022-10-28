@@ -128,6 +128,7 @@ Async functions can be triggered by events in message queues like Kafka, here yo
      partitions: 10
      replicas: 1
      config:
+       cleanup.policy: delete
        retention.ms: 7200000
        segment.bytes: 1073741824
    EOF
