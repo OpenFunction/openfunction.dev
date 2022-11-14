@@ -89,7 +89,7 @@ Async functions can be triggered by events in message queues like Kafka, here yo
      namespace: default
    spec:
      kafka:
-       version: 3.1.0
+       version: 3.3.1
        replicas: 1
        listeners:
          - name: plain
