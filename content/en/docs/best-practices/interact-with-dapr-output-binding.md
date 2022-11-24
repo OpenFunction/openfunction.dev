@@ -19,7 +19,7 @@ The following diagram illustrates the relationship between these functions.
 ## Prerequisites
 
 - You have [installed OpenFunction](../../getting-started/installation/).
-- You have [created a secret](../../getting-started/quickstarts/prerequisites/).
+- You have [created a secret](../../getting-started/your-first-function/function-go/#create-a-secret).
 
 ## Create a Kafka Server and Topic
 
