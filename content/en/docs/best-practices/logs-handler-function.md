@@ -17,7 +17,7 @@ This document uses an asynchronous function to analyze the log stream in Kafka t
 ## Prerequisites
 
 - You have [installed OpenFunction](../../getting-started/installation/).
-- You have [created a secret](../../getting-started/your-first-function/function-go/#create-a-secret).
+- You have [created a secret](../../getting-started/quickstarts/prerequisites/).
 
 ## Create a Kafka Server and Topic
 
