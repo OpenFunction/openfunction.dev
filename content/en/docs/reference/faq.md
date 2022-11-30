@@ -228,5 +228,8 @@ spec:
       dapr.io/app-max-concurrency: "value"
 ```
 
+## Q: How to create source repository credential for the function image build process?
 
+A: You may be prompted with errors like `Unsupported type of credentials provided, either SSH private key or username/password is supported (exit code 110)` when using `spec.build.srcRepo.credentials`, which means you are using an incorrect Secret resource as source repository crendital.
 
+OpenFunction currently implements the function image building framework based on [ShipWright](https://shipwright.io/), so we need to refer to this [document](https://shipwright.io/docs/build/authentication/#authentication-for-git) to setup the correct source repository credential.
