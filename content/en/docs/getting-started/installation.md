@@ -13,11 +13,18 @@ This document describes how to install OpenFunction.
 
 - You need to ensure your Kubernetes version meets the requirements described in the following compatibility matrix. 
 
-| OpenFunction Version | Kubernetes 1.17 | Kubernetes 1.18 | Kubernetes 1.19 | Kubernetes 1.20+ |
-|----------------------| --------------- | --------------- |-----------------| ---------------- |
-| HEAD                 | N/A             | N/A             | N/A             | √                |
-| v0.7.0               | N/A             | N/A             | N/A             | √                |
-| v0.6.0               | √*              | √*              | √               | √                |
+| OpenFunction Version | Kubernetes 1.20 | Kubernetes 1.21 | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 |
+|----------------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+| HEAD                 | √               | √               | √               | √               |  √              | √               |
+| v0.8.x               | √               | √               | √               | √               |  √              | √*              |
+| v0.7.0               | √               | √               | √               | √               |  √              | N/A             |
+
+{{% alert title="Note" color="success" %}}
+
+OpenFunction supports Kubernetes 1.25 starting from v0.8.1
+
+{{% /alert %}}
+
 
 ## Install OpenFunction
 
@@ -41,25 +48,25 @@ Now you can install OpenFunction and all its dependencies with helm charts.
    - Install all components:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction openfunction/openfunction -n openfunction --version 0.3.1
+      helm install openfunction openfunction/openfunction -n openfunction
       ```
    
    - Install Serving only (without build):
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set global.ShipwrightBuild.enabled=false --set global.TektonPipelines.enabled=false openfunction/openfunction -n openfunction --version 0.3.1
+      helm install openfunction --set global.ShipwrightBuild.enabled=false --set global.TektonPipelines.enabled=false openfunction/openfunction -n openfunction
       ```
    
    - Install Knative sync runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set global.Keda.enabled=false openfunction/openfunction -n openfunction --version 0.3.1
+      helm install openfunction --set global.Keda.enabled=false openfunction/openfunction -n openfunction
       ```
    
    - Install OpenFunction async runtime only:
       ```shell
       kubectl create namespace openfunction
-      helm install openfunction --set global.Contour.enabled=false  --set global.KnativeServing.enabled=false openfunction/openfunction -n openfunction --version 0.3.1
+      helm install openfunction --set global.Contour.enabled=false  --set global.KnativeServing.enabled=false openfunction/openfunction -n openfunction
       ```
 
    {{% alert title="Note" color="success" %}}
