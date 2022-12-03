@@ -41,7 +41,7 @@ And we're planning to add another sync function runtime powered by the KEDA http
 
 ## The async runtime
 
-OpenFunction's asyn runtime is an event-driven runtime which is implemented based on [KEDA](https://keda.sh/) and [Dapr](https://dapr.io/). Async functions can be triggered by various event types like message queue, cronjob, and MQTT etc.
+OpenFunction's async runtime is an event-driven runtime which is implemented based on [KEDA](https://keda.sh/) and [Dapr](https://dapr.io/). Async functions can be triggered by various event types like message queue, cronjob, and MQTT etc.
 
 <div align=center><img width="70%" height="70%" src=/images/docs/en/concepts/function/openfunction-serving.svg/></div>
 
