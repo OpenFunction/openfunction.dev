@@ -60,7 +60,7 @@ To build OpenFunction function images from source code locally, you can follow t
 
 ```shell
 git clone https://github.com/OpenFunction/samples.git
-cd samples/functions/Knative/hello-world-go
+cd samples/functions/knative/hello-world-go
 ```
 
 ### Build the function image with the pack CLI
