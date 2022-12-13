@@ -25,12 +25,19 @@ kubectl create secret docker-registry push-secret \
 
 If your source code is in a private git repository, you'll need to create a secret containing the private git repo's username and password:
 
-```bash
-USERNAME=<your_git_username>
-PASSWORD=<your_git_password>
-kubectl create secret generic git-repo-secret \
- --username=$USERNAME \
- --password=$USERNAME
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-repo-secret
+  annotations:
+    build.shipwright.io/referenced.secret: "true"
+type: kubernetes.io/basic-auth
+stringData:
+  username: <cleartext username>
+  password: <cleartext password>
+EOF
 ```
 
 You can then reference this secret in the `Function` CR's spec.build.srcRepo.credentials
