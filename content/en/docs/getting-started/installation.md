@@ -31,6 +31,8 @@ OpenFunction supports Kubernetes 1.25 starting from v0.8.1
 Now you can install OpenFunction and all its dependencies with helm charts.
 > The `ofn` CLI install method is deprecated.
 
+If you want to install OpenFunction in an offline environment, please refer to [Install OpenFunction in an offline environment](https://openfunction.dev/docs/reference/faq/#q-how-to-install-openfunction-in-an-offline-environment)
+
 ### Requirements
 - Kubernetes version: `>=v1.20.0-0`
 - Helm version: `>=v3.6.3`
