@@ -233,3 +233,321 @@ spec:
 A: You may be prompted with errors like `Unsupported type of credentials provided, either SSH private key or username/password is supported (exit code 110)` when using `spec.build.srcRepo.credentials`, which means you are using an incorrect Secret resource as source repository crendital.
 
 OpenFunction currently implements the function image building framework based on [ShipWright](https://shipwright.io/), so we need to refer to this [document](https://shipwright.io/docs/build/authentication/#authentication-for-git) to setup the correct source repository credential.
+
+## Q: How to install OpenFunction in an offline environment?
+
+A: You can install and use OpenFunction in an offline environment by following steps:
+
+### Pull the Helm Chart
+
+Pull the helm chart in an environment that can access GitHub:
+
+```shell
+helm repo add openfunction https://openfunction.github.io/charts/
+helm repo update
+helm pull openfunction/openfunction
+```
+
+Then use tools like scp to copy the helm package to your offline environment, e.g.:
+
+```shell
+scp openfunction-v0.8.1-v0.4.0.tgz <username>@<your-machine-ip>:/home/<username>/
+```
+
+### Synchronize images
+You need to sync these images to your private image repository:
+
+```
+# dapr
+docker.io/daprio/dashboard:0.10.0
+docker.io/daprio/dapr:1.8.3
+
+# keda
+openfunction/keda:2.8.1
+openfunction/keda-metrics-apiserver:2.8.1
+
+# contour
+docker.io/bitnami/contour:1.21.1-debian-11-r5
+docker.io/bitnami/envoy:1.22.2-debian-11-r6
+docker.io/bitnami/nginx:1.21.6-debian-11-r10
+
+# tekton-pipelines
+openfunction/tektoncd-pipeline-cmd-controller:v0.37.2
+openfunction/tektoncd-pipeline-cmd-kubeconfigwriter:v0.37.2
+openfunction/tektoncd-pipeline-cmd-git-init:v0.37.2
+openfunction/tektoncd-pipeline-cmd-entrypoint:v0.37.2
+openfunction/tektoncd-pipeline-cmd-nop:v0.37.2
+openfunction/tektoncd-pipeline-cmd-imagedigestexporter:v0.37.2
+openfunction/tektoncd-pipeline-cmd-pullrequest-init:v0.37.2
+openfunction/tektoncd-pipeline-cmd-workingdirinit:v0.37.2
+openfunction/cloudsdktool-cloud-sdk@sha256:27b2c22bf259d9bc1a291e99c63791ba0c27a04d2db0a43241ba0f1f20f4067f
+openfunction/distroless-base@sha256:b16b57be9160a122ef048333c68ba205ae4fe1a7b7cc6a5b289956292ebf45cc
+openfunction/tektoncd-pipeline-cmd-webhook:v0.37.2
+
+# knative-serving
+openfunction/knative.dev-serving-cmd-activator:v1.3.2
+openfunction/knative.dev-serving-cmd-autoscaler:v1.3.2
+openfunction/knative.dev-serving-cmd-queue:v1.3.2
+openfunction/knative.dev-serving-cmd-controller:v1.3.2
+openfunction/knative.dev-serving-cmd-domain-mapping:v1.3.2
+openfunction/knative.dev-serving-cmd-domain-mapping-webhook:v1.3.2
+openfunction/knative.dev-net-contour-cmd-controller:v1.3.0
+openfunction/knative.dev-serving-cmd-default-domain:v1.3.2
+openfunction/knative.dev-serving-cmd-webhook:v1.3.2
+
+# shipwright-build
+openfunction/shipwright-shipwright-build-controller:v0.10.0
+openfunction/shipwright-io-build-git:v0.10.0
+openfunction/shipwright-mutate-image:v0.10.0
+openfunction/shipwright-bundle:v0.10.0
+openfunction/shipwright-waiter:v0.10.0
+
+# openfunction
+openfunction/openfunction:v0.8.1
+openfunction/kube-rbac-proxy:v0.8.0
+openfunction/eventsource-handler:v4
+openfunction/trigger-handler:v4
+openfunction/dapr-proxy:v0.1.1
+```
+
+### Create custom values
+
+Create `custom-values.yaml` in your offline environment:
+
+```shell
+touch custom-values.yaml
+```
+
+Edit `custom-values.yaml`, add the following content:
+
+```yaml
+knative-serving:
+  activator:
+    activator:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-activator
+  autoscaler:
+    autoscaler:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-autoscaler
+  configDeployment:
+    queueSidecarImage:
+      repository: <your-private-image-repository>/knative.dev-serving-cmd-queue
+  controller:
+    controller:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-controller
+  domainMapping:
+    domainMapping:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-domain-mapping
+  domainmappingWebhook:
+    domainmappingWebhook:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-domain-mapping-webhook
+  netContourController:
+    controller:
+      image:
+        repository: <your-private-image-repository>/knative.dev-net-contour-cmd-controller
+  defaultDomain:
+    job:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-default-domain
+  webhook:
+    webhook:
+      image:
+        repository: <your-private-image-repository>/knative.dev-serving-cmd-webhook
+shipwright-build:
+  shipwrightBuildController:
+    shipwrightBuild:
+      image:
+        repository: <your-private-image-repository>/shipwright-shipwright-build-controller
+      GIT_CONTAINER_IMAGE:
+        repository: <your-private-image-repository>/shipwright-io-build-git
+      MUTATE_IMAGE_CONTAINER_IMAGE:
+        repository: <your-private-image-repository>/shipwright-mutate-image
+      BUNDLE_CONTAINER_IMAGE:
+        repository: <your-private-image-repository>/shipwright-bundle
+      WAITER_CONTAINER_IMAGE:
+        repository: <your-private-image-repository>/shipwright-waiter
+tekton-pipelines:
+  controller:
+    tektonPipelinesController:
+      image:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-controller
+      kubeconfigWriterImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-kubeconfigwriter
+      gitImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-git-init
+      entrypointImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-entrypoint
+      nopImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-nop
+      imagedigestExporterImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-imagedigestexporter
+      prImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-pullrequest-init
+      workingdirinitImage:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-workingdirinit
+      gsutilImage:
+        repository: <your-private-image-repository>/cloudsdktool-cloud-sdk
+        digest: sha256:27b2c22bf259d9bc1a291e99c63791ba0c27a04d2db0a43241ba0f1f20f4067f
+      shellImage:
+        repository: <your-private-image-repository>/distroless-base
+        digest: sha256:b16b57be9160a122ef048333c68ba205ae4fe1a7b7cc6a5b289956292ebf45cc
+  webhook:
+    webhook:
+      image:
+        repository: <your-private-image-repository>/tektoncd-pipeline-cmd-webhook
+keda:
+  image:
+    keda:
+      repository: <your-private-image-repository>/keda
+      tag: 2.8.1
+    metricsApiServer:
+      repository: <your-private-image-repository>/keda-metrics-apiserver
+      tag: 2.8.1
+dapr:
+  registry: <your-private-image-registry>/daprio
+  tag: '1.8.3'
+contour:
+  contour:
+    image:
+      registry: <your-private-image-registry>
+      repository: <your-private-image-repository>/contour
+      tag: 1.21.1-debian-11-r5
+  envoy:
+    image:
+      registry: <your-private-image-registry>
+      repository: <your-private-image-repository>/envoy
+      tag: 1.22.2-debian-11-r6
+  defaultBackend:
+    image:
+      registry: <your-private-image-registry>
+      repository: <your-private-image-repository>/nginx
+      tag: 1.21.6-debian-11-r10
+```
+
+### Install OpenFunction
+
+Run the following command in an offline environment to try to install OpenFunction：
+```shell
+kubectl create namespace openfunction
+helm install openfunction openfunction-v0.8.1-v0.4.0.tgz -n openfunction -f custom-values.yaml
+```
+
+{{% alert title="Note" color="success" %}}
+
+If the `helm install` command gets stuck, it may be caused by the job `contour-contour-cergen`.
+
+Run the following command to confirm whether the job is executed successfully:
+
+```shell
+kubectl get job contour-contour-cergen -n projectcontour
+```
+
+If the job exists and the job status is completed, run the following command to complete the installation:
+
+```shell
+helm uninstall openfunction -n openfunction --no-hooks
+helm install openfunction openfunction-v0.8.1-v0.4.0.tgz -n openfunction -f custom-values.yaml --no-hooks
+```
+
+{{% /alert %}}
+
+## Q: How to build and run functions in an offline environment
+
+A: Let's take [Java functions](https://github.com/OpenFunction/samples/tree/main/functions/knative/java) as an example to illustrate how to build and run functions in an offline environment:
+
+- Synchronize `https://github.com/OpenFunction/samples.git` to your private code repository
+
+- Follow this [prerequisites](https://openfunction.dev/docs/getting-started/quickstarts/prerequisites/) doc to create `push-secret` and `git-repo-secret`
+
+- Change public maven repository to private maven repository:
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+  
+      <groupId>dev.openfunction.samples</groupId>
+      <artifactId>samples</artifactId>
+      <version>1.0-SNAPSHOT</version>
+  
+      <properties>
+          <maven.compiler.source>11</maven.compiler.source>
+          <maven.compiler.target>11</maven.compiler.target>
+      </properties>
+  
+      <repositories>
+          <repository>
+              <id>snapshots</id>
+              <name>Maven snapshots</name>
+                  <!--<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>-->
+                  <url>your private maven repository</url>
+              <releases>
+                  <enabled>false</enabled>
+              </releases>
+              <snapshots>
+                  <enabled>true</enabled>
+              </snapshots>
+          </repository>
+      </repositories>
+  
+      <dependencies>
+          <dependency>
+              <groupId>dev.openfunction.functions</groupId>
+              <artifactId>functions-framework-api</artifactId>
+              <version>1.0.0-SNAPSHOT</version>
+          </dependency>
+      </dependencies>
+  
+  </project>
+  ```
+  > Make sure to commit the changes to the code repo.
+
+- Synchronize `openfunction/buildpacks-java18-run:v1` to your private image repository
+
+- Modify `functions/knative/java/hello-world/function-sample.yaml` according to your environment:
+  ```yaml
+  apiVersion: core.openfunction.io/v1beta1
+  kind: Function
+  metadata:
+    name: function-http-java
+  spec:
+    version: "v2.0.0"
+    image: "<your private image repository>/sample-java-func:v1"
+    imageCredentials:
+      name: push-secret
+    port: 8080 # default to 8080
+    build:
+      builder: <your private image repository>/builder-java:v2-18
+      params:
+        RUN_IMAGE: "<your private image repository>/buildpacks-java18-run:v1"
+      env:
+        FUNC_NAME: "dev.openfunction.samples.HttpFunctionImpl"
+        FUNC_CLEAR_SOURCE: "true"
+      srcRepo:
+        url: "https://<your private code repository>/OpenFunction/samples.git"
+        sourceSubPath: "functions/knative/java"
+        revision: "main"
+        credentials:
+         name: git-repo-secret
+    serving:
+      template:
+        containers:
+          - name: function # DO NOT change this
+            imagePullPolicy: IfNotPresent 
+      runtime: "knative"
+  ```
+
+  > If your private mirror repository is insecure, please refer to [Use private image repository in an insecure way](https://openfunction.dev/docs/reference/faq/#q-how-to-use-private-image-repositories-in-openfunction)
+
+- Run the following commands to build and run the function:
+
+  ```shell
+  kubectl apply -f functions/knative/java/hello-world/function-sample.yaml
+  ```
+  
+  
