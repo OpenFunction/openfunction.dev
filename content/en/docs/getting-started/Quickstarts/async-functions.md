@@ -1,6 +1,6 @@
 ---
-title: "Create async functions"
-linkTitle: "Create async functions"
+title: "Create Async Functions"
+linkTitle: "Create Async Functions"
 weight: 2230
 description: 
 ---

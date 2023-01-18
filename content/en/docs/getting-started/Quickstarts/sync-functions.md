@@ -1,6 +1,6 @@
 ---
-title: "Create sync functions"
-linkTitle: "Create sync functions"
+title: "Create Sync Functions"
+linkTitle: "Create Sync Functions"
 weight: 2220
 description: 
 ---
