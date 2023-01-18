@@ -6,7 +6,7 @@ description:
 ---
 In addition to building and running Serverless Functions, you can also build and run Serverless Applications with OpenFuntion. 
 
-OpenFunction uses [Shipwright](https://github.com/shipwright-io/build) to build source code into container images, [Shipwright](https://github.com/shipwright-io/build) supports to build source code in two different ways: 
+OpenFunction support building source code into container images in two different ways: 
 - Using [Cloud Native Buildpacks](https://buildpacks.io/) to build source code without a `Dockerfile`
 - Using [Buildah](https://buildah.io/) or [BuildKit](https://github.com/moby/buildkit) to build source code with a `Dockerfile`
 
