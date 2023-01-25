@@ -17,7 +17,7 @@ OpenFunction support building source code into container images in two different
 
 If you already created a `Dockerfile` for your application like this [Go Application](https://github.com/OpenFunction/samples/tree/main/apps/buildah/go), you can build and run this application in the serverless way like [this](https://github.com/OpenFunction/samples/blob/main/apps/buildah/go/sample-go-app.yaml):
 
-1. Create the sample go serverless app
+1. Create the sample go serverless application
 
 ```shell
 cat <<EOF | kubectl apply -f -
@@ -50,7 +50,7 @@ spec:
 EOF
 ```
 
-2. Check the serverless app status
+2. Check the application status
 
 You can then check the serverless app's status by `kubectl get functions.core.openfunction.io -w`:
 
@@ -60,7 +60,7 @@ NAME                    BUILDSTATE   SERVINGSTATE   BUILDER         SERVING     
 sample-go-app           Succeeded    Running        builder-jgnzp   serving-q6wdp   http://sample-go-app.default.svc.cluster.local/           22m
 ```
 
-3. Access the function
+3. Access this application
 
 Once the `BUILDSTATE` becomes `Succeeded` and the `SERVINGSTATE` becomes `Running`, you can access this Go serverless app through the address in the `ADDRESS` field: 
 
@@ -75,7 +75,7 @@ curl http://sample-go-app.default.svc.cluster.local
 
 If you hava an application without a `Dockerfile` like this [Java Application](https://github.com/buildpacks/samples/tree/main/apps/java-maven), you can also build and run your application in the serverless way like this [Java application](https://github.com/OpenFunction/samples/tree/main/apps/buildpacks/java):
 
-1. Create the sample Java serverless app
+1. Create the sample Java serverless application
 
 ```shell
 cat <<EOF | kubectl apply -f -
@@ -104,7 +104,7 @@ spec:
 EOF
 ```
 
-2. Check the serverless app status
+1. Check the application status
 
 You can then check the serverless app's status by `kubectl get functions.core.openfunction.io -w`:
 
@@ -114,7 +114,7 @@ NAME                                 BUILDSTATE   SERVINGSTATE   BUILDER        
 sample-java-app-buildpacks           Succeeded    Running        builder-jgnzp   serving-q6wdp   http://sample-java-app-buildpacks.default.svc.cluster.local/           22m
 ```
 
-3. Access the function
+1. Access this application
 
 Once the `BUILDSTATE` becomes `Succeeded` and the `SERVINGSTATE` becomes `Running`, you can access this Java serverless app through the address in the `ADDRESS` field: 
 
