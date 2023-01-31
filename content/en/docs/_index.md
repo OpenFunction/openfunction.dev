@@ -1,5 +1,5 @@
 ---
-title: "v0.8 (latest)"
+title: "v1.0 (preview)"
 linkTitle: "Docs"
 weight: 20
 ---
