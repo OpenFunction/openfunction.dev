@@ -4,9 +4,15 @@ linkTitle: "Function Build"
 weight: 3110
 description: 
 ---
-Currently, OpenFunction builds function images with [Cloud Native Buildpacks](https://buildpacks.io/). The traditional `Dockerfile` build method will be supported in the future.
+Currently, OpenFunction supports building function images using [Cloud Native Buildpacks](https://buildpacks.io/) without the need to create a `Dockerfile`. 
 
-## Build functions by adding a build section in the function definition
+In the meantime, you can also use OpenFunction to build [Serverless Applications](./serverless_apps/#build-and-run-a-serverless-application-with-a-dockerfile) with `Dockerfile`.
+
+## Build functions by defining a build section
+
+You can build your functions or applications from the source code in a git repo or from the source code stored locally.
+
+### Build functions from source code in a git repo
 
 You can build a function image by simply adding a build section in the `Function` definition like below.
 If there is a serving section defined as well, the function will be launched as soon as the build completes.
@@ -42,19 +48,26 @@ spec:
 
 ### Build functions from local source code
 
-To build functions from local source code, we need a bundle image which contains the source code. 
-We can use the following `Dockerfile` to build a bundle image.
+To build functions or applications from local source code, you'll need to package your local source code into a container image and push this image to a container registry. 
+
+Suppose your source code is in the `samples` directory, you can use the following `Dockerfile` to build a source code bundle image.
 
 ```shell
 FROM scratch
-
 WORKDIR /
 COPY samples samples/
 ```
 
-> We suggest using a empty image such as `scratch` as the base image of the bundle image, a non-empty base image may cause the source code copy to fail.
+Then you can build the source code bundle image like this:
 
-The `srcRepo` of function should be changed like this.
+```shell
+docker build -t <your registry name>/sample-source-code:latest -f </path/to/the/dockerfile> .
+docker push <your registry name>/sample-source-code:latest
+```
+
+> It's recommended to use the empty image `scratch` as the base image to build the source code bundle image, a non-empty base image may cause the source code copy to fail.
+
+Unlike defining the `spec.build.srcRepo.url` field for the git repo method, you'll need to define the `spec.build.srcRepo.bundleContainer.image` field instead.
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1
@@ -65,11 +78,11 @@ spec:
   build:
     srcRepo:
       bundleContainer:
-        image: openfunctiondev/local-source
+        image: openfunctiondev/sample-source-code:latest
       sourceSubPath: "/samples/functions/async/logs-handler-function/"
 ```
 
-> The `sourceSubPath` is the absolute path of the source code in the bundle image.
+> The `sourceSubPath` is the absolute path of the source code in the source code bundle image.
 
 ## Build functions with the pack CLI
 
