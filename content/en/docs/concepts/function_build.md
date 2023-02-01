@@ -40,6 +40,37 @@ spec:
 > To push the function image to a container registry, you have to create a secret containing the registry's credential and add the secret to `imageCredentials`.
 > You can refer to the [prerequisites](../../getting-started/Quickstarts/prerequisites) for more info.
 
+### Build functions from local source code
+
+To build functions from local source code, we need a bundle image which contains the source code. 
+We can use the following `Dockerfile` to build a bundle image.
+
+```shell
+FROM scratch
+
+WORKDIR /
+COPY samples samples/
+```
+
+> We suggest using a empty image such as `scratch` as the base image of the bundle image, a non-empty base image may cause the source code copy to fail.
+
+The `srcRepo` of function should be changed like this.
+
+```yaml
+apiVersion: core.openfunction.io/v1beta1
+kind: Function
+metadata:
+  name: logs-async-handler
+spec:
+  build:
+    srcRepo:
+      bundleContainer:
+        image: openfunctiondev/local-source
+      sourceSubPath: "/samples/functions/async/logs-handler-function/"
+```
+
+> The `sourceSubPath` is the absolute path of the source code in the bundle image.
+
 ## Build functions with the pack CLI
 
 Usually it's necessary to build function images directly from local source code especially for debug purpose or for offline environment. You can use the pack CLI for this.
