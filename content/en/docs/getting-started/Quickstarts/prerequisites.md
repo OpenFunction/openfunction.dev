@@ -157,3 +157,42 @@ Async functions can be triggered by events in message queues like Kafka, here yo
    ```shell
    $ kafkacat -L -b <kafka-server>-kafka-brokers:9092
    ```
+
+## WasmEdge
+
+Function now supports using `WasmEdge` as workload runtime, here you can find steps to setup the `WasmEdge` workload runtime in a Kubernetes cluster (with `containerd` as the container runtime).
+
+> You should run the following steps on all the nodes (or a subset of the nodes that will host the wasm workload) of your cluster.
+
+1. **WasmEdge**
+
+   The easiest way to install WasmEdge is to run the following command. Your system should have git and curl installed.
+   ```shell
+   wget -qO- https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash -s -- -p /usr/local
+   ```
+   
+2. **crun**
+   
+   The crun project has WasmEdge support baked in. For now, the easiest approach is just download the binary and move it to `/usr/local/bin/` 
+   ```shell
+   wget https://github.com/OpenFunction/OpenFunction/releases/latest/download/crun-linux-amd64
+   mv crun-linux-amd64 /usr/local/bin/crun
+   ```
+   If the above approach does not work for you, please refer to [build and install a crun binary with WasmEdge support.](https://wasmedge.org/book/en/use_cases/kubernetes/container/crun.html)
+
+3. **containerd**
+
+   Edit the configuration `/etc/containerd/config.toml`, add the following section to setup crun runtime, make sure the BinaryName equal to your crun binary path
+   ```
+   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
+       runtime_type = "io.containerd.runc.v2"
+       pod_annotations = ["*.wasm.*", "wasm.*", "module.wasm.image/*", "*.module.wasm.image", "module.wasm.image/variant.*"]
+       privileged_without_host_devices = false
+       [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
+         BinaryName = "/usr/local/bin/crun"
+   ```
+
+   Restart containerd service:
+   ```shell
+   sudo systemctl restart containerd
+   ```
