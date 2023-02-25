@@ -1,7 +1,7 @@
 ---
-title: "CICD"
-linkTitle: "CICD"
-weight: 4600 
+title: "CI/CD"
+linkTitle: "CI/CD"
+weight: 3500 
 description:
 ---
 

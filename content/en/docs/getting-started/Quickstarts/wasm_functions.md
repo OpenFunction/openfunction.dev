@@ -13,4 +13,4 @@ Here you can find wasm function examples:
 |----------|------------------------------------------------------------------------------------------------------------------|----------|
 | Rust     | [wasmedge-http-server](https://github.com/OpenFunction/samples/tree/main/functions/knative/wasmedge/http-server) | wasmedge |
 
-> You can find more info about these Function [here](../../../concepts/wasmedge_integration/)
+> You can find more info about these Function [here](../../../concepts/wasm_functions/)

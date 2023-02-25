@@ -1,7 +1,7 @@
 ---
 title: "Serverless Applications"
 linkTitle: "Serverless Applications"
-weight: 3310
+weight: 3330
 description: 
 ---
 In addition to building and running Serverless Functions, you can also build and run Serverless Applications with OpenFuntion. 
