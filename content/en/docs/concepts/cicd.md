@@ -7,36 +7,36 @@ description:
 
 ## Overview
 
-OpenFunction has realized automatic building and serving, what we need now is to trigger it when the code changes, thus forming a complete CICD.
+Previously users can use OpenFunction to build function or application source code into container images and then deploy the built image directly to the underlying sync/async Serverless runtime without user intervention. 
 
-OpenFunction use Revision Controller to trigger build when the source code changed, or rerun the application when the image changed.
+But OpenFunction can neither rebuild the image and then redeploy it whenever the function or application source code changes nor redeploy the image whenever this image changes (When the image is built and pushed manually or in another function)
 
-The Revision Controller will: 
-- Watch the source code in github, gitlab or gitee, rebuild the function when source code changed.
-- Watch the bundle container image which include the soucre code, rebuild the function when image changed.
-- Watch the images of functions that without builder, rerun the image when image changed.
+Starting from v1.0.0, OpenFunction adds the ability to detect source code or image changes and then rebuilt and/or redeploy the new built image in a new component called `Revision Controller`. The Revision Controller is able to: 
+- Detect source code changes in github, gitlab or gitee, then rebuild and redeploy the new built image whenever the source code changes.
+- Detect the bundle container image (image containing the source code) changes, then rebuild and redeploy the new built image whenever the bundle image changes.
+- Detect the function or application image changes, then redeploy the new image whenever the function or application image changes.
 
 ## Quick start
 
-### Install
+### Install `Revision Controller`
 
-You can install the Revision Controller when installing the [OpenFunction](https://openfunction.dev/docs/getting-started/installation/#install-openfunction), just need to add the following flag to the helm command.
+You can enable `Revision Controller` when installing [OpenFunction](https://openfunction.dev/docs/getting-started/installation/#install-openfunction) by simply adding the following flag to the helm command.
 
 ```shell
 --set revisionController.enable=true
 ```
 
-Or you can install the `Revision Controller` after the `OpenFunction` installed by the following command.
+You can also enable `Revision Controller` after `OpenFunction` is installed:
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/OpenFunction/revision-controller/release-1.0/deploy/bundle.yaml
 ```
 
-> The `Revision Controller` willbe installed to the `openfunction` namespace by default, if you want to install it to another namespace, please download the `bundle.yaml` and modify it before apply.
+> The `Revision Controller` will be installed to the `openfunction` namespace by default. You can download `bundle.yaml` and change the namespace manually if you want to install it to another namespace.
 
-### How to use
+### Detect source code or image changes
 
-To watch a function, just need to add some annotations to it.
+To detect source code or image changes, you'll need to add revision controller switch and params like below to a function's annotation.
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta1
@@ -61,16 +61,16 @@ Annotations
 
 | Key                                            | Description                                                                                    |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **openfunction.io/revision-controller**        | Whether to start a revision controller for this function, known values are enable and disable. |
+| **openfunction.io/revision-controller**        | Whether to enable revision controller to detect source code or image changes for this function, can be set to either `enable` or `disable`. |
 | **openfunction.io/revision-controller-params** | Parameters for revision controller.                                                            |
 
 Parameters
 
 | Name                  | Description                                                                                                        |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **type**              | The target type to watch, known values are source, source-image, image.                                            |
-| **polling-interval**  | The interval to get the image digest or source code head.                                                          |
-| **repo-type**         | The type of the git server where the source code be in, known values are github, gitlab, gitee, default is github. |
+| **type**              | The change type to detect including `source`, `source-image`, and `image`.                                            |
+| **polling-interval**  | The interval to polling the image digest or source code head.                                                          |
+| **repo-type**         | The type of the git repo including `github`, `gitlab`, and `gitee`. Default to `github`. |
 | **base-url**          | The base url of the gitlab server.                                                                                 |
 | **auth-type**         | The auth type of the gitlab server.                                                                                |
 | **project-id**        | The project id of a gitlab repo.                                                                                   |
