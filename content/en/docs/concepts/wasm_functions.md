@@ -33,6 +33,8 @@ When `function.spec.workloadRuntime` is set to `wasmedge` or the function's anno
 > To setup `WasmEdge` workload runtime in kubernetes cluster and push images to a container registry,
 > please refer to the [prerequisites](../../getting-started/Quickstarts/prerequisites) section for more info.
 
+> You can find more info about this sample Function [here](https://github.com/OpenFunction/samples/tree/main/functions/knative/wasmedge/http-server).
+
 1. Create a wasm function
 
 ```shell
