@@ -15,7 +15,8 @@ This document describes how to install OpenFunction.
 
 | OpenFunction Version | Kubernetes 1.20 | Kubernetes 1.21 | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 |
 |----------------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
-| HEAD                 | √               | √               | √               | √               |  √              | √               |
+| HEAD                 | N/A             | √               | √               | √               |  √              | √               |
+| v1.0.x               | N/A             | √               | √               | √               |  √              | √              |
 | v0.8.x               | √               | √               | √               | √               |  √              | √*              |
 | v0.7.0               | √               | √               | √               | √               |  √              | N/A             |
 
@@ -34,7 +35,7 @@ Now you can install OpenFunction and all its dependencies with helm charts.
 If you want to install OpenFunction in an offline environment, please refer to [Install OpenFunction in an offline environment](https://openfunction.dev/docs/reference/faq/#q-how-to-install-openfunction-in-an-offline-environment)
 
 ### Requirements
-- Kubernetes version: `>=v1.20.0-0`
+- Kubernetes version: `>=v1.21.0-0`
 - Helm version: `>=v3.6.3`
 
 ### Steps to install OpenFunction helm charts
@@ -52,7 +53,13 @@ If you want to install OpenFunction in an offline environment, please refer to [
       kubectl create namespace openfunction
       helm install openfunction openfunction/openfunction -n openfunction
       ```
-   
+     
+   - Install all components and [Revision Controller](https://openfunction.dev/docs/concepts/cicd/):
+      ```shell
+      kubectl create namespace openfunction
+      helm install openfunction openfunction/openfunction -n openfunction --set revisionController.enable=true
+      ```   
+
    - Install Serving only (without build):
       ```shell
       kubectl create namespace openfunction
