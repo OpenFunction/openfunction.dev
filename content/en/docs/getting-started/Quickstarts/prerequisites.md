@@ -164,35 +164,79 @@ Function now supports using `WasmEdge` as workload runtime, here you can find st
 
 > You should run the following steps on all the nodes (or a subset of the nodes that will host the wasm workload) of your cluster.
 
-1. **WasmEdge**
+### Step 1 : Installing WasmEdge
 
    The easiest way to install WasmEdge is to run the following command. Your system should have git and curl installed.
    ```shell
    wget -qO- https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash -s -- -p /usr/local
    ```
    
-2. **crun**
+### Step 2 : Installing Container runtimes
    
-   The crun project has WasmEdge support baked in. For now, the easiest approach is just download the binary and move it to `/usr/local/bin/` 
-   ```shell
-   wget https://github.com/OpenFunction/OpenFunction/releases/latest/download/crun-linux-amd64
-   mv crun-linux-amd64 /usr/local/bin/crun
-   ```
-   If the above approach does not work for you, please refer to [build and install a crun binary with WasmEdge support.](https://wasmedge.org/book/en/use_cases/kubernetes/container/crun.html)
+#### crun
 
-3. **containerd**
+The crun project has WasmEdge support baked in. For now, the easiest approach is just download the binary and move it to `/usr/local/bin/` 
+```shell
+wget https://github.com/OpenFunction/OpenFunction/releases/latest/download/crun-linux-amd64
+mv crun-linux-amd64 /usr/local/bin/crun
+```
+If the above approach does not work for you, please refer to [build and install a crun binary with WasmEdge support.](https://wasmedge.org/book/en/use_cases/kubernetes/container/crun.html)
 
-   Edit the configuration `/etc/containerd/config.toml`, add the following section to setup crun runtime, make sure the BinaryName equal to your crun binary path
-   ```
-   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
-       runtime_type = "io.containerd.runc.v2"
-       pod_annotations = ["*.wasm.*", "wasm.*", "module.wasm.image/*", "*.module.wasm.image", "module.wasm.image/variant.*"]
-       privileged_without_host_devices = false
-       [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
-         BinaryName = "/usr/local/bin/crun"
-   ```
+### Step 3 : Setup CRI runtimes
 
-   Restart containerd service:
-   ```shell
-   sudo systemctl restart containerd
-   ```
+#### Option 1: containerd
+
+> You can follow this [installation guide](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd) to install containerd and 
+> this [setup guide](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#setting-up-containerd-for-kubernetes) to setup containerd for Kubernetes.
+
+First, edit the configuration `/etc/containerd/config.toml`, add the following section to setup crun runtime, make sure the BinaryName equal to your crun binary path
+```
+# Add crun runtime here
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
+  runtime_type = "io.containerd.runc.v2"
+  pod_annotations = ["*.wasm.*", "wasm.*", "module.wasm.image/*", "*.module.wasm.image", "module.wasm.image/variant.*"]
+  privileged_without_host_devices = false
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
+    BinaryName = "/usr/local/bin/crun"
+```
+
+Next, restart containerd service:
+
+```shell
+sudo systemctl restart containerd
+```
+
+#### Option 2: CRI-O
+        
+> You can follow this [installation guide](https://github.com/cri-o/cri-o/blob/main/install.md) to install CRI-O and
+> this [setup guide](https://github.com/cri-o/cri-o/blob/main/tutorials/kubernetes.md#running-cri-o-on-kubernetes-cluster) to setup CRI-O for Kubernetes.
+
+CRI-O uses the runc runtime by default and we need to configure it to use crun instead. That is done by adding to two configuration files.
+
+First, create a `/etc/crio/crio.conf` file and add the following lines as its content. It tells CRI-O to use crun by default.
+
+```
+[crio.runtime]
+default_runtime = "crun"
+```
+
+The crun runtime is in turn defined in the `/etc/crio/crio.conf.d/01-crio-runc.conf` file.
+```
+[crio.runtime.runtimes.runc]
+runtime_path = "/usr/lib/cri-o-runc/sbin/runc"
+runtime_type = "oci"
+runtime_root = "/run/runc"
+# The above is the original content
+
+# Add crun runtime here
+[crio.runtime.runtimes.crun]
+runtime_path = "/usr/local/bin/crun"
+runtime_type = "oci"
+runtime_root = "/run/crun"
+```
+
+Next, restart CRI-O to apply the configuration changes.
+
+```shell
+systemctl restart crio
+```
