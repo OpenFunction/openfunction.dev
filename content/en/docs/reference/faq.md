@@ -251,7 +251,7 @@ helm pull openfunction/openfunction
 Then use tools like scp to copy the helm package to your offline environment, e.g.:
 
 ```shell
-scp openfunction-v0.8.1-v0.4.0.tgz <username>@<your-machine-ip>:/home/<username>/
+scp openfunction-v1.0.0-v0.5.0.tgz <username>@<your-machine-ip>:/home/<username>/
 ```
 
 ### Synchronize images
@@ -301,13 +301,16 @@ openfunction/shipwright-io-build-git:v0.10.0
 openfunction/shipwright-mutate-image:v0.10.0
 openfunction/shipwright-bundle:v0.10.0
 openfunction/shipwright-waiter:v0.10.0
+openfunction/buildah:v1.23.3
+openfunction/buildah:v1.28.0
 
 # openfunction
-openfunction/openfunction:v0.8.1
+openfunction/openfunction:v1.0.0
 openfunction/kube-rbac-proxy:v0.8.0
 openfunction/eventsource-handler:v4
 openfunction/trigger-handler:v4
 openfunction/dapr-proxy:v0.1.1
+openfunction/revision-controller:v1.0.0
 ```
 
 ### Create custom values
@@ -433,7 +436,7 @@ contour:
 Run the following command in an offline environment to try to install OpenFunction：
 ```shell
 kubectl create namespace openfunction
-helm install openfunction openfunction-v0.8.1-v0.4.0.tgz -n openfunction -f custom-values.yaml
+helm install openfunction openfunction-v1.0.0-v0.5.0.tgz -n openfunction -f custom-values.yaml
 ```
 
 {{% alert title="Note" color="success" %}}
@@ -450,10 +453,19 @@ If the job exists and the job status is completed, run the following command to 
 
 ```shell
 helm uninstall openfunction -n openfunction --no-hooks
-helm install openfunction openfunction-v0.8.1-v0.4.0.tgz -n openfunction -f custom-values.yaml --no-hooks
+helm install openfunction openfunction-v1.0.0-v0.5.0.tgz -n openfunction -f custom-values.yaml --no-hooks
 ```
 
 {{% /alert %}}
+
+### Patch ClusterBuildStrategy
+
+If you want to build wasm functions or use `buildah` to build functions in offline environment, run the following command to patch `ClusterBuildStrategy`:
+
+```shell
+kubectl patch clusterbuildstrategy buildah --type='json' -p='[{"op": "replace", "path": "/spec/buildSteps/0/image", "value":"openfunction/buildah:v1.28.0"}]'
+kubectl patch clusterbuildstrategy wasmedge --type='json' -p='[{"op": "replace", "path": "/spec/buildSteps/0/image", "value":"openfunction/buildah:v1.28.0"}]'
+```
 
 ## Q: How to build and run functions in an offline environment
 
