@@ -6,7 +6,7 @@ description:
 ---
 Currently, OpenFunction supports building function images using [Cloud Native Buildpacks](https://buildpacks.io/) without the need to create a `Dockerfile`. 
 
-In the meantime, you can also use OpenFunction to build [Serverless Applications](./serverless_apps/#build-and-run-a-serverless-application-with-a-dockerfile) with `Dockerfile`.
+In the meantime, you can also use OpenFunction to build [Serverless Applications](../serverless_apps/#build-and-run-a-serverless-application-with-a-dockerfile) with `Dockerfile`.
 
 ## Build functions by defining a build section
 
