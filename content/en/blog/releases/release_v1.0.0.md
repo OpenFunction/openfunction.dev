@@ -1,5 +1,5 @@
 ---
-title: "# Announcing OpenFunction 1.0.0: integrate WasmEdge to support Wasm Functions and enhanced CI/CD"
+title: "Announcing OpenFunction 1.0.0: integrate WasmEdge to support Wasm Functions and enhanced CI/CD"
 linkTitle: "Release v1.0.0"
 date: 2023-03-11
 weight: 92
