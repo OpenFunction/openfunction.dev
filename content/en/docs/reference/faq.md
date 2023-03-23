@@ -411,8 +411,9 @@ keda:
       repository: <your-private-image-repository>/keda-metrics-apiserver
       tag: 2.8.1
 dapr:
-  registry: <your-private-image-registry>/daprio
-  tag: '1.8.3'
+  global:
+    registry: <your-private-image-registry>/daprio
+    tag: '1.8.3'
 contour:
   contour:
     image:
