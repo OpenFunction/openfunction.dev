@@ -38,7 +38,7 @@ This document uses an asynchronous function to analyze the log stream in Kafka t
      namespace: default
    spec:
      kafka:
-       version: 3.1.0
+       version: 3.3.1
        replicas: 1
        listeners:
          - name: plain

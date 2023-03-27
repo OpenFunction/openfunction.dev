@@ -63,7 +63,7 @@ sink   Skipped      Running                  serving-4x5wh   https://openfunctio
      namespace: default
    spec:
      kafka:
-       version: 3.1.0
+       version: 3.3.1
        replicas: 1
        listeners:
          - name: plain

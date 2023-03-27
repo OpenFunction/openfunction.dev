@@ -40,7 +40,7 @@ The following diagram illustrates the relationship between these functions.
      namespace: default
    spec:
      kafka:
-       version: 3.1.0
+       version: 3.3.1
        replicas: 1
        listeners:
          - name: plain
