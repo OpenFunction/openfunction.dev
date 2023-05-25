@@ -52,7 +52,6 @@ spec:
   image: "openfunctiondev/sample-go-func:v1"
   imageCredentials:
     name: push-secret
-  port: 8080 # default to 8080
   build:
     builder: openfunction/builder-go:latest
     env:

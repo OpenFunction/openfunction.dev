@@ -73,9 +73,7 @@ To access a sync function by the external address, you'll need to configure DNS 
     state: Skipped
   route:
     conditions:
-    - lastTransitionTime: "2022-08-20T11:03:14Z"
-      message: Valid HTTPRoute
-      observedGeneration: 13
+    - message: Valid HTTPRoute
       reason: Valid
       status: "True"
       type: Accepted
@@ -126,9 +124,7 @@ To access a sync function by the external address, you'll need to configure DNS 
     state: Skipped
   route:
     conditions:
-    - lastTransitionTime: "2022-08-20T13:07:17Z"
-      message: Valid HTTPRoute
-      observedGeneration: 14
+    - message: Valid HTTPRoute
       reason: Valid
       status: "True"
       type: Accepted

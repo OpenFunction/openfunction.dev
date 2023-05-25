@@ -18,7 +18,7 @@ You can build a function image by simply adding a build section in the `Function
 If there is a serving section defined as well, the function will be launched as soon as the build completes.
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: logs-async-handler
@@ -70,7 +70,7 @@ docker push <your registry name>/sample-source-code:latest
 Unlike defining the `spec.build.srcRepo.url` field for the git repo method, you'll need to define the `spec.build.srcRepo.bundleContainer.image` field instead.
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: logs-async-handler
@@ -83,53 +83,6 @@ spec:
 ```
 
 > The `sourceSubPath` is the absolute path of the source code in the source code bundle image.
-
-## Build functions with the pack CLI
-
-Usually it's necessary to build function images directly from local source code especially for debug purpose or for offline environment. You can use the pack CLI for this.
-
-Pack is a tool maintained by the Cloud Native Buildpacks project to support the use of buildpacks.
-It enables the following functionality:
-
-- Build an application using buildpacks.
-- Rebase application images created using buildpacks.
-- Creation of various components used within the ecosystem.
-
-Follow the instructions [here](https://buildpacks.io/docs/tools/pack/) to install the `pack` CLI tool.
-You can find more details on how to use the pack CLI [here](https://buildpacks.io/docs/tools/pack/cli/pack/).
-
-To build OpenFunction function images from source code locally, you can follow the steps below:
-
-### Download function samples
-
-```shell
-git clone https://github.com/OpenFunction/samples.git
-cd samples/functions/knative/hello-world-go
-```
-
-### Build the function image with the pack CLI
-
-```shell
-pack build func-helloworld-go --builder openfunction/builder-go:v2.4.0-1.17 --env FUNC_NAME="HelloWorld"  --env FUNC_CLEAR_SOURCE=true
-```
-
-### Launch the function image locally
-
-```shell
-docker run --rm --env="FUNC_CONTEXT={\"name\":\"HelloWorld\",\"version\":\"v1.0.0\",\"port\":\"8080\",\"runtime\":\"Knative\"}" --env="CONTEXT_MODE=self-host" --name func-helloworld-go -p 8080:8080 func-helloworld-go
-```
-
-### Visit the function
-
-```shell
-curl http://localhost:8080
-```
-
-Output example:
-
-```shell
-hello, world!
-```
 
 ## OpenFunction Builders
 

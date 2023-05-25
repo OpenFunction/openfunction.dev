@@ -72,7 +72,7 @@ This document uses `skywalking-oap.default:11800` as an example of the skywalkin
 
    ```yaml
    data:
-     plugins.tracing: |
+     tracing: |
        enabled: true
        provider:
          name: "skywalking"
@@ -94,20 +94,21 @@ To enable tracing configuration in the function-level, add the field `plugins.tr
 ```yaml
 metadata:
   name: tracing-function
-  annotations:
-    plugins.tracing: |
-      enabled: true
-      provider:
-        name: "skywalking"
-        oapServer: "skywalking-oap:11800"
-      tags:
-        func: tracing-function
-        layer: faas
-        tag1: value1
-        tag2: value2
-      baggage:
-        key: "key1"
-        value: "value1"
+spec:
+   serving:
+      tracing:
+        enabled: true
+        provider:
+          name: "skywalking"
+          oapServer: "skywalking-oap:11800"
+        tags:
+          func: tracing-function
+          layer: faas
+          tag1: value1
+          tag2: value2
+        baggage:
+          key: "key1"
+          value: "value1"
 ```
 
 It is recommended that you use the global tracing configuration, or you have to add function-level tracing configuration for every function you create.
