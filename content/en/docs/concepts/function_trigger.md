@@ -1,10 +1,37 @@
 ---
-title: "Function Inputs and Outputs"
-linkTitle: "Function Inputs and Outputs"
+title: "Function Trigger"
+linkTitle: "Function Trigger"
 weight: 3200
 description: 
 ---
-Functions usually have inputs and outputs.
+Function triggers used to triggered the function. Now there are two kind of triggers, HTTP trigger and dapr trigger.
+
+## HTTP Trigger
+
+HTTP trigger triggered the function with a HTTP request. To define a HTTP trigger, you can follow this:
+
+```yaml
+apiVersion: core.openfunction.io/v1beta2
+kind: Function
+metadata:
+  name: function-sample
+spec:
+  serving:
+    triggers:
+      http:
+        port: 8080
+        route:
+          rules:
+            - matches:
+                - path:
+                    type: PathPrefix
+                    value: /echo
+```
+
+
+
+## Dapr Trigger
+
 ## Function Inputs
 
 For a sync function, the input is always the payload of the HTTP request.

@@ -21,32 +21,35 @@ If you already created a `Dockerfile` for your application like this [Go Applica
 
 ```shell
 cat <<EOF | kubectl apply -f -
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: sample-go-app
+  namespace: default
 spec:
-  version: "v1.0.0"
-  image: "openfunctiondev/sample-go-app:v1"
-  imageCredentials:
-    name: push-secret
-  #port: 8080 # default to 8080
   build:
     builder: openfunction/buildah:v1.23.1
-    srcRepo:
-      url: "https://github.com/OpenFunction/samples.git"
-      sourceSubPath: "apps/buildah/go"
-      revision: "main"
     shipwright:
       strategy:
-        name: buildah
         kind: ClusterBuildStrategy
+        name: buildah
+    srcRepo:
+      revision: main
+      sourceSubPath: apps/buildah/go
+      url: https://github.com/OpenFunction/samples.git
+  image: openfunctiondev/sample-go-app:v1
+  imageCredentials:
+    name: push-secret
   serving:
-    runtime: knative
     template:
       containers:
-        - name: function
-          imagePullPolicy: IfNotPresent
+        - imagePullPolicy: IfNotPresent
+          name: function
+    triggers:
+      http:
+        port: 8080
+  version: v1.0.0
+  workloadRuntime: OCIContainer
 EOF
 ```
 
@@ -79,28 +82,33 @@ If you hava an application without a `Dockerfile` like this [Java Application](h
 
 ```shell
 cat <<EOF | kubectl apply -f -
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: sample-java-app-buildpacks
+  namespace: default
 spec:
-  version: "v1.0.0"
-  image: "openfunction/sample-java-app-buildpacks:v1"
+  build:
+    builder: cnbs/sample-builder:alpine
+    srcRepo:
+      revision: main
+      sourceSubPath: apps/java-maven
+      url: https://github.com/buildpacks/samples.git
+  image: openfunction/sample-java-app-buildpacks:v1
   imageCredentials:
     name: push-secret
-  port: 8080 # default to 8080
-  build:
-    builder: "cnbs/sample-builder:alpine"
-    srcRepo:
-      url: "https://github.com/buildpacks/samples.git"
-      sourceSubPath: "apps/java-maven"
-      revision: "main"
   serving:
-    runtime: "knative" # default to knative
     template:
       containers:
-        - name: function
-          imagePullPolicy: IfNotPresent
+        - imagePullPolicy: IfNotPresent
+          name: function
+          resources: {}
+    triggers:
+      http:
+        port: 8080
+  version: v1.0.0
+  workloadRuntime: OCIContainer
+
 EOF
 ```
 

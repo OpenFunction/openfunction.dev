@@ -114,7 +114,7 @@ The following diagram illustrates the relationship between these functions.
 1. Use the following example YAML file to create a manifest `kafka-input.yaml` and modify the value of `spec.image` to set your own image registry address. The field `spec.serving.inputs` defines an input source that points to a Dapr component of the Kafka server. It means that the `kafka-input` function will be driven by events in the topic `sample-topic` of the Kafka server.
 
    ```yaml
-   apiVersion: core.openfunction.io/v1beta1
+   apiVersion: core.openfunction.io/v1beta2
    kind: Function
    metadata:
      name: kafka-input
@@ -138,10 +138,15 @@ The following diagram illustrates the relationship between these functions.
          minReplicas: 0
          maxReplicas: 10 
          keda:
+           triggers:
+           - type: kafka
+             metadata:
+               topic: sample-topic
+               bootstrapServers: kafka-server-kafka-brokers.default.svc:9092
+               consumerGroup: kafka-input
+               lagThreshold: "20"
            scaledObject:
              pollingInterval: 15
-             minReplicaCount: 0
-             maxReplicaCount: 10
              cooldownPeriod: 60
              advanced:
                horizontalPodAutoscalerConfig:
@@ -154,16 +159,11 @@ The following diagram illustrates the relationship between these functions.
                        periodSeconds: 15
                    scaleUp:
                      stabilizationWindowSeconds: 0
+
        triggers:
-         - type: kafka
-           metadata:
-             topic: sample-topic
-             bootstrapServers: kafka-server-kafka-brokers.default.svc:9092
-             consumerGroup: kafka-input
-             lagThreshold: "20"
-       inputs:
-         - name: greeting
-           component: target-topic
+         dapr:
+         - name: target-topic
+           type: bindings.kafka
        bindings:
          target-topic:
            type: bindings.kafka
@@ -192,8 +192,8 @@ The following diagram illustrates the relationship between these functions.
    ```
 
 3. Use the following example YAML file to create a manifest `function-front.yaml` and modify the value of `spec.image` to set your own image registry address.
-
-   ```yaml
+   
+```yaml
    apiVersion: core.openfunction.io/v1beta1
    kind: Function
    metadata:
@@ -249,8 +249,8 @@ The following diagram illustrates the relationship between these functions.
          containers:
            - name: function
              imagePullPolicy: Always
-   ```
-   
+ ```
+
    {{% alert title="Note" color="success" %}}
 
    `metadata.plugins.pre` defines the order of plugins that need to be called before the user function is executed. `metadata.plugins.post` defines the order of plugins that need to be called after the user function is executed. For more information about the logic of these two plugins and the effect of the plugins after they are executed, see [Plugin mechanism](https://github.com/OpenFunction/samples/blob/main/functions-framework/README.md#plugin-mechanism).

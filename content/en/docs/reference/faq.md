@@ -142,7 +142,7 @@ You can refer to the `Global(ConfigMap)` and `Global(Operator)` sections of this
 And for `Per Revision` you can configure it like [this](../../concepts/function_scaling_trigger/).
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
@@ -150,8 +150,7 @@ spec:
   serving:
     scaleOptions:
       knative:
-        autoscaling:
-          target: "200"
+        autoscaling.knative.dev/target: "200"
 ```
 
 #### Hard limit
@@ -176,7 +175,7 @@ spec:
         autoscaling.knative.dev/<key>: "value"
 
 # Configuration in OpenFunction (recommended)
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
@@ -184,7 +183,6 @@ spec:
   serving:
     scaleOptions:
       knative:
-        autoscaling:
           <key>: "value"
 
 # Alternative approach
@@ -218,7 +216,7 @@ spec:
         dapr.io/app-max-concurrency: "value"
 
 # Configuration in OpenFunction (recommended)
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample

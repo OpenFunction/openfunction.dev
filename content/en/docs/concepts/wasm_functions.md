@@ -39,7 +39,7 @@ When `function.spec.workloadRuntime` is set to `wasmedge` or the function's anno
 
 ```shell
 cat <<EOF | kubectl apply -f -
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: wasmedge-http-server
@@ -54,15 +54,7 @@ spec:
       revision: main
       sourceSubPath: functions/knative/wasmedge/http-server
       url: https://github.com/OpenFunction/samples
-  port: 8080
-  route:
-    rules:
-      - matches:
-          - path:
-              type: PathPrefix
-              value: /echo
   serving:
-    runtime: knative
     scaleOptions:
       minReplicas: 0
     template:
@@ -76,6 +68,15 @@ spec:
             tcpSocket:
               port: 8080
           name: function
+    triggers:
+      http:
+        port: 8080
+        route:
+          rules:
+            - matches:
+                - path:
+                    type: PathPrefix
+                    value: /echo
 EOF
 ```
 
