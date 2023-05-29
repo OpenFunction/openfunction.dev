@@ -8,7 +8,7 @@ Function triggers used to triggered the function. Now there are two kind of trig
 
 ## HTTP Trigger
 
-HTTP trigger triggered the function with a HTTP request. To define a HTTP trigger, you can follow this:
+`HTTP Trigger` triggers a function with an HTTP request. You can define an `HTTP Trigger` for a function like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
