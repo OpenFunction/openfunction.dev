@@ -94,7 +94,7 @@ spec:
 
 The `ko` ClusterBuildStrategy uses [ko](https://github.com/ko-build/ko) to build `Go` application images.
 
-To use `ko` ClusterBuildStrategy, you can set the `Function` as the following:
+To use `ko` ClusterBuildStrategy, you can define a `Function` like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
