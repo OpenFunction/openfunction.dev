@@ -32,7 +32,6 @@ spec:
 
 `Dapr Trigger` triggers a function with events from `Dapr bindings` or `Dapr pubsub`. You can define a function with `Dapr Trigger` like this:
 
-To define a dapr trigger, you can follow this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
