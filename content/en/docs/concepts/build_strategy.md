@@ -14,7 +14,7 @@ There are 4 built-in `ClusterBuildStrategy` in OpenFunction, you can find more d
 
 ## openfunction
 
-The `openfunction` ClusterBuildStrategy use [Buildpacks](https://buildpacks.io/docs/) to building image. It is the default strategy.
+The `openfunction` ClusterBuildStrategy uses [Buildpacks](https://buildpacks.io/docs/) to build function images which is the default build strategy.
 
 The following are the parameters of `openfunction` ClusterBuildStrategy:
 
