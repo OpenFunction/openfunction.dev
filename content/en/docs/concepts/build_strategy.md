@@ -42,7 +42,7 @@ spec:
 
 The `buildah` ClusterBuildStrategy uses [buildah](https://buildah.io/) to build application images. 
 
-To use `buildah` ClusterBuildStrategy, you can set the `Function` as the following:
+To use `buildah` ClusterBuildStrategy, you can define a `Function` like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
