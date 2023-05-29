@@ -8,7 +8,7 @@ description:
 Build Strategy is used to control the build process. There are two types of strategies, `ClusterBuildStrategy` and `BuildStrategy`. 
 Both strategies define a group of steps necessary to control the application build process.
 
-A ClusterBuildStrategy is available cluster-wide, while a BuildStrategy is available within a namespace.
+`ClusterBuildStrategy` is cluster-wide, while `BuildStrategy` is namespaced.
 
 OpenFunction has 4 built-in cluster build strategies for building images in different scenarios.
 
