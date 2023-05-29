@@ -66,7 +66,7 @@ spec:
 
 `Input` is where a function can get extra input data from, `Dapr State Stores` is supported as `Input` currently.
 
-To define a input, you can follow this:
+You can define function input like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
