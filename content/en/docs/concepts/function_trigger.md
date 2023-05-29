@@ -30,7 +30,7 @@ spec:
 
 ## Dapr Trigger
 
-Dapr trigger is a event trigger using dapr bindings and pubsub. The function will be triggered when receive a event from dapr bindings or pubsub.
+`Dapr Trigger` triggers a function with events from `Dapr bindings` or `Dapr pubsub`. You can define a function with `Dapr Trigger` like this:
 
 To define a dapr trigger, you can follow this:
 
