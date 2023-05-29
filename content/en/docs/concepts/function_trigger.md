@@ -64,7 +64,7 @@ spec:
 
 ## Function Inputs
 
-Function input is a component that function can get data from, now only support dapr state store.
+`Input` is where a function can get extra input data from, `Dapr State Stores` is supported as `Input` currently.
 
 To define a input, you can follow this:
 
