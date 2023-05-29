@@ -38,7 +38,7 @@ spec:
         ENV_VARS: ""
 ```
 
-## buildah ClusterBuildStrategy
+## buildah
 
 The `buildah` ClusterBuildStrategy use [buildah](https://buildah.io/) to build APP image. 
 
