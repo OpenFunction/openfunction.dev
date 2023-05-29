@@ -40,7 +40,7 @@ spec:
 
 ## buildah
 
-The `buildah` ClusterBuildStrategy use [buildah](https://buildah.io/) to build APP image. 
+The `buildah` ClusterBuildStrategy uses [buildah](https://buildah.io/) to build application images. 
 
 To use `buildah` ClusterBuildStrategy, you can set the `Function` as the following:
 
