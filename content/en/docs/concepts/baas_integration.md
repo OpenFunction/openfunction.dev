@@ -44,7 +44,7 @@ There're default values for both of these two flags if they're not set.
 Below you can find a function example to set these two flags:
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: cron-input-kafka-output
@@ -70,14 +70,14 @@ spec:
       containers:
         - name: function # DO NOT change this
           imagePullPolicy: IfNotPresent 
-    runtime: "async"
-    inputs:
-      - name: cron
-        component: cron
+    triggers:
+      dapr:
+        - name: cron
+          type: bindings.cron
     outputs:
-      - name: sample
-        component: kafka-server
-        operation: "create"
+      - dapr: 
+          component: kafka-server
+          operation: "create"
     bindings:
       cron:
         type: bindings.cron

@@ -14,20 +14,21 @@ In this example, an EventSource is defined for synchronous invocation to use the
 Use the following content to create a function as the EventSource Sink. For more information about how to create a function, see [Create sync functions](../../../getting-started/quickstarts/sync-functions).
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: sink
 spec:
   version: "v1.0.0"
   image: "openfunction/sink-sample:latest"
-  port: 8080
   serving:
-    runtime: "knative"
     template:
       containers:
         - name: function
           imagePullPolicy: Always
+    triggers:
+      http:
+        port: 8080
 ```
 
 After the function is created, run the following command to get the URL of the function.

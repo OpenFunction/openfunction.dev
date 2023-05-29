@@ -26,24 +26,18 @@ After an `OpenFunction Gateway` is deployed, you'll be able to find the status o
 ```yaml
 status:
   conditions:
-  - lastTransitionTime: "2022-08-04T10:20:57Z"
-    message: Gateway is scheduled
-    observedGeneration: 2
+  - message: Gateway is scheduled
     reason: Scheduled
     status: "True"
     type: Scheduled
-  - lastTransitionTime: "2022-08-04T10:20:57Z"
-    message: Valid Gateway
-    observedGeneration: 2
+  - message: Valid Gateway
     reason: Valid
     status: "True"
     type: Ready
   listeners:
   - attachedRoutes: 0
     conditions:
-    - lastTransitionTime: "2022-08-04T10:20:57Z"
-      message: Valid listener
-      observedGeneration: 2
+    - message: Valid listener
       reason: Ready
       status: "True"
       type: Ready
@@ -53,9 +47,7 @@ status:
       kind: HTTPRoute
   - attachedRoutes: 0
     conditions:
-    - lastTransitionTime: "2022-08-04T10:20:57Z"
-      message: Valid listener
-      observedGeneration: 2
+    - message: Valid listener
       reason: Ready
       status: "True"
       type: Ready

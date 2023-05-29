@@ -35,9 +35,7 @@ status:
     state: Skipped
   route:
     conditions:
-      - lastTransitionTime: "2022-08-04T10:43:29Z"
-        message: Valid HTTPRoute
-        observedGeneration: 1
+      - message: Valid HTTPRoute
         reason: Valid
         status: "True"
         type: Accepted
@@ -75,24 +73,24 @@ If `route.rules` is not defined, `route.rules` will be generated based on path o
 
 ```shell
 kubectl apply -f - <<EOF
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
 spec:
   version: "v1.0.0"
   image: "openfunctiondev/v1beta1-http:latest"
-  port: 8080
   serving:
-    runtime: knative
     template:
       containers:
         - name: function
           imagePullPolicy: Always
-  route:
-    gatewayRef:
-      name: openfunction
-      namespace: openfunction
+    triggers:
+      http:
+        route:
+          gatewayRef:
+            name: openfunction
+            namespace: openfunction
 EOF
 ```
 
@@ -108,26 +106,26 @@ If you define `route.hostnames` in a function, `route.rules` will be generated b
 
 ```shell
 kubectl apply -f - <<EOF
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
 spec:
   version: "v1.0.0"
   image: "openfunctiondev/v1beta1-http:latest"
-  port: 8080
   serving:
-    runtime: knative
     template:
       containers:
         - name: function
           imagePullPolicy: Always
-  route:
-    gatewayRef:
-      name: openfunction
-      namespace: openfunction
-    hostnames:
-    - "sample.ofn.io"
+    triggers:
+      http:
+        route:
+          gatewayRef:
+            name: openfunction
+            namespace: openfunction
+           hostnames:
+           - "sample.ofn.io"
 EOF
 ```
 
@@ -148,31 +146,31 @@ In this mode, you'll need to resolve possible conflicts between HTTPRoutes by yo
 {{% /alert %}}
 ```shell
 kubectl apply -f - <<EOF
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
 spec:
   version: "v1.0.0"
   image: "openfunctiondev/v1beta1-http:latest"
-  port: 8080
   serving:
-    runtime: knative
     template:
       containers:
         - name: function
           imagePullPolicy: Always
-  route:
-    gatewayRef:
-      name: openfunction
-      namespace: openfunction
-    rules:
-      - matches:
-          - path:
-              type: PathPrefix
-              value: /v2/foo
-    hostnames:
-    - "sample.ofn.io"
+    triggers:
+      http:
+        route:
+          gatewayRef:
+            name: openfunction
+            namespace: openfunction
+          rules:
+            - matches:
+                - path:
+                    type: PathPrefix
+                    value: /v2/foo
+          hostnames:
+          - "sample.ofn.io"
 EOF
 ```
 

@@ -142,7 +142,7 @@ You can refer to the `Global(ConfigMap)` and `Global(Operator)` sections of this
 And for `Per Revision` you can configure it like [this](../../concepts/function_scaling_trigger/).
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
@@ -150,8 +150,7 @@ spec:
   serving:
     scaleOptions:
       knative:
-        autoscaling:
-          target: "200"
+        autoscaling.knative.dev/target: "200"
 ```
 
 #### Hard limit
@@ -176,7 +175,7 @@ spec:
         autoscaling.knative.dev/<key>: "value"
 
 # Configuration in OpenFunction (recommended)
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
@@ -184,11 +183,10 @@ spec:
   serving:
     scaleOptions:
       knative:
-        autoscaling:
           <key>: "value"
 
 # Alternative approach
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
@@ -218,7 +216,7 @@ spec:
         dapr.io/app-max-concurrency: "value"
 
 # Configuration in OpenFunction (recommended)
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
@@ -524,7 +522,7 @@ A: Let's take [Java functions](https://github.com/OpenFunction/samples/tree/main
 
 - Modify `functions/knative/java/hello-world/function-sample.yaml` according to your environment:
   ```yaml
-  apiVersion: core.openfunction.io/v1beta1
+  apiVersion: core.openfunction.io/v1beta2
   kind: Function
   metadata:
     name: function-http-java
@@ -533,7 +531,6 @@ A: Let's take [Java functions](https://github.com/OpenFunction/samples/tree/main
     image: "<your private image repository>/sample-java-func:v1"
     imageCredentials:
       name: push-secret
-    port: 8080 # default to 8080
     build:
       builder: <your private image repository>/builder-java:v2-18
       params:
@@ -552,7 +549,9 @@ A: Let's take [Java functions](https://github.com/OpenFunction/samples/tree/main
         containers:
           - name: function # DO NOT change this
             imagePullPolicy: IfNotPresent 
-      runtime: "knative"
+      triggers:
+        http:
+          port: 8080
   ```
 
   > If your private mirror repository is insecure, please refer to [Use private image repository in an insecure way](https://openfunction.dev/docs/reference/faq/#q-how-to-use-private-image-repositories-in-openfunction)

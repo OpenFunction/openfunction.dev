@@ -27,16 +27,14 @@ helm install stan nats/stan --set stan.nats.url=nats://nats:4222
 1. Use the following content to create a configuration file (for example, `openfuncasync-function.yaml`) for the target function, which is triggered by the Trigger CRD and prints the received message.
 
    ```yaml
-   apiVersion: core.openfunction.io/v1beta1
+   apiVersion: core.openfunction.io/v1beta2
    kind: Function
    metadata:
      name: trigger-target
    spec:
      version: "v1.0.0"
      image: openfunctiondev/v1beta1-trigger-target:latest
-     port: 8080
      serving:
-       runtime: "async"
        scaleOptions:
          keda:
            scaledObject:
@@ -44,18 +42,18 @@ helm install stan nats/stan --set stan.nats.url=nats://nats:4222
              minReplicaCount: 0
              maxReplicaCount: 10
              cooldownPeriod: 30
+           triggers:
+             - type: stan
+               metadata:
+                 natsServerMonitoringEndpoint: "stan.default.svc.cluster.local:8222"
+                 queueGroup: "grp1"
+                 durableName: "ImDurable"
+                 subject: "metrics"
+                 lagThreshold: "10"
        triggers:
-         - type: stan
-           metadata:
-             natsServerMonitoringEndpoint: "stan.default.svc.cluster.local:8222"
-             queueGroup: "grp1"
-             durableName: "ImDurable"
-             subject: "metrics"
-             lagThreshold: "10"
-       inputs:
-         - name: autoscaling-pubsub
-           component: eventbus
-           topic: metrics
+         dapr:
+           - name: eventbus
+             topic: metrics
        pubsub:
          eventbus:
            type: pubsub.natsstreaming
@@ -233,7 +231,7 @@ helm install stan nats/stan --set stan.nats.url=nats://nats:4222
 1. Use the following content to create an event producer configuration file (for example, `events-producer.yaml`).
 
    ```yaml
-   apiVersion: core.openfunction.io/v1beta1
+   apiVersion: core.openfunction.io/v1beta2
    kind: Function
    metadata:
      name: events-producer
@@ -245,14 +243,14 @@ helm install stan nats/stan --set stan.nats.url=nats://nats:4222
          containers:
            - name: function
              imagePullPolicy: Always
-       runtime: "async"
-       inputs:
-         - name: cron
-           component: cron
+       triggers:
+         dapr:
+           - name: cron
+             type: bindings.cron
        outputs:
-         - name: target
-           component: kafka-server
-           operation: "create"
+         - dapr:
+             name: kafka-server
+             operation: "create"
        bindings:
          cron:
            type: bindings.cron

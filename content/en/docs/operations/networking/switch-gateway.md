@@ -68,23 +68,23 @@ EOF
 
 ```shell
 kubectl apply -f - <<EOF
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: function-sample
 spec:
   version: "v1.0.0"
   image: "openfunctiondev/v1beta1-http:latest"
-  port: 8080
   serving:
-    runtime: knative
     template:
       containers:
         - name: function
           imagePullPolicy: Always
-  route:
-    gatewayRef:
-      name: custom-gateway
-      namespace: openfunction
+    triggers:
+      http:
+        route:
+          gatewayRef:
+            name: custom-gateway
+            namespace: openfunction
 EOF
 ```

@@ -111,87 +111,89 @@ This document uses an asynchronous function to analyze the log stream in Kafka t
 
 1. Use the following example YAML file to create a manifest `logs-handler-function.yaml` and modify the value of `spec.image` to set your own image registry address.
 
-   ```yaml
-   apiVersion: core.openfunction.io/v1beta1
+```yaml
+   apiVersion: core.openfunction.io/v1beta2
    kind: Function
    metadata:
      name: logs-async-handler
+     namespace: default
    spec:
-     version: "v2.0.0"
-     image: <your registry name>/logs-async-handler:latest
-     imageCredentials:
-       name: push-secret
      build:
        builder: openfunction/builder-go:latest
        env:
-         FUNC_NAME: "LogsHandler"
          FUNC_CLEAR_SOURCE: "true"
-         # Use FUNC_GOPROXY to set the goproxy
-         # FUNC_GOPROXY: "https://goproxy.cn"
+         FUNC_NAME: LogsHandler
        srcRepo:
-         url: "https://github.com/OpenFunction/samples.git"
-         sourceSubPath: "functions/async/logs-handler-function/"
-         revision: "main"
+         revision: main
+         sourceSubPath: functions/async/logs-handler-function/
+         url: https://github.com/OpenFunction/samples.git
+     image: openfunctiondev/logs-async-handler:v1
+     imageCredentials:
+       name: push-secret
      serving:
-       runtime: "async"
+       bindings:
+         kafka-receiver:
+           metadata:
+             - name: brokers
+               value: kafka-server-kafka-brokers:9092
+             - name: authRequired
+               value: "false"
+             - name: publishTopic
+               value: logs
+             - name: topics
+               value: logs
+             - name: consumerGroup
+               value: logs-handler
+           type: bindings.kafka
+           version: v1
+         notification-manager:
+           metadata:
+             - name: url
+               value: http://notification-manager-svc.kubesphere-monitoring-system.svc.cluster.local:19093/api/v2/alerts
+           type: bindings.http
+           version: v1
+       outputs:
+         - dapr:
+             name: notification-manager
+             operation: post
+             type: bindings.http
        scaleOptions:
          keda:
            scaledObject:
-             pollingInterval: 15
-             minReplicaCount: 0
-             maxReplicaCount: 10
-             cooldownPeriod: 60
              advanced:
                horizontalPodAutoscalerConfig:
                  behavior:
                    scaleDown:
-                     stabilizationWindowSeconds: 45
                      policies:
-                     - type: Percent
-                       value: 50
-                       periodSeconds: 15
+                       - periodSeconds: 15
+                         type: Percent
+                         value: 50
+                     stabilizationWindowSeconds: 45
                    scaleUp:
                      stabilizationWindowSeconds: 0
-       triggers:
-         - type: kafka
-           metadata:
-             topic: logs
-             bootstrapServers: kafka-server-kafka-brokers.default.svc.cluster.local:9092
-             consumerGroup: logs-handler
-             lagThreshold: "20"
+             cooldownPeriod: 60
+             pollingInterval: 15
+           triggers:
+             - metadata:
+                 bootstrapServers: kafka-server-kafka-brokers.default.svc.cluster.local:9092
+                 consumerGroup: logs-handler
+                 lagThreshold: "20"
+                 topic: logs
+               type: kafka
+         maxReplicas: 10
+         minReplicas: 0
        template:
          containers:
-           - name: function
-             imagePullPolicy: Always
-       inputs:
-         - name: kafka
-           component: kafka-receiver
-       outputs:
-         - name: notify
-           component: notification-manager
-           operation: "post"
-       bindings:
-         kafka-receiver:
-           type: bindings.kafka
-           version: v1
-           metadata:
-             - name: brokers
-               value: "kafka-server-kafka-brokers:9092"
-             - name: authRequired
-               value: "false"
-             - name: publishTopic
-               value: "logs"
-             - name: topics
-               value: "logs"
-             - name: consumerGroup
-               value: "logs-handler"
-         notification-manager:
-           type: bindings.http
-           version: v1
-           metadata:
-             - name: url
-               value: http://notification-manager-svc.kubesphere-monitoring-system.svc.cluster.local:19093/api/v2/alerts
-   ```
+           - imagePullPolicy: IfNotPresent
+             name: function
+       triggers:
+         dapr:
+           - name: kafka-receiver
+             type: bindings.kafka
+       workloadType: Deployment
+     version: v2.0.0
+     workloadRuntime: OCIContainer
+```
 
 2. Run the following command to create the function `logs-async-handler`.
 

@@ -39,7 +39,7 @@ kubectl apply -f https://raw.githubusercontent.com/OpenFunction/revision-control
 To detect source code or image changes, you'll need to add revision controller switch and params like below to a function's annotation.
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   annotations:

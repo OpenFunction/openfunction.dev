@@ -18,7 +18,7 @@ You can build a function image by simply adding a build section in the `Function
 If there is a serving section defined as well, the function will be launched as soon as the build completes.
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: logs-async-handler
@@ -70,7 +70,7 @@ docker push <your registry name>/sample-source-code:latest
 Unlike defining the `spec.build.srcRepo.url` field for the git repo method, you'll need to define the `spec.build.srcRepo.bundleContainer.image` field instead.
 
 ```yaml
-apiVersion: core.openfunction.io/v1beta1
+apiVersion: core.openfunction.io/v1beta2
 kind: Function
 metadata:
   name: logs-async-handler
