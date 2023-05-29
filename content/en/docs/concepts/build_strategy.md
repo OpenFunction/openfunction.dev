@@ -72,7 +72,7 @@ The following are the parameters of the `buildah` ClusterBuildStrategy:
 
 The `kaniko` ClusterBuildStrategy uses [kaniko](https://github.com/GoogleContainerTools/kaniko) to build application images.
 
-To use `kaniko` ClusterBuildStrategy, you can set the `Function` as the following:
+To use `kaniko` ClusterBuildStrategy, you can define a `Function` like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
