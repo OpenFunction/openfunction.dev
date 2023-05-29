@@ -60,7 +60,7 @@ spec:
         name: buildah
 ```
 
-The following are the parameters of `buildah` ClusterBuildStrategy:
+The following are the parameters of the `buildah` ClusterBuildStrategy:
 
 | Name | Type | Describe |  Default |
 | --- | --- | --- | --- |
