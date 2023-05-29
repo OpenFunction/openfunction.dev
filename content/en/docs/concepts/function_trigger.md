@@ -4,11 +4,11 @@ linkTitle: "Function Trigger"
 weight: 3200
 description: 
 ---
-Function triggers used to triggered the function. Now there are two kind of triggers, HTTP trigger and dapr trigger.
+Function `Triggers` are used to define how to trigger a function. Currently, there are two kinds of triggers: `HTTP Trigger`, and `Dapr Trigger`.
 
 ## HTTP Trigger
 
-HTTP trigger triggered the function with a HTTP request. To define a HTTP trigger, you can follow this:
+`HTTP Trigger` triggers a function with an HTTP request. You can define an `HTTP Trigger` for a function like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
@@ -30,9 +30,8 @@ spec:
 
 ## Dapr Trigger
 
-Dapr trigger is a event trigger using dapr bindings and pubsub. The function will be triggered when receive a event from dapr bindings or pubsub.
+`Dapr Trigger` triggers a function with events from `Dapr bindings` or `Dapr pubsub`. You can define a function with `Dapr Trigger` like this:
 
-To define a dapr trigger, you can follow this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
@@ -65,9 +64,9 @@ spec:
 
 ## Function Inputs
 
-Function input is a component that function can get data from, now only support dapr state store.
+`Input` is where a function can get extra input data from, `Dapr State Stores` is supported as `Input` currently.
 
-To define a input, you can follow this:
+You can define function input like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2

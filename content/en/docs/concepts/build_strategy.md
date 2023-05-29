@@ -5,25 +5,25 @@ weight: 3120
 description:
 ---
 
-Build Strategy use to control the build process. There are two types of strategies, the ClusterBuildStrategy and the BuildStrategy. 
-Both strategies define a shared group of steps, needed to fullfil the application build.
+Build Strategy is used to control the build process. There are two types of strategies, `ClusterBuildStrategy` and `BuildStrategy`. 
+Both strategies define a group of steps necessary to control the application build process.
 
-A ClusterBuildStrategy is available cluster-wide, while a BuildStrategy is available within a namespace.
+`ClusterBuildStrategy` is cluster-wide, while `BuildStrategy` is namespaced.
 
-OpenFunction has 4 built-in cluster build strategies for building images in different scenarios.
+There are 4 built-in `ClusterBuildStrategy` in OpenFunction, you can find more details in the following sections.
 
-## openfunction ClusterBuildStrategy
+## openfunction
 
-The `openfunction` ClusterBuildStrategy use [Buildpacks](https://buildpacks.io/docs/) to building image. It is the default strategy.
+The `openfunction` ClusterBuildStrategy uses [Buildpacks](https://buildpacks.io/docs/) to build function images which is the default build strategy.
 
-The following are the parameters of `openfunction` ClusterBuildStrategy:
+The following are the parameters of the `openfunction` ClusterBuildStrategy:
 
 | Name | Type | Describe |  
 | --- | --- | --- |
 | RUN_IMAGE | string | Reference to a run image to use |  
 | ENV_VARS  | string | Environment variables to set during _build-time_. The formate is `key1=value1,key2=value2`. |
 
-User can set these parameters as the following:
+Users can set these parameters like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
@@ -38,11 +38,11 @@ spec:
         ENV_VARS: ""
 ```
 
-## buildah ClusterBuildStrategy
+## buildah
 
-The `buildah` ClusterBuildStrategy use [buildah](https://buildah.io/) to build APP image. 
+The `buildah` ClusterBuildStrategy uses [buildah](https://buildah.io/) to build application images. 
 
-To use `buildah` ClusterBuildStrategy, you can set the `Function` as the following:
+To use `buildah` ClusterBuildStrategy, you can define a `Function` like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
@@ -60,19 +60,19 @@ spec:
         name: buildah
 ```
 
-The following are the parameters of `buildah` ClusterBuildStrategy:
+The following are the parameters of the `buildah` ClusterBuildStrategy:
 
 | Name | Type | Describe |  Default |
 | --- | --- | --- | --- |
 | registry-search   | string | The registries for searching short name images such as `golang:latest`, separated by commas. | docker.io,quay.io |  
-| registry-insecure | string | The fully-qualified name of insecure registries. An insecure registry is one that does not have a valid SSL certificate or only does HTTP. |
+| registry-insecure | string | The fully-qualified name of insecure registries. An insecure registry is a registry that does not have a valid SSL certificate or only supports HTTP. |
 | registry-block    | string | The registries that need to block pull access. | "" |
 
-## kaniko ClusterBuildStrategy
+## kaniko
 
-The `kaniko` ClusterBuildStrategy use [kaniko](https://github.com/GoogleContainerTools/kaniko) to build APP image.
+The `kaniko` ClusterBuildStrategy uses [kaniko](https://github.com/GoogleContainerTools/kaniko) to build application images.
 
-To use `kaniko` ClusterBuildStrategy, you can set the `Function` as the following:
+To use `kaniko` ClusterBuildStrategy, you can define a `Function` like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
@@ -90,11 +90,11 @@ spec:
         name: kaniko
 ```
 
-## ko ClusterBuildStrategy
+## ko
 
-The `ko` ClusterBuildStrategy use [ko](https://github.com/ko-build/ko) to build Go APP image.
+The `ko` ClusterBuildStrategy uses [ko](https://github.com/ko-build/ko) to build `Go` application images.
 
-To use `ko` ClusterBuildStrategy, you can set the `Function` as the following:
+To use `ko` ClusterBuildStrategy, you can define a `Function` like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
