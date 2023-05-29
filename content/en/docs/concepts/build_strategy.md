@@ -68,7 +68,7 @@ The following are the parameters of `buildah` ClusterBuildStrategy:
 | registry-insecure | string | The fully-qualified name of insecure registries. An insecure registry is a registry that does not have a valid SSL certificate or only supports HTTP. |
 | registry-block    | string | The registries that need to block pull access. | "" |
 
-## kaniko ClusterBuildStrategy
+## kaniko
 
 The `kaniko` ClusterBuildStrategy use [kaniko](https://github.com/GoogleContainerTools/kaniko) to build APP image.
 
