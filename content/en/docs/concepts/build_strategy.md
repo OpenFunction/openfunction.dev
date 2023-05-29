@@ -23,7 +23,7 @@ The following are the parameters of `openfunction` ClusterBuildStrategy:
 | RUN_IMAGE | string | Reference to a run image to use |  
 | ENV_VARS  | string | Environment variables to set during _build-time_. The formate is `key1=value1,key2=value2`. |
 
-User can set these parameters as the following:
+Users can set these parameters like this:
 
 ```yaml
 apiVersion: core.openfunction.io/v1beta2
