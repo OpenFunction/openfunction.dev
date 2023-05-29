@@ -6,7 +6,7 @@ description:
 ---
 
 Build Strategy is used to control the build process. There are two types of strategies, `ClusterBuildStrategy` and `BuildStrategy`. 
-Both strategies define a shared group of steps, needed to fullfil the application build.
+Both strategies define a group of steps necessary to control the application build process.
 
 A ClusterBuildStrategy is available cluster-wide, while a BuildStrategy is available within a namespace.
 
