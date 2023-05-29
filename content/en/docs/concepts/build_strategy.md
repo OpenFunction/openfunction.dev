@@ -90,7 +90,7 @@ spec:
         name: kaniko
 ```
 
-## ko ClusterBuildStrategy
+## ko
 
 The `ko` ClusterBuildStrategy use [ko](https://github.com/ko-build/ko) to build Go APP image.
 
