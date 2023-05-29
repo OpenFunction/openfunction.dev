@@ -92,7 +92,7 @@ spec:
 
 ## ko
 
-The `ko` ClusterBuildStrategy use [ko](https://github.com/ko-build/ko) to build Go APP image.
+The `ko` ClusterBuildStrategy uses [ko](https://github.com/ko-build/ko) to build `Go` application images.
 
 To use `ko` ClusterBuildStrategy, you can set the `Function` as the following:
 
