@@ -65,7 +65,7 @@ The following are the parameters of `buildah` ClusterBuildStrategy:
 | Name | Type | Describe |  Default |
 | --- | --- | --- | --- |
 | registry-search   | string | The registries for searching short name images such as `golang:latest`, separated by commas. | docker.io,quay.io |  
-| registry-insecure | string | The fully-qualified name of insecure registries. An insecure registry is one that does not have a valid SSL certificate or only does HTTP. |
+| registry-insecure | string | The fully-qualified name of insecure registries. An insecure registry is a registry that does not have a valid SSL certificate or only supports HTTP. |
 | registry-block    | string | The registries that need to block pull access. | "" |
 
 ## kaniko ClusterBuildStrategy
