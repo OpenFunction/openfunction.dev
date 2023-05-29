@@ -10,7 +10,7 @@ Both strategies define a group of steps necessary to control the application bui
 
 `ClusterBuildStrategy` is cluster-wide, while `BuildStrategy` is namespaced.
 
-OpenFunction has 4 built-in cluster build strategies for building images in different scenarios.
+There are 4 built-in `ClusterBuildStrategy` in OpenFunction, you can find more details in the following sections.
 
 ## openfunction ClusterBuildStrategy
 
