@@ -12,7 +12,7 @@ Both strategies define a group of steps necessary to control the application bui
 
 There are 4 built-in `ClusterBuildStrategy` in OpenFunction, you can find more details in the following sections.
 
-## openfunction ClusterBuildStrategy
+## openfunction
 
 The `openfunction` ClusterBuildStrategy use [Buildpacks](https://buildpacks.io/docs/) to building image. It is the default strategy.
 
