@@ -21,6 +21,8 @@ The following are the parameters of the `openfunction` ClusterBuildStrategy:
 | Name | Type | Describe |  
 | --- | --- | --- |
 | RUN_IMAGE | string | Reference to a run image to use |  
+| CACHE_IMAGE | string | Cache Image is a way to preserve cache layers across different builds, which can improve build performance when building functions or applications with lots of dependencies like Java functions. |  
+| BASH_IMAGE | string | The bash image that the strategy used.  |  
 | ENV_VARS  | string | Environment variables to set during _build-time_. The formate is `key1=value1,key2=value2`. |
 
 Users can set these parameters like this:

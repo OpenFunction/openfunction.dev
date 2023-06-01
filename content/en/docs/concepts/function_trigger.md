@@ -4,7 +4,7 @@ linkTitle: "Function Trigger"
 weight: 3200
 description: 
 ---
-Function `Triggers` are used to define how to trigger a function. Currently, there are two kinds of triggers: `HTTP Trigger`, and `Dapr Trigger`.
+Function `Triggers` are used to define how to trigger a function. Currently, there are two kinds of triggers: `HTTP Trigger`, and `Dapr Trigger`. The default trigger is `HTTP trigger`.
 
 ## HTTP Trigger
 
