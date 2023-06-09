@@ -27,14 +27,8 @@
 <script src='{{ "/js/prism.js" | relURL }}'></script>
 {{ end }}
 {{ partial "hooks/body-end.html" . }}
-{{ if eq .Site.Params.contentdir "content/zh" }}
-<script>
-    const href = $('.hide_zh_doc_class')
-    $(href[0]).attr('href', '/docs/');
-</script>
-{{ end }}
 
-{{ if eq .Site.Params.languagename "English" }}
+{{ if eq .Site.Language.Lang "en" }}
 <script>
     const url = window.location.href;
     if (url.indexOf('/docs') !== -1) {
