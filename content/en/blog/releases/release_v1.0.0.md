@@ -6,7 +6,7 @@ weight: 92
 
 ---
 
-[OpenFunction](https://github.com/OpenFunction/OpenFunction) is a cloud-native open-source FaaS (Function as a Service) platform aiming to let you focus on your business logic only. Today, we are thrilled to announce the general availability of OpenFunction 1.1.0.
+[OpenFunction](https://github.com/OpenFunction/OpenFunction) is a cloud-native open-source FaaS (Function as a Service) platform aiming to let you focus on your business logic only. Today, we are thrilled to announce the general availability of OpenFunction 1.0.0.
 
 In this update, we have continued our commitment to providing developers with more flexible and powerful tools, and have added some new feature. This release integrates WasmEdge to support Wasm functions; we have also enhanced the CI/CD functionality of OpenFunction to provide relatively complete end-to-end CI/CD functionality; and we have added the ability to build an image of a function or application directly from local code in this release, making it easier for developers to publish and deploy their code.
 
