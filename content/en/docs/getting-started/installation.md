@@ -16,7 +16,7 @@ This document describes how to install OpenFunction.
 | OpenFunction Version | Kubernetes 1.21 | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 | Kubernetes 1.26+ |
 |----------------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
 | HEAD                 | N/A             | N/A             | √               |  √              | √               | √               |
-| v1.2                 | N/A             | N/A             | √               |  √              | √               | N/A             |
+| v1.2                 | N/A             | N/A             | √               |  √              | √               | √               |
 | v1.1.x               | √               | √               | √               |  √              | √               | N/A             |
 | v1.0.x               | √               | √               | √               |  √              | √               | N/A             |
 
