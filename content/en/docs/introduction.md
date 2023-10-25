@@ -13,7 +13,7 @@ OpenFunction is a cloud-native open source FaaS (Function as a Service) platform
 
 ## Architecture and Design
 
-<div align=center><img width="80%" height="80%" src=/images/docs/en/introduction/what-is-openfunction/openfunction-0.5-architecture.svg/></div>
+<div align=center><img width="80%" height="80%" src=/images/docs/en/introduction/what-is-openfunction/openfunction-architecture.svg/></div>
 
 ## Core Features
 
