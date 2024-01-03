@@ -7,7 +7,7 @@ description:
 
 > Before you creating any functions, make sure you've installed all the [prerequisites](../prerequisites)
 
-Sync functions are funtions whose inputs are payloads of HTTP requests, and the output or response are sent to the waiting client immediately after the function logic finishes processing the inputs payload. Below you can find some sync function examples in different languages:
+Sync functions are functions whose inputs are payloads of HTTP requests, and the output or response are sent to the waiting client immediately after the function logic finishes processing the inputs payload. Below you can find some sync function examples in different languages:
 
 |           | Sync Functions |
 |-----------|----------------|
