@@ -27,15 +27,3 @@
 <script src='{{ "/js/prism.js" | relURL }}'></script>
 {{ end }}
 {{ partial "hooks/body-end.html" . }}
-
-{{ if eq .Site.Language.Lang "en" }}
-<script>
-    const url = window.location.href;
-    if (url.indexOf('/docs') !== -1) {
-        $('.hide_select_in_en').hide();
-        $('.lang-dropdown-toggle').addClass('hide_doc_zh')
-    } else {
-        $('.lang-dropdown-toggle').removeClass('hide_doc_zh')
-    }
-</script>
-{{ end }}
