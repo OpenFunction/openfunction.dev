@@ -6,7 +6,7 @@ description:
 ---
 ## Overview
 
-OpenFunction is a cloud-native open source FaaS (Function as a Service) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure. You can generate event-driven and dynamically scaling Serverless workloads by simply submitting business-related source code in the form of functions.
+OpenFunction is a user-friendly, cloud-native FaaS (Function as a Service) platform. Its aim is to let you concentrate on your business logic without the hassle of managing the runtime environment and infrastructure. With OpenFunction, you effortless create event-driven and dynamically scaling Serverless workloads by submitting business-related source code in the form of functions.
 
 <div align=center><img width="70%" height="70%" src=/images/docs/en/introduction/what-is-openfunction/function-lifecycle.svg/></div>
 
@@ -17,11 +17,11 @@ OpenFunction is a cloud-native open source FaaS (Function as a Service) platform
 
 ## Core Features
 
-- Cloud agnostic and decoupled with cloud providers' BaaS
+- Cloud-agnostic and decoupled from cloud providers' BaaS
 - Pluggable architecture that allows multiple function runtimes
-- Support both sync and async functions
+- Supports both sync and async functions
 - Unique async functions support that can consume events directly from event sources
-- Support generating OCI-Compliant container images directly from function source code.
+- Supports generating OCI-Compliant container images directly from function source code.
 - Flexible autoscaling between 0 and N
 - Advanced async function autoscaling based on event sources' specific metrics
 - Simplified BaaS integration for both sync and async functions by introducing [Dapr](https://dapr.io/)
