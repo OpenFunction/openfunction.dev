@@ -1,13 +1,13 @@
 [context.production.environment]
-  HUGO_VERSION = "0.124.0"
+  HUGO_VERSION = "0.125.0"
   NODE_VERSION = "18"
 
 [context.deploy-preview.environment]
-  HUGO_VERSION = "0.124.0"
+  HUGO_VERSION = "0.125.0"
   NODE_VERSION = "18"
 
 [context.branch-deploy.environment]
-  HUGO_VERSION = "0.124.0"
+  HUGO_VERSION = "0.125.0"
   NODE_VERSION = "18"
 
 [build]
