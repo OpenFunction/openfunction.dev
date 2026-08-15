@@ -5,7 +5,7 @@ weight: 4110
 description:
 ---
 
-You can switch to any [gateway implementations](https://gateway-api.sigs.k8s.io/implementations/) that support [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) such as Contour, Istio, Apache APISIX, Envoy Gateway (in the future) and more in an easier and vendor-neutral way.
+You can switch to any [gateway implementations](https://gateway-api.sigs.k8s.io/implementations/) that support [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) such as Contour, Istio, [Apache APISIX](https://apisix.apache.org/docs/ingress-controller/concepts/gateway-api/), Envoy Gateway (in the future) and more in an easier and vendor-neutral way.
 
 For example, you can choose to use Istio as the underlying `Kubernetes Gateway` like this:
 
